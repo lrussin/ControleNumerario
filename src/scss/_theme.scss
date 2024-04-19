@@ -1,0 +1,180 @@
+:root {
+  --primary-color-1 : #0073E6;
+  --primary-color-1-shade : #3DC7FF;
+  --primary-color-1-dark : #3DC7FF;
+  --primary-color-1-light : #3DC7FF;
+
+  --primary-color-2 : #00005C;
+  --primary-color-2-shade : #3DC7FF;
+  --primary-color-2-dark : #3DC7FF;
+
+  --primary-color-3 : 	#00c9d1;
+  --primary-color-3-shade : #0af5ff;
+
+  --tempThemeButton : #0073E6;
+  --tempThemeButtonHover : #0073E6;
+  --tempThemeButton2 : #00005C;
+  --tempThemeButtonHover2 : #00005C;
+
+  --link : #3c78d2;
+  --link-shade : #2b67c1;
+  --link-pastel : #6a95d4;
+
+  --gray-letter-1 : #8A8B8A;
+  --gray-letter-2 : #3A3B3A;
+  --gray-letter-3 : #6A6B6A;
+  --alert-letter-1 : #3c78d2;
+
+  --gray-scroll-bg : #E6E5E7;
+  --gray-scroll : #8A8B8A;
+  --gray-scroll-shade : #7A7B7A;
+
+  --warning-alert-1 : #ffff00;
+  --warning-mostard : #ffdc41;
+  --warning-alert-1-light : #ffff97;
+
+  --green :  hsl(120, 70%, 50%);
+  --green-water: hsl(162, 56%, 52%);
+  --green-aqua: #03bb85;
+
+  --success : #00c300;
+  --success-shade : #00b200;
+  --success-dark : #378b2c;
+  --success-pastel : #88ff88;
+  --success-black : #091707;
+
+  --light-danger : #F60000;
+  --danger : #c30000;
+  --danger-shade : #b20000;
+  --danger-pastel : #ff8888;
+  --danger-wine : #591717;
+
+  --warning : #c3c300;
+  --warning-shade : #b2b200;
+  --warning-pastel : #ffff88;
+
+  --const-white : #fff;
+  --white : #fff;
+  --white-5 : #fafafa;
+  --white-1 : #f8f8f8;
+  --white-2 : #eee;
+  --white-3 : #ddd;
+  --white-4 : #ccc;
+
+  --gray : #aaa;
+  --gray-1 : #999;
+  --gray-2 : #888;
+  --gray-5 : #555;
+  --const-black : #111;
+  --black : #111;
+
+  --DarkSlateGray : #2F4F4F;
+
+  --svg-gear-bg-1 : #F6F7FB;
+  --svg-gear-bg-2 : #EDEEF1;
+  --svg-gear-bg-3 : #ECEDF1;
+  --svg-gear-bg-4 : #F8FAFD;
+  --impact-map-grid : rgba(0, 0, 0, .05);
+
+  /*darkmode only*/
+  --body-bg : unset;
+  --body-color : unset;
+
+  --cui-tertiary-bg-dark: var(--green-water);
+
+}
+
+@font-face {
+  font-family: Meso;
+  src: url(../assets/fonts/Poppins-Medium.ttf) format("opentype");
+}
+
+* {
+  font-family: 'Meso', 'arial', sans-serif;
+}
+
+body {
+  background-color: var(--cui-tertiary-bg);
+}
+
+.wrapper {
+  width: 100%;
+  @include ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));
+  @include ltr-rtl("padding-right", var(--cui-sidebar-occupy-end, 0));
+  will-change: auto;
+  @include transition(padding .15s);
+}
+
+.header > .container-fluid,
+.sidebar-header {
+  min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  @include ltr-rtl("margin-left", auto);
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    @include ltr-rtl("margin-right", auto);
+  }
+}
+
+.header > .container-fluid + .container-fluid {
+  min-height: 3rem;
+}
+
+.footer {
+  min-height: calc(3rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+@if $enable-dark-mode {
+  @include color-mode(dark) {
+    body {
+      background-color: var(--cui-dark-bg-subtle);
+    }
+
+    .footer {
+      --cui-footer-bg: var(--cui-body-bg);
+    }
+  }
+}
+
+c-sidebar {
+  &[colorScheme] {
+    background-color: var(--DarkSlateGray);
+  }
+}
+
+.sidebar-nav .nav-link.active {
+  color: var(--white);
+  background: var(--green-water);
+}
+
+.sidebar-nav .nav-link {
+  color: var(--white);
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: var(--cui-tertiary-bg-dark);
+}
+
+
