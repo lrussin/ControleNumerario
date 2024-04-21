@@ -21,6 +21,6 @@ describe('AppComponent', () => {
   it(`should have as title 'CoreUI Angular Admin Template'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Controle Numerico');
+    expect(app.title).toEqual('Controle Numerario');
   });
 });

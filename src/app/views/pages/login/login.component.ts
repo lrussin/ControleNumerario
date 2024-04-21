@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective } from '@coreui/angular';
 
@@ -8,10 +8,29 @@ import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, Tex
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
+    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, CommonModule]
 })
 export class LoginComponent {
 
   constructor() { }
+
+  username : string = "";
+  password : string = "";
+  isAlertVisible : boolean = false;
+  isReset : boolean = false;
+  alertMessage : string = "";
+
+  isForgotPassword : boolean = false;
+
+  changeView() {
+    this.isForgotPassword = !this.isForgotPassword;
+    this.username = "";
+    this.password = "";
+    this.alertMessage = "";
+  }
+
+  // verifyInput(event : KeyboardEvent) {
+  //   if(event.key == 'Enter') this.login();
+  // }
 
 }
