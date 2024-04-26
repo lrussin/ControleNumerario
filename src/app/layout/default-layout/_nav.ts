@@ -3,12 +3,22 @@ import { INavData } from '@coreui/angular';
 export const navItems: INavData[] = [
   {
     name: 'Home',
-    url: '/dashboard',
+    url: '/home',
     iconComponent: { name: 'cil-home' },
     // badge: {
     //   color: 'info',
     //   text: 'NEW'
     // }
+  },
+  {
+    name: 'Ponto de Atendimento',
+    url: '/pointService',
+    iconComponent: { name: 'cil-location-pin' },
+  },
+  {
+    name: 'Dashboard',
+    url: '/dashboard',
+    iconComponent: { name: 'cil-chart' },
   },
   {
     title: true,
@@ -256,11 +266,11 @@ export const navItems: INavData[] = [
     url: '/login',
     iconComponent: { name: 'cil-star' },
     children: [
-      {
-        name: 'Login',
-        url: '/login',
-        icon: 'nav-icon-bullet'
-      },
+      // {
+      //   name: 'Login',
+      //   url: '/login',
+      //   icon: 'nav-icon-bullet'
+      // },
       {
         name: 'Register',
         url: '/register',

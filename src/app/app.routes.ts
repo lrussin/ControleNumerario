@@ -1,3 +1,5 @@
+import { HomeComponent } from './views/home/home.component';
+import { PointServiceComponent } from './views/point-service/point-service.component'
 import { ThemeColorComponent } from './views/theme/colors.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
@@ -9,8 +11,10 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './views/pages/register/register.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', redirectTo: 'dashboard' },
+  // { path: 'pointService', component: PointServiceComponent },
   { path: '',
     component: DefaultLayoutComponent,
     data: {
@@ -18,9 +22,17 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
         component: DashboardComponent
+      },
+      {
+        path: 'pointService',
+        component: PointServiceComponent
       },
       {
         path: 'theme',
@@ -76,14 +88,14 @@ export const routes: Routes = [
       title: 'Page 500'
     }
   },
-  {
-    path: 'login',
-    // loadComponent: () => import('./views/pages/login/login.component').then(m => m.LoginComponent),
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
+  // {
+  //   path: 'login',
+  //   // loadComponent: () => import('./views/pages/login/login.component').then(m => m.LoginComponent),
+  //   component: LoginComponent,
+  //   data: {
+  //     title: 'Login Page'
+  //   }
+  // },
   {
     path: 'register',
     // loadComponent: () => import('./views/pages/register/register.component').then(m => m.RegisterComponent),
