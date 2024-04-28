@@ -1,3 +1,99 @@
-.row{
-  color: var(--gray-2 );
+.container {
+  .row {
+    border-bottom: 1px solid #ccc; /* Adiciona uma borda inferior a todas as linhas */
+    margin-bottom: 20px; /* Adiciona espaço extra abaixo de todas as linhas */
+  }
+}
+
+div[class*="col-sm-4"],
+div[class*="col-sm-3"],
+div[class*="col-sm-2"] {
+  color: var(--cui-secondary-color);
+  font-size: 14px;
+  border-right: 2px solid #ccc; /* Cor e estilo da borda */
+  padding-right: 15px;
+  margin-bottom: 5px;
+
+  @media(max-width: 576px) {
+    border-right: none;
+    margin-bottom: 15px;
+  }
+}
+
+
+
+div[class*="col-8"],
+div[class*="col-15"],
+div[class*="col-20"] {
+  color: var(--cui-body-color);
+  font-size: 16px;
+  display: flex; // Ativa o layout de flexbox
+  flex-direction: column;
+  justify-content: flex-end; // Alinha os itens na parte inferior
+  height: 60%; // Garante que a div ocupe toda a altura disponível
+}
+
+#button-details {
+  display: flex; // Ativa o layout de flexbox
+  align-items: center; // Centraliza verticalmente os itens
+  justify-content: center; // Centraliza horizontalmente os itens
+
+  .btn-details{
+    background-color: var(--green); // Cor de fundo do botão
+    color: #fff; // Cor do texto do botão
+    border: none; // Remove a borda do botão
+    padding: 5px 20px; // Espaçamento interno do botão
+    border-radius: 5px; // Arredonda as bordas do botão
+    cursor: pointer; // Altera o cursor para indicar que é clicável
+    transition: background-color 0.3s ease; // Transição suave ao passar o mouse
+    font-size: 20px;
+
+    .icon {
+      width: 19px; // Largura do ícone
+      height: 19px; // Altura do ícone
+    }
+  }
+}
+
+#button-details {
+  .btn-details:hover {
+    background-color: var(--green-water); // Cor de fundo do botão ao passar o mouse
+  }
+}
+
+#button-details:last-child {
+  border-right: none;
+}
+
+.atm {
+  font-size: 25px;
+  margin-bottom: 12px;
+  color: var(--cui-secondary-color);
+  margin-top: 40px;
+}
+
+.atm-recycler {
+  margin-bottom: 10%;
+}
+
+#icone {
+  background-color: var(--cui-tertiary-bg-dark);
+  border-radius: 15px 0px 0px 15px;
+  position: relative; //
+  display: flex; // Ativa o layout de flexbox
+  align-items: center; // Centraliza verticalmente os itens
+  justify-content: center; // Centraliza horizontalmente os itens
+
+  svg[name="cilLocationPin"] {
+    color: var(--cui-body-color);
+    height: 100%;
+
+    @media(max-width: 576px) { // Aplique este estilo apenas em dispositivos com largura máxima de 576px (dispositivos móveis)
+      border-right: none; // Remova a borda à direita
+      padding-bottom: 10px; // Adicione um espaçamento abaixo do elemento
+    }
+  }
+  @media(max-width: 576px) {
+    border-radius: 15px 15px 0px 0px;
+  }
 }
