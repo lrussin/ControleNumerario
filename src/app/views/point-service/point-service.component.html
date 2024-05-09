@@ -45,7 +45,7 @@
         <div class="col-20 mediano">
           Mediano: 20.245,00
         </div>
-        <div class="col-8 limite-su">
+        <div class="col-10 limite-su">
           Limite Superior: 27.477,50
         </div>
       </div>
@@ -58,7 +58,7 @@
       </div>
       <div class="col-sm-1 graphic">
         GRÁFICO
-        <button class="btn-details" id="exp-graphic">
+        <button class="btn-details" id="exp-graphic" (click)="openModal()">
           <svg class="icon" cIcon name="cilGraph"></svg>
         </button>
       </div>
@@ -95,10 +95,15 @@
       </div>
       <div class="col-sm-1 graphic">
         GRÁFICO
-        <button class="btn-details" id="exp-graphic">
+        <button class="btn-details" id="exp-graphic" (click)="openModal()">
           <svg class="icon" cIcon name="cilGraph"></svg>
         </button>
       </div>
     </div>
   </div>
+</ng-container>
+
+<!-- Modal -->
+<ng-container *ngIf="isModalOpen">
+  <app-modal-point [isModalOpen]="isModalOpen" (closeModal)="closeModal()"></app-modal-point>
 </ng-container>

@@ -1,11 +1,12 @@
-import { NgStyle } from '@angular/common';
+import { ModalPointComponent } from './../modal-point/modal-point.component';
+import { NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
 
 @Component({
   selector: 'app-point-service',
   standalone: true,
-  imports: [IconDirective, NgStyle],
+  imports: [IconDirective, NgStyle, NgIf, ModalPointComponent],
   templateUrl: './point-service.component.html',
   styleUrl: './point-service.component.scss'
 })
@@ -13,8 +14,17 @@ export class PointServiceComponent {
 
   balanceValue: string = '20.245,00'; // Defina o valor manualmente aqui
 
-  get circleColor(): string {
+  isModalOpen: boolean = false;
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  get circleColor(): string {
     if (this.balanceValue <= '20.244,99') {
       return 'var(--danger)';
     } else if (this.balanceValue >= '20.245,00' && this.balanceValue <= '27.477,50') {

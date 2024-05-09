@@ -1,0 +1,15 @@
+<!-- Modal -->
+<ng-container *ngIf="isModalOpen">
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="onCloseModal()">&times;</span>
+      <!-- Conteúdo do modal aqui -->
+      <p>Conteúdo do modal de exportação.</p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- Fundo escuro semi-transparente -->
+<ng-container *ngIf="isModalOpen" >
+  <div (click)="onCloseModal()"></div>
+</ng-container>
