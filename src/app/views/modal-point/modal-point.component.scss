@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background-color: var(--cui-dark-bg-subtle);
+  background-color: var(--cui-body-bg);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para destacar o modal do fundo */
@@ -23,9 +23,90 @@
 .close {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 15px;
   cursor: pointer;
   color: var(--cui-body-color);
   font-size: 20px; /* Ajuste o tamanho conforme necessário */
   transform: scale(1.5); /* Aumenta o tamanho do ícone */
+}
+
+.align-items-start {
+  margin-top: 20px;
+  border-width: 3px; // Define a largura da borda
+  border-style: solid; // Define o estilo da borda como sólido
+  border-image: linear-gradient(to right, transparent,var(--DarkSlateGray), transparent) 10; // Aplica o gradiente à borda
+  border-radius: 30px;
+}
+
+.icone {
+  background-color: var(--cui-tertiary-bg-dark);
+  border-radius: 15px 0px 0px 15px;
+  position: relative; //
+  display: flex;
+  align-items: center;
+  width: 90%;
+}
+
+.atm-Nu-users {
+  font-size: 42px;
+  margin-left: 30px;
+}
+
+.atm-No-users {
+  color: var(--cui-secondary-color);
+}
+
+.dados {
+  color: var(--cui-secondary-color);
+  margin-left: -20px;
+}
+
+.limite-in {
+  margin-top: 13px;
+}
+
+.limite-in,
+.mediano,
+.limite-su {
+  color: var(--cui-body-color);
+
+  @media(max-width: 576px) {
+    margin-bottom: 5px;
+  }
+}
+
+.circle {
+  margin-top: 15px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  position: relative;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px; /* Ajuste conforme necessário */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.balance-value {
+  margin-left: 40px; /* Espaçamento entre o círculo e o texto */
+  font-size: 30px;
+  color: var(--cui-body-color);
 }
