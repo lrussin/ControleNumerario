@@ -4,7 +4,7 @@
       <span class="close" (click)="onCloseModal()">&times;</span>
       <div class="container">
         <div class="row align-items-start">
-          <div class="col-sm-2">
+          <div class="col-sm-3">
             <div class="row icone">
               <div class="col-sm-3">
                 <svg cIcon name="cilLocationPin" size="5xl"></svg>
@@ -22,7 +22,7 @@
             </div>
           </div>
 
-          <div class="col-sm-3 dados">
+          <div class="col-sm-4 dados">
             DADOS
             <div class="col-20 limite-in">
               Limite Inferior: 14.457,50
@@ -30,16 +30,29 @@
             <div class="col-20 mediano">
               Mediano: 20.245,00
             </div>
-            <div class="col-10 limite-su">
+            <div class="col-20 limite-su">
               Limite Superior: 27.477,50
             </div>
           </div>
-          <div class="col-sm-3 balance">
+          <div class="col-sm-5 balance">
             SALDO<br>R$
             <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
               <div class="balance-value">{{ balanceValue }}</div>
               <div class="tooltip">{{ circleTooltip }}</div>
             </div>
+          </div>
+        </div>
+        <div class="row date">
+          <div class="col-sm-6">
+            Data Incial
+            <div class="col-10 ">
+              <button class="date-inicial">
+                11/02/2021
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            Data Final
           </div>
         </div>
       </div>

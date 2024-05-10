@@ -69,13 +69,10 @@
   .row-content-atm,
   .row-content-recicly {
     margin-bottom: 40px;
-    border-width: 3px; // Define a largura da borda
-    border-style: solid; // Define o estilo da borda como sólido
-    border-image: linear-gradient(to right, transparent,var(--DarkSlateGray), transparent) 10; // Aplica o gradiente à borda
-    border-radius: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
 
     @media(max-width: 576px) {
-      border-image: linear-gradient(to top, transparent,var(--DarkSlateGray), transparent) 1;
       margin-bottom: 15px;
     }
   }
@@ -178,7 +175,7 @@
 
 #icone {
   background-color: var(--cui-tertiary-bg-dark);
-  border-radius: 15px 0px 0px 15px;
+  border-radius: 10px 0px 0px 10px;
   position: relative; //
   display: flex; // Ativa o layout de flexbox
   align-items: center; // Centraliza verticalmente os itens
@@ -196,7 +193,7 @@
     }
   }
   @media (max-width: 576px) {
-    border-radius: 15px 15px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
   }
 }
 
@@ -208,6 +205,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column; /* Define o layout para coluna */
+    margin-top: 20px;
   }
 }
 

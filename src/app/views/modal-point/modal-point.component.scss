@@ -30,26 +30,54 @@
   transform: scale(1.5); /* Aumenta o tamanho do ícone */
 }
 
+.container {
+  margin-left: 50px;
+}
+
 .align-items-start {
   margin-top: 20px;
-  border-width: 3px; // Define a largura da borda
-  border-style: solid; // Define o estilo da borda como sólido
-  border-image: linear-gradient(to right, transparent,var(--DarkSlateGray), transparent) 10; // Aplica o gradiente à borda
-  border-radius: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
+  margin-right: 2px;
+  width: 70%;
 }
+
+.date {
+  position: absolute;
+  top: 100px;
+  left: 65%; /* Ajuste conforme necessário */
+  transform: translateY(-50%);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
+  height: 120px;
+  width: 30%;
+}
+
+.date-inicial {
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
+  width: 100%;
+  height: 40px;
+  margin-top: 20%;
+}
+
 
 .icone {
   background-color: var(--cui-tertiary-bg-dark);
-  border-radius: 15px 0px 0px 15px;
+  border-radius: 10px 0px 0px 10px;
   position: relative; //
   display: flex;
   align-items: center;
   width: 90%;
+
+  svg[name="cilLocationPin"] {
+    margin-top: 10px;
+  }
 }
 
 .atm-Nu-users {
   font-size: 42px;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 .atm-No-users {
@@ -62,7 +90,7 @@
 }
 
 .limite-in {
-  margin-top: 13px;
+  margin-top: 20px;
 }
 
 .limite-in,
