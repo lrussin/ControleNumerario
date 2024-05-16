@@ -1,16 +1,17 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-point',
   standalone: true,
-  imports: [NgIf, NgStyle, IconDirective],
+  imports: [NgIf, NgStyle, IconDirective, DashboardComponent, FormsModule],
   templateUrl: './modal-point.component.html',
   styleUrl: './modal-point.component.scss'
 })
 export class ModalPointComponent {
-
   balanceValue: string = '20.245,00'; // Defina o valor manualmente aqui
 
   @Input() isModalOpen: boolean = false;

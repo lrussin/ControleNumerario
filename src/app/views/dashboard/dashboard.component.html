@@ -1,14 +1,14 @@
-<app-widgets-dropdown />
-<c-card class="my-4">
+<c-card class="my-4 graphic">
   <c-card-body>
     <c-row>
       <c-col sm="5">
-        <h4 class="card-title mb-0" id="traffic">Traffic</h4>
-        <div class="small text-body-secondary">January - December 2023</div>
+        <h4 class="card-title mb-0" id="traffic">Saldo Ociosidade de Caixa</h4>
+        <!-- <div class="small text-body-secondary">January - December 2023</div> -->
       </c-col>
       <c-col class="d-none d-md-block" sm="7">
         <button cButton class="float-end" color="primary">
           <svg cIcon name="cilCloudDownload"></svg>
+          Exportar
         </button>
         <form [formGroup]="trafficRadioGroup">
           <c-button-group class="float-end me-3" role="group">
@@ -25,7 +25,7 @@
               color="secondary"
               variant="outline"
             >
-              Day
+              Dia
             </label>
             <input
               class="btn-check"
@@ -40,7 +40,7 @@
               color="secondary"
               variant="outline"
             >
-              Month
+              Mês
             </label>
             <input
               class="btn-check"
@@ -55,7 +55,7 @@
               color="secondary"
               variant="outline"
             >
-              Year
+              Ano
             </label>
           </c-button-group>
         </form>
@@ -73,39 +73,39 @@
     </c-chart>
   </c-card-body>
   <c-card-footer>
-    <c-row class="text-center mb-2" [xl]="5" [lg]="4" [sm]="2" [xs]="1" [gutter]="4">
+    <c-row class="text-center mb-2" [xl]="4" [lg]="4" [sm]="2" [xs]="1" [gutter]="4">
       <c-col>
+        <div class="text-body-secondary">Saldo Ociosidade</div>
+        <!-- <div class="fw-semibold text-truncate">24.093 Users (20%)</div> -->
+        <c-progress class="mt-2" thin color="info" value="100" />
+      </c-col>
+      <c-col>
+        <div class="text-body-secondary">1 Charts</div>
+        <!-- <div class="fw-semibold text-truncate">22.123 Users (80%)</div> -->
+        <c-progress class="mt-2" thin color="danger" value="100" />
+      </c-col>
+      <c-col class="d-none d-xl-block">
+        <div class="text-body-secondary">3 Charts</div>
+        <!-- <div class="fw-semibold text-truncate">Average Rate (40.15%)</div> -->
+        <c-progress class="mt-2" thin value="100" />
+      </c-col>
+      <c-col>
+        <div class="text-body-secondary">Mediano</div>
+        <!-- <div class="fw-semibold text-truncate">78.706 Views (60%)</div> -->
+        <c-progress class="mt-2" thin color="warning" value="100" />
+      </c-col>
+      <!-- <c-col>
         <div class="text-body-secondary">Visits</div>
         <strong>29.703 Users (40%)</strong>
         <c-progress class="mt-2" thin color="success" value="40" />
-      </c-col>
-      <c-col>
-        <div class="text-body-secondary">Unique</div>
-        <div class="fw-semibold text-truncate">24.093 Users (20%)</div>
-        <c-progress class="mt-2" thin color="info" value="20" />
-      </c-col>
-      <c-col>
-        <div class="text-body-secondary">Page views</div>
-        <div class="fw-semibold text-truncate">78.706 Views (60%)</div>
-        <c-progress class="mt-2" thin color="warning" value="60" />
-      </c-col>
-      <c-col>
-        <div class="text-body-secondary">New Users</div>
-        <div class="fw-semibold text-truncate">22.123 Users (80%)</div>
-        <c-progress class="mt-2" thin color="danger" value="80" />
-      </c-col>
-      <c-col class="d-none d-xl-block">
-        <div class="text-body-secondary">Bounce Rate</div>
-        <div class="fw-semibold text-truncate">Average Rate (40.15%)</div>
-        <c-progress class="mt-2" thin value="40" />
-      </c-col>
+      </c-col> -->
     </c-row>
   </c-card-footer>
 </c-card>
 
-<app-widgets-brand [withCharts]="true" />
+<!-- <app-widgets-brand [withCharts]="true" /> -->
 
-<c-row class="mt-4">
+<!-- <c-row class="mt-4">
   <c-col xs>
     <c-card class="mb-4">
       <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
@@ -310,8 +310,8 @@
       </c-card-body>
     </c-card>
   </c-col>
-</c-row>
-<c-row>
+</c-row> -->
+<!-- <c-row>
   <c-col xs>
     <c-card class="mb-4">
       <c-card-body>
@@ -385,4 +385,4 @@
       </c-card-body>
     </c-card>
   </c-col>
-</c-row>
+</c-row> -->

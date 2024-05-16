@@ -39,7 +39,7 @@
             "styles": [
               "src/scss/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [ ],
             "allowedCommonJsDependencies": []
           },
           "configurations": {

@@ -71,7 +71,7 @@ export class DashboardChartsData {
         'November',
         'December'
       ];
-    } else {
+    } else if (period === 'Day') {
       /* tslint:disable:max-line-length */
       const week = [
         'Monday',
@@ -80,9 +80,24 @@ export class DashboardChartsData {
         'Thursday',
         'Friday',
         'Saturday',
-        'Sunday'
+        'Sunday',
       ];
       labels = week.concat(week, week, week);
+    } else {
+      labels = [
+        '2000',
+        '2001',
+        '2002',
+        '2003',
+        '2004',
+        '2005',
+        '2006',
+        '2007',
+        '2008',
+        '2009',
+        '2010',
+        '2011'
+      ];
     }
 
     const colors = [

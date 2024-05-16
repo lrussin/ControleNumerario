@@ -199,6 +199,7 @@
 
 .graphic {
   color: var(--cui-secondary-color);
+  text-align: center;
 
   @media(max-width: 576px) {
     display: flex;
@@ -226,8 +227,8 @@
 
 #exp-graphic:hover {
   background-color: var(
-    --green-water
-  ); // Cor de fundo do botão ao passar o mouse
+   --green-water
+  );  // Cor de fundo do botão ao passar o mouse
 }
 
 @media screen and (max-width: 767px) {

@@ -15,11 +15,11 @@ export const navItems: INavData[] = [
     url: '/pointService',
     iconComponent: { name: 'cil-location-pin' },
   },
-  {
-    name: 'Dashboard',
-    url: '/dashboard',
-    iconComponent: { name: 'cil-chart' },
-  },
+  // {
+  //   name: 'Dashboard',
+  //   url: '/dashboard',
+  //   iconComponent: { name: 'cil-chart' },
+  // },
   {
     title: true,
     name: 'Theme'

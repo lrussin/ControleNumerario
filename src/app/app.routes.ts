@@ -1,6 +1,5 @@
 import { HomeComponent } from './views/home/home.component';
 import { PointServiceComponent } from './views/point-service/point-service.component'
-import { ThemeColorComponent } from './views/theme/colors.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import { LoginComponent } from './views/pages/login/login.component';
@@ -9,11 +8,15 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { CmAngularDualListboxModule } from 'cm-angular-dual-listbox';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', redirectTo: 'dashboard' },
+  // { path: 'dashboard', redirectTo: 'dashboard' },
   // { path: 'pointService', component: PointServiceComponent },
   { path: '',
     component: DefaultLayoutComponent,
@@ -27,7 +30,7 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
+        // loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
         component: DashboardComponent
       },
       {
@@ -104,11 +107,17 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'Home' }
 ];
 
 @NgModule({
-  imports:[RouterModule.forRoot(routes)],
+  imports:[RouterModule.forRoot(routes),
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    CmAngularDualListboxModule
+  ],
+  providers: [],
   exports: [RouterModule]
 })
 export class AppRoutes { }
