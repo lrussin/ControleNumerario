@@ -3,12 +3,13 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   template: '<router-outlet />',
   standalone: true,
-  imports: [RouterOutlet]
+  imports: [RouterOutlet, HttpClientModule]
 })
 export class AppComponent implements OnInit {
   title = 'Controle Numerario';

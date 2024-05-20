@@ -209,3 +209,8 @@ li.selected {
   display: none;
 }
 
+.accordion-button,
+.accordion-header {
+  border-radius: 10px !important;
+}
+

@@ -1,0 +1,100 @@
+<ng-container>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-sm-4 custom-col-4">
+        Banco
+        <div class="col-20 cus-col-8">
+          <select class="banco">
+            <option value="01">01 - PA - LONDRINA - RUA: QUINTINO BOCAIÚVA</option>
+            <option value="02">02 - Outra opção</option>
+            <option value="03">03 - Mais uma opção</option>
+            <option value="04">04 - Ver Tudo</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-2 date-ini">
+        Data Incial
+        <div class="col-10">
+          <input class="date-final" type="date">
+        </div>
+      </div>
+      <div class="col-sm-2 date-fin">
+        Data Final
+        <div class="col-10">
+          <input class="date-final" type="date">
+        </div>
+      </div>
+      <div class="col-1 check">
+        <svg cIcon name="cilCheck"></svg>
+      </div>
+      <div class="col-sm-2 custom-col-2" id="button-details">
+        <button class="btn-details">
+          <svg class="icon" cIcon name="cilCloudDownload"></svg>
+          <span> Exportar</span>
+        </button>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <c-accordion class="accordion" [flush]="true">
+        <c-accordion-item  #item0="cAccordionItem" [visible]="false">
+          <ng-template class="accordion-button" cTemplateId="accordionHeaderTemplate">
+            <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+              <svg cIcon name="cilMoney" size="3xl"></svg>
+              <span class="interbancario">Transações SPB</span>
+              <div class="col-sm-2 amount">VALOR TOTAL | R$
+                <!-- <br> -->
+                <div class="col-10 value">2.540.560,00</div>
+              </div>
+            </button>
+          </ng-template>
+          <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data de Movimentação</th>
+                    <th scope="col">Banco</th>
+                    <th scope="col">Agência</th>
+                    <th scope="col">Operação</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>26/06/2022 14:45:20</td>
+                    <td>341</td>
+                    <td>1553</td>
+                    <td>Compra</td>
+                    <td>Recebido</td>
+                    <td>1.800,00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>26/06/2022 14:45:20</td>
+                    <td>341</td>
+                    <td>1553</td>
+                    <td>Venda</td>
+                    <td>Recebido</td>
+                    <td>1.800,00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>26/06/2022 14:45:20</td>
+                    <td>341</td>
+                    <td>1553</td>
+                    <td>Compra</td>
+                    <td>Recebido</td>
+                    <td>1.800,00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </c-accordion-item>
+      </c-accordion>
+    </div>
+  </div>
+</ng-container>
