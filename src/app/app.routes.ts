@@ -7,13 +7,16 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
-import { NgModule } from '@angular/core';
+import { ApplicationRef, NgModule } from '@angular/core';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CmAngularDualListboxModule } from 'cm-angular-dual-listbox';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeService } from './views/home/service/home.service';
+import { AppComponent } from './app.component';
+import { SidebarNavHelper } from '@coreui/angular';
 
 
 export const routes: Routes = [
@@ -125,7 +128,11 @@ export const routes: Routes = [
     CmAngularDualListboxModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [HomeService, SidebarNavHelper],
   exports: [RouterModule]
 })
-export class AppRoutes { }
+export class AppRoutes {
+  ngDoBootstrap(appRef: ApplicationRef) {
+    appRef.bootstrap(AppComponent); // Componentes a serem inicializados
+  }
+ }
