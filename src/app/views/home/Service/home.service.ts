@@ -10,9 +10,11 @@ export class HomeService {
 
   private getAllPaUrl = 'https://localhost:7162/PA/GetAllPA?pageNumber=1&pageSize=10';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private httpClient : HttpClient,
+  ) { }
 
   GetAllPA(): Observable<any> {
-    return this.http.get<any>(this.getAllPaUrl);
+    return this.httpClient.get<any>(this.getAllPaUrl);
   }
 }

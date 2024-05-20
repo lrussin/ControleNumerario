@@ -1,3 +1,4 @@
+import { InterbancarioComponent } from './views/interbancario/interbancario.component';
 import { HomeComponent } from './views/home/home.component';
 import { PointServiceComponent } from './views/point-service/point-service.component'
 import { RouterModule, Routes } from '@angular/router';
@@ -38,6 +39,10 @@ export const routes: Routes = [
       {
         path: 'pointService',
         component: PointServiceComponent
+      },
+      {
+        path: 'interbancario',
+        component: InterbancarioComponent
       },
       {
         path: 'theme',
@@ -118,7 +123,7 @@ export const routes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     CmAngularDualListboxModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   exports: [RouterModule]
