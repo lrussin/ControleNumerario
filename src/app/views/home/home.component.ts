@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [IconDirective, HttpClientModule, FormsModule, CommonModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   data: any;
@@ -20,15 +20,16 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("teste")
-    this.homeService.GetAllPA().subscribe(
-      response => {
-        this.data = response;
-        console.log(this.data);
+    console.log('Iniciando conponenmt')
+    this.homeService.GetAllPA().subscribe({
+      next: (response) =>{
+          this.data = response;
+          console.log(this.data);
+
       },
-      error => {
+      error: (error) =>{
         console.error('Erro ao buscar dados', error);
       }
-    );
+    });
   }
 }
