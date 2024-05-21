@@ -21,15 +21,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Iniciando conponenmt')
-    this.homeService.GetAllPA().subscribe({
-      next: (response) =>{
-          this.data = response;
-          console.log(this.data);
+    // this.homeService.GetAllPA().subscribe({
+    //   next: (response) =>{
+    //       this.data = response;
+    //       console.log(this.data);
 
-      },
-      error: (error) =>{
-        console.error('Erro ao buscar dados', error);
-      }
-    });
+    //   },
+    //   error: (error) =>{
+    //     console.error('Erro ao buscar dados', error);
+    //   }
+    // });
   }
 }

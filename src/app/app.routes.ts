@@ -1,3 +1,4 @@
+import { UsersListComponent } from './views/users-list/users-list.component';
 import { InterbancarioComponent } from './views/interbancario/interbancario.component';
 import { HomeComponent } from './views/home/home.component';
 import { PointServiceComponent } from './views/point-service/point-service.component'
@@ -17,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeService } from './views/home/service/home.service';
 import { AppComponent } from './app.component';
 import { SidebarNavHelper } from '@coreui/angular';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ModalRegisterComponent } from './views/modal-register/modal-register.component';
 
 
 export const routes: Routes = [
@@ -46,6 +50,14 @@ export const routes: Routes = [
       {
         path: 'interbancario',
         component: InterbancarioComponent
+      },
+      {
+        path: 'users',
+        component: UsersListComponent
+      },
+      {
+        path: 'modal-register',
+        component: ModalRegisterComponent
       },
       {
         path: 'theme',
@@ -127,6 +139,8 @@ export const routes: Routes = [
     FormsModule,
     CmAngularDualListboxModule,
     HttpClientModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [HomeService, SidebarNavHelper],
   exports: [RouterModule]
