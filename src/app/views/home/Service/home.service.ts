@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,13 +8,18 @@ import { Observable } from 'rxjs';
 })
 export class HomeService {
 
-  private getAllPaUrl = 'https://localhost:7162/PA/GetAllPA?pageNumber=1&pageSize=10';
+  private baseUrl = 'https://localhost:7162/PA/GetAllPA';
 
   constructor(
     private httpClient : HttpClient,
   ) { }
 
-  GetAllPA(): Observable<any> {
-    return this.httpClient.get<any>(this.getAllPaUrl);
+  GetAllPA(pageNumber: number, pageSize: number, descriptogradado: boolean): Observable<any> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString())
+      .set('descriptogradado', descriptogradado.toString())
+
+    return this.httpClient.get<any>(this.baseUrl, { params });
   }
 }

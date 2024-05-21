@@ -14,22 +14,41 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   data: any;
+  pageNumber = 1;
+  pageSize = 10;
+  descriptografado = true;
 
   constructor(
     private homeService: HomeService
   ) { }
 
   ngOnInit(): void {
-    console.log('Iniciando conponenmt')
-    // this.homeService.GetAllPA().subscribe({
-    //   next: (response) =>{
-    //       this.data = response;
-    //       console.log(this.data);
+    this.loadData();
+  }
 
-    //   },
-    //   error: (error) =>{
-    //     console.error('Erro ao buscar dados', error);
-    //   }
-    // });
+  loadData():void{
+    console.log('Iniciando conponenmt')
+    this.homeService.GetAllPA(this.pageNumber,this.pageSize,this.descriptografado).subscribe({
+      next: (response) =>{
+          this.data = response;
+          console.log(this.data);
+
+      },
+      error: (error) =>{
+        console.error('Erro ao buscar dados', error);
+      }
+    });
+  }
+
+  nextPage():void{
+    this.pageNumber ++;
+    this.loadData();
+  }
+ 
+  prevPage():void{
+    if(this.pageNumber > 1){
+      this.pageNumber --;
+    }
+    this.loadData();
   }
 }

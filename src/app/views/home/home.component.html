@@ -1,33 +1,40 @@
-<ng-container>
+<ng-container *ngIf="data && data.length > 0">
   <div class="container">
-    <div class="row">
+    <div class="row" *ngFor="let item of data">
       <div class="col-sm-2" id="icone">
         <svg cIcon name="cilLocationPin" size="8xl"></svg>
       </div>
       <div class="col-sm-3">
-        Ponto atendimento :
+        Ponto atendimento:
         <div class="col-15">
-          01 - PA - LONDRINA - RUA: QUINTINO BOCAIÚVA
+          {{ item.nomeUnidade }}
         </div>
       </div>
       <div class="col-sm-3">
-        Saldo Total :
+        Saldo Total:
         <div class="col-8">
-          R$: 9.847.536.593,00
+          R$: {{ item.saldo | number:'1.2-2' }}
         </div>
       </div>
       <div class="col-sm-2">
-        Data Atualização :
+        Data Atualização:
         <div class="col-15">
-          23/01/2024 às 18:30:20
+          {{ item.modifiedAt | date: 'dd/MM/yyyy HH:mm:ss' }}
         </div>
       </div>
       <div class="col-sm-2" id="button-details">
         <button class="btn-details">
-          <svg cIcon name="cilPlus" size="2xl "></svg>
-          <span>  Mais Detalhes</span>
+          <svg cIcon name="cilPlus" size="2xl"></svg>
+          <span> Mais Detalhes</span>
         </button>
       </div>
     </div>
   </div>
+  <div class="paginacao-button">
+      <button (click)="prevPage()" [disabled]="pageNumber === 1">Anterior</button>
+      <button (click)="nextPage()">Proximo</button>
+  </div>
+</ng-container>
+      <ng-container *ngIf="!data || data.length === 0">
+      <P>Nenhum Registro Encontrado.</P>
 </ng-container>
