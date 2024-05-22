@@ -29,6 +29,7 @@
   flex-direction: column;
   justify-content: flex-end; // Alinha os itens na parte inferior
   height: 60%; // Garante que a div ocupe toda a altura disponível
+  padding-left: 0;
 }
 
 #button-details {
@@ -123,6 +124,7 @@
 .mediano,
 .limite-su {
   color: var(--cui-body-color);
+  padding-left: 0;
 
   @media(max-width: 576px) {
     margin-bottom: 5px;
@@ -199,6 +201,7 @@
 
 .graphic {
   color: var(--cui-secondary-color);
+  text-align: center;
 
   @media(max-width: 576px) {
     display: flex;
@@ -226,8 +229,8 @@
 
 #exp-graphic:hover {
   background-color: var(
-    --green-water
-  ); // Cor de fundo do botão ao passar o mouse
+   --green-water
+  );  // Cor de fundo do botão ao passar o mouse
 }
 
 @media screen and (max-width: 767px) {

@@ -6,24 +6,38 @@
           <c-card-body class="p-4">
             <form cForm>
               <h1>Registrar</h1>
+              <p class="text-body-secondary">Criar um novo usuário</p>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Nome" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input autoComplete="name" cFormControl placeholder="Sobrenome" />
+                <input autoComplete="name" cFormControl placeholder="Nome e Sobrenome" />
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>&#64;</span>
                 <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>         
-              <div class="d-grid">
-                <button cButton color="success">Criar usuário</button>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input autoComplete="new-password" cFormControl placeholder="Senha" type="password" />
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input autoComplete="new-password" cFormControl placeholder="Repetir Senha" type="password" />
+              </c-input-group>
+              <div class="permission">
+                Permissão
+              </div>
+              <dual-listbox [sort]="true" [source]="source" key="id" display="name"
+                [filter]="true" [(destination)]="confirmed" height="150px"
+                [disabled]="false">
+              </dual-listbox>
+              <div class="d-grid create-account">
+                <button cButton class="create">Criar conta</button>
               </div>
             </form>
           </c-card-body>

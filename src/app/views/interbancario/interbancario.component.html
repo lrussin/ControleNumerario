@@ -1,0 +1,80 @@
+<ng-container>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-sm-4 custom-col-4">
+        Banco
+        <div class="col-20 cus-col-8">
+          <select class="banco" [(ngModel)]="selectedBanco">
+            <option *ngFor="let banco of bancoDebito" [value]="banco">{{ banco }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-2 date-ini">
+        Data Incial
+        <div class="col-10">
+          <input class="date-final" type="date" [(ngModel)]="dataInicial">
+        </div>
+      </div>
+      <div class="col-sm-2 date-fin">
+        Data Final
+        <div class="col-10">
+          <input class="date-final" type="date" [(ngModel)]="dataFinal">
+        </div>
+      </div>
+      <div class="col-1 check" (click)="exportarDados(selectedBanco, dataInicial, dataFinal)">
+        <svg cIcon name="cilCheck"></svg>
+      </div>
+      <div class="col-sm-2 custom-col-2" id="button-details">
+        <button class="btn-details" (click)="exportToExcel()">
+          <svg class="icon" cIcon name="cilCloudDownload"></svg>
+          <span> Exportar</span>
+        </button>
+      </div>
+    </div>
+    <div class="row align-items-center" *ngIf="resultInter">
+      <c-accordion class="accordion" [flush]="true">
+        <c-accordion-item  #item0="cAccordionItem" [visible]="false">
+          <ng-template class="accordion-button" cTemplateId="accordionHeaderTemplate">
+            <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+              <svg cIcon name="cilMoney" size="3xl"></svg>
+              <span class="interbancario">Transações SPB</span>
+              <div class="col-sm-2 amount">VALOR TOTAL | R$
+                <!-- <br> -->
+                <div class="col-10 value">
+                  {{ valorTotal }}</div>
+              </div>
+            </button>
+          </ng-template>
+          <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data de Movimentação</th>
+                    <th scope="col">Banco</th>
+                    <th scope="col">Agência Débito</th>
+                    <th scope="col">Agência Crédito</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dado of dadosInter; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ dado.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ dado.bancoDebito }}</td>
+                    <td>{{ dado.agenciaDebito }}</td>
+                    <td>{{ dado.agenciaCredito }}</td>
+                    <td>{{ dado.situacao }}</td>
+                    <td>{{ dado.valor }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </c-accordion-item>
+      </c-accordion>
+    </div>
+  </div>
+</ng-container>

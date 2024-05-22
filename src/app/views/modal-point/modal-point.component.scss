@@ -53,14 +53,32 @@
   width: 30%;
 }
 
-.date-inicial {
+.date-ini,
+.date-fin {
+  text-align: center;
+  color: var(--cui-secondary-color);
+}
+
+.date-inicial,
+.date-final {
   border-radius: 5px;
   box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
   width: 100%;
-  height: 40px;
-  margin-top: 20%;
+  height: 45px;
+  margin-top: 30%;
+  margin-left: 13%;
+  background-color: var(--cui-body-bg);
 }
 
+input {
+  font-size: 16px;
+  margin-top: 30%;
+  height: 45px;
+  width: 110%;
+  border-radius: 5px;
+  margin-left: 13%;
+  box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
+}
 
 .icone {
   background-color: var(--cui-tertiary-bg-dark);
@@ -133,8 +151,34 @@
   opacity: 1;
 }
 
+.balance {
+  color: var(--cui-secondary-color);
+}
+
 .balance-value {
   margin-left: 40px; /* Espaçamento entre o círculo e o texto */
   font-size: 30px;
   color: var(--cui-body-color);
+}
+
+.check {
+  margin-top: 12%;
+  margin-left: 7%;
+  margin-bottom: 4%;
+  height: 45px;
+  text-align: center;
+  background-color: var(--green); // Cor de fundo do botão
+  color: #fff; // Cor do texto do botão
+  padding: 5px 0px 0px 5px; // Espaçamento interno do botão
+  border-radius: 5px; // Arredonda as bordas do botão
+  cursor: pointer;
+
+  svg[name="cilCheck"] {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.check:hover {
+  background-color: var(--green-water);
 }

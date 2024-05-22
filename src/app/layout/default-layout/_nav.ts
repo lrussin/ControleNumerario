@@ -16,10 +16,20 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-location-pin' },
   },
   {
-    name: 'Dashboard',
-    url: '/dashboard',
-    iconComponent: { name: 'cil-chart' },
+    name: 'Interbancário',
+    url: '/interbancario',
+    iconComponent: { name: 'cil-money' },
   },
+  {
+    name: 'Usuários',
+    url: '/users',
+    iconComponent: { name: 'cil-user' },
+  },
+  // {
+  //   name: 'Dashboard',
+  //   url: '/dashboard',
+  //   iconComponent: { name: 'cil-chart' },
+  // },
   {
     title: true,
     name: 'Theme'

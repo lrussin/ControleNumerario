@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 :root {
   --primary-color-1 : #0073E6;
   --primary-color-1-shade : #3DC7FF;
@@ -177,4 +179,38 @@ c-sidebar {
   background-color: var(--cui-tertiary-bg-dark);
 }
 
+.point-right,
+.point-left {
+  background-color: var(--tempThemeButton);
+}
+
+.point-right:hover,
+.point-left:hover {
+  background-color: var(--tempThemeButton2);
+}
+
+input[name="filterDestination"],
+input[name="filterSource"] {
+  border: 1px solid #ddd;
+}
+
+.filter::after {
+  opacity: 1 !important; // ou outras regras de estilo
+}
+
+li.selected:hover,
+li:hover,
+li.selected {
+  background-color: var(--gray-5) !important;
+  color: var(--white);
+}
+
+.button-bar{
+  display: none;
+}
+
+.accordion-button,
+.accordion-header {
+  border-radius: 10px !important;
+}
 
