@@ -27,12 +27,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadData():void{
-    console.log('Iniciando conponenmt')
     this.homeService.GetAllPA(this.pageNumber,this.pageSize,this.descriptografado).subscribe({
       next: (response) =>{
           this.data = response;
           console.log(this.data);
-
       },
       error: (error) =>{
         console.error('Erro ao buscar dados', error);
@@ -44,7 +42,7 @@ export class HomeComponent implements OnInit {
     this.pageNumber ++;
     this.loadData();
   }
- 
+
   prevPage():void{
     if(this.pageNumber > 1){
       this.pageNumber --;

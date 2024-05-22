@@ -29,6 +29,7 @@
   flex-direction: column;
   justify-content: flex-end; // Alinha os itens na parte inferior
   height: 60%; // Garante que a div ocupe toda a altura disponível
+  padding-left: 0;
 }
 
 #button-details {
@@ -123,6 +124,7 @@
 .mediano,
 .limite-su {
   color: var(--cui-body-color);
+  padding-left: 0;
 
   @media(max-width: 576px) {
     margin-bottom: 5px;

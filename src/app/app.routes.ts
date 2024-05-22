@@ -21,6 +21,7 @@ import { SidebarNavHelper } from '@coreui/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ModalRegisterComponent } from './views/modal-register/modal-register.component';
+import { CommonModule } from '@angular/common';
 
 
 export const routes: Routes = [
@@ -140,7 +141,8 @@ export const routes: Routes = [
     CmAngularDualListboxModule,
     HttpClientModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
   ],
   providers: [HomeService, SidebarNavHelper],
   exports: [RouterModule]
