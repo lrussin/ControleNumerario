@@ -1,3 +1,9 @@
+.input-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4%;
+}
+
 .container {
   .row {
     margin-bottom: 40px;
@@ -80,5 +86,35 @@ div[class*="col-sm-2"] {
 #button-details {
   .btn-details:hover {
     background-color: var(--cui-tertiary-bg-dark); // Cor de fundo do botão ao passar o mouse
+  }
+}
+
+.paginacao {
+  display: flex;
+  justify-content: flex-end; // Posiciona a div no canto direito
+  margin-right: 20px; // Espaço à direita, ajuste conforme necessário
+}
+
+.page-link{
+  cursor: pointer;
+}
+
+.page-link:hover {
+  color: var(--tempThemeButton);
+}
+
+.pagination {
+  .page-item {
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+
+      .page-link {
+        cursor: not-allowed;
+        color: black; // Cor para o texto desabilitado
+        background-color: #f5f5f5; // Cor de fundo desabilitada
+        border-color: #ddd; // Cor da borda desabilitada
+      }
+    }
   }
 }

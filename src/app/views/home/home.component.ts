@@ -1,3 +1,5 @@
+import { PontoAtendimento } from './../../util/interfaces/PontoAtendimento';
+import { MoedaService } from './../../services/moeda.service';
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './service/home.service';
 import { IconDirective } from '@coreui/icons-angular';
@@ -13,40 +15,86 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  data: any;
+  PA: PontoAtendimento[] = [];
   pageNumber = 1;
   pageSize = 10;
   descriptografado = true;
+  totalPages: number = 7;
+
+  page: number[] = [];
+
+  searchTerm: string = '';
+
+  filteredData: any[] = [];
 
   constructor(
-    private homeService: HomeService
-  ) { }
+    private homeService: HomeService,
+    private MoedaService: MoedaService
+  ) {
+    this.page = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+   }
 
   ngOnInit(): void {
     this.loadData();
   }
 
-  loadData():void{
-    this.homeService.GetAllPA(this.pageNumber,this.pageSize,this.descriptografado).subscribe({
-      next: (response) =>{
-          this.data = response;
-          console.log(this.data);
+  loadData(): void {
+    this.homeService.GetAllPA(this.pageNumber, this.pageSize, this.descriptografado).subscribe({
+      next: (response) => {
+        // this.PA = response;
+
+        console.log(response);
+        this.filterItems();
       },
-      error: (error) =>{
+      error: (error) => {
         console.error('Erro ao buscar dados', error);
       }
     });
   }
 
-  nextPage():void{
-    this.pageNumber ++;
-    this.loadData();
+  formatCurrency(value: number): string {
+    return this.MoedaService.formatCurrency(value);
   }
 
-  prevPage():void{
-    if(this.pageNumber > 1){
-      this.pageNumber --;
+  nextPage() {
+    if (this.pageNumber < this.totalPages) {
+      this.pageNumber++;
+      this.changePage(this.pageNumber);
+    }
+  }
+
+  prevPage(): void {
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
     }
     this.loadData();
   }
+
+  goToPage(page: number) {
+    this.pageNumber = page;
+    this.changePage(this.pageNumber);
+  }
+
+  changePage(page: number) {
+    this.loadData();
+  }
+
+  onSearchInput() {
+    this.filterItems();
+  }
+
+  performSearch() {
+    this.filterItems();
+  }
+
+  filterItems() {
+    if (this.searchTerm) {
+      this.filteredData = this.PA.filter(item =>
+        item.nomeUnidade.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredData = [...this.PA];
+    }
+  }
+
 }
