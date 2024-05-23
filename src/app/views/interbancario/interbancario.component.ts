@@ -39,6 +39,7 @@ export class InterbancarioComponent {
   dadosInter: DadosInterbancario[] = [];
   resultInter: boolean = false
   valorTotal: string = '';
+  isExportDisabled: boolean = true;
 
   constructor(
     private interbancarioService: InterbancarioService,
@@ -66,7 +67,7 @@ export class InterbancarioComponent {
           this.dadosInter = response;
           this.resultInter = true
           this.valorTotal = this.calcularValorTotal(response);
-          console.log(this.dadosInter);
+          this.isExportDisabled = false;
         },
         error: (error) => {
           console.error('Erro ao buscar Transações', error);
@@ -79,7 +80,7 @@ export class InterbancarioComponent {
           this.dadosInter = response;
           this.resultInter = true
           this.valorTotal = this.calcularValorTotal(response);
-          console.log(this.dadosInter);
+          this.isExportDisabled = false;
         },
         error: (error) => {
           console.error('Erro ao buscar Transações', error);
@@ -89,18 +90,26 @@ export class InterbancarioComponent {
   }
 
   calcularValorTotal(dados: any[]): string {
-    const total = dados.reduce((sum, item) => sum + item.valor, 0); // Supondo que 'valor' é o campo que você quer somar
-    return this.MoedaService.maskCurrency(total); // Formatar o valor total para o padrão brasileiro
+    const total = dados.reduce((sum, item) => sum + item.valor, 0);
+    return this.MoedaService.maskCurrency(total);
+  }
+
+  formatCurrency(value: number): string {
+    return this.MoedaService.maskCurrency(value);
   }
 
   exportToExcel(): void {
-    this.interbancarioService.getData().subscribe(data => {
+    this.interbancarioService.getExcelImport(this.selectedBanco,this.dataInicial,this.dataFinal,this.pageNumber,this.pageSize).subscribe(data => {
       // Remover a terceira coluna (índice 2)
       const filteredData = data.map(row => {
         return {
           // Manter apenas as colunas desejadas e mapear outras conforme necessário
-          dataHora: row.dataHora, // Mapear a primeira coluna
-          coluna2: row.bancoDebito, // Mapear a segunda coluna
+          DataMovimentacao: row.dataHora, // Mapear a primeira coluna
+          Banco: row.bancoDebito,
+          AgenciaDebito: row.agenciaDebito,
+          AgenciaCredito: row.agenciaCredito,
+          Situacao: row.situacao,
+          Valor: row.valor, // Mapear a segunda coluna
           // Adicionar outras colunas conforme necessário
         };
       });
@@ -108,7 +117,7 @@ export class InterbancarioComponent {
       const workbook = XLSX.utils.book_new();
       const worksheet = XLSX.utils.json_to_sheet(filteredData);
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-      XLSX.writeFile(workbook, 'data.xlsx');
+      XLSX.writeFile(workbook, 'TransaçõesInterbancaria.xlsx');
     });
   }
 

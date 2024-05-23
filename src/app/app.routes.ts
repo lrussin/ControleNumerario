@@ -8,7 +8,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
-import { ApplicationRef, NgModule } from '@angular/core';
+import { ApplicationRef, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -144,7 +144,7 @@ export const routes: Routes = [
     MatIconModule,
     CommonModule
   ],
-  providers: [HomeService, SidebarNavHelper],
+  providers: [HomeService, SidebarNavHelper ],
   exports: [RouterModule]
 })
 export class AppRoutes {

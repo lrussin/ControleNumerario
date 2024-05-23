@@ -24,7 +24,7 @@
       <div class="col-1 check" (click)="exportarDados(selectedBanco, dataInicial, dataFinal)">
         <svg cIcon name="cilCheck"></svg>
       </div>
-      <div class="col-sm-2 custom-col-2" id="button-details">
+      <div class="col-sm-2 custom-col-2" id="button-details" >
         <button class="btn-details" (click)="exportToExcel()">
           <svg class="icon" cIcon name="cilCloudDownload"></svg>
           <span> Exportar</span>
@@ -67,7 +67,7 @@
                     <td>{{ dado.agenciaDebito }}</td>
                     <td>{{ dado.agenciaCredito }}</td>
                     <td>{{ dado.situacao }}</td>
-                    <td>{{ dado.valor }}</td>
+                    <td>{{ formatCurrency(dado.valor) }}</td>
                   </tr>
                 </tbody>
               </table>
