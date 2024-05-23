@@ -37,11 +37,22 @@
 <!--</c-header>-->
 <ng-template #userDropdown>
   <c-dropdown [popperOptions]="{ placement: 'bottom-start' }" variant="nav-item">
-    <c-avatar
-      shape="rounded-1"
-      [size]="'md'"
-      src="./assets/images/avatars/profile.png"
-    />
+    <button [caret]="false" cDropdownToggle class="py-0 pe-0">
+      <c-avatar
+        shape="rounded-1"
+        [size]="'md'"
+        src="./assets/images/avatars/profile.png"
+        textColor="primary"
+      />
+    </button>
+    <ul cDropdownMenu class="pt-0 w-auto">
+      <li>
+        <a cDropdownItem routerLink="">
+          <svg cIcon class="me-2" name="cilAccountLogout"></svg>
+          Logout
+        </a>
+      </li>
+    </ul>
   </c-dropdown>
 </ng-template>
 <ng-template #themeDropdown>
