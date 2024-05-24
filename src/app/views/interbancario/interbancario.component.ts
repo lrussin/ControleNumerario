@@ -31,7 +31,7 @@ export class InterbancarioComponent {
   pageNumber = 1;
   pageSize = 20;
 
-
+  buttonExport: boolean = false
   bancoDebito: DadosInterbancario[] = [];
   selectedBanco: number = 0;
   dataInicial: string = '';
@@ -99,26 +99,29 @@ export class InterbancarioComponent {
   }
 
   exportToExcel(): void {
-    this.interbancarioService.getExcelImport(this.selectedBanco,this.dataInicial,this.dataFinal,this.pageNumber,this.pageSize).subscribe(data => {
-      // Remover a terceira coluna (índice 2)
-      const filteredData = data.map(row => {
-        return {
-          // Manter apenas as colunas desejadas e mapear outras conforme necessário
-          DataMovimentacao: row.dataHora, // Mapear a primeira coluna
-          Banco: row.bancoDebito,
-          AgenciaDebito: row.agenciaDebito,
-          AgenciaCredito: row.agenciaCredito,
-          Situacao: row.situacao,
-          Valor: row.valor, // Mapear a segunda coluna
-          // Adicionar outras colunas conforme necessário
-        };
-      });
+    if (!this.isExportDisabled) {
+      this.interbancarioService.getExcelImport(this.selectedBanco,this.dataInicial,this.dataFinal,this.pageNumber,this.pageSize).subscribe(data => {
+        const filteredData = data.map(row => {
 
-      const workbook = XLSX.utils.book_new();
-      const worksheet = XLSX.utils.json_to_sheet(filteredData);
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-      XLSX.writeFile(workbook, 'TransaçõesInterbancaria.xlsx');
-    });
+          const dateParts = row.dataHora.split('T')[0].split('-');
+          const dataMovimentacao = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+          const valorFormatado = Number(row.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          return {
+            DataMovimentacao: dataMovimentacao,
+            Banco: row.bancoDebito,
+            AgenciaDebito: row.agenciaDebito,
+            AgenciaCredito: row.agenciaCredito,
+            Situacao: row.situacao,
+            Valor: valorFormatado,
+          };
+        });
+
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(filteredData);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+        XLSX.writeFile(workbook, 'TransaçõesInterbancaria.xlsx');
+      });
+    }
   }
 
 }

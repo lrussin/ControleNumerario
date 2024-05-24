@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+
   PA: PontoAtendimento[] = [];
   pageNumber = 1;
   pageSize = 10;
@@ -24,8 +25,7 @@ export class HomeComponent implements OnInit {
   page: number[] = [];
 
   searchTerm: string = '';
-
-  filteredData: any[] = [];
+  filteredData: PontoAtendimento[] = [];
 
   constructor(
     private homeService: HomeService,
@@ -40,9 +40,8 @@ export class HomeComponent implements OnInit {
 
   loadData(): void {
     this.homeService.GetAllPA(this.pageNumber, this.pageSize, this.descriptografado).subscribe({
-      next: (response) => {
-        // this.PA = response;
-
+      next: (response ) => {
+        this.PA = response;
         console.log(response);
         this.filterItems();
       },

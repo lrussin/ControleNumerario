@@ -1,14 +1,14 @@
-<ng-container *ngIf="PA && PA.length > 0">
+<ng-container *ngIf="filteredData && filteredData.length > 0">
   <div class="input-group">
     <div class="form-outline" data-mdb-input-init>
-      <input type="search" id="form1" class="form-control" placeholder="Search"/>
+      <input type="search" id="form1" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (input)="onSearchInput()"/>
     </div>
-    <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+    <button type="button" class="btn btn-primary" data-mdb-ripple-init (click)="performSearch()">
       <svg cIcon name="cilSearch" size="lg"></svg>
     </button>
   </div>
   <div class="container">
-    <div class="row" *ngFor="let item of PA">
+    <div class="row" *ngFor="let item of filteredData">
       <div class="col-sm-2" id="icone">
         <svg cIcon name="cilLocationPin" size="8xl"></svg>
       </div>
@@ -53,6 +53,28 @@
   </div>
 
 </ng-container>
-      <ng-container *ngIf="!PA || PA.length === 0">
-      <P>Nenhum Registro Encontrado.</P>
+
+<ng-container *ngIf="!filteredData || filteredData.length === 0">
+  <div class="input-group">
+    <div class="form-outline" data-mdb-input-init>
+      <input type="search" id="form1" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (input)="onSearchInput()"/>
+    </div>
+    <button type="button" class="btn btn-primary" data-mdb-ripple-init (click)="performSearch()">
+      <svg cIcon name="cilSearch" size="lg"></svg>
+    </button>
+  </div>
+  <span class="resgister">Nenhum Registro Encontrado.</span>
+  <div class="paginacao">
+    <ul class="pagination">
+      <li class="page-item prev" (click)="prevPage()" [class.disabled]="pageNumber === 1">
+        <a class="page-link" >Anterior</a>
+      </li>
+      <li class="page-item" *ngFor="let pages of page" (click)="goToPage(pages)" [class.active]="pages === pageNumber">
+        <a class="page-link">{{ pages }}</a>
+      </li>
+      <li class="page-item" (click)="nextPage()" [class.disabled]="pageNumber === totalPages">
+        <a class="page-link">Próximo</a>
+      </li>
+    </ul>
+  </div>
 </ng-container>

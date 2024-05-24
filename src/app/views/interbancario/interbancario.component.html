@@ -21,11 +21,15 @@
           <input class="date-final" type="date" [(ngModel)]="dataFinal">
         </div>
       </div>
-      <div class="col-1 check" (click)="exportarDados(selectedBanco, dataInicial, dataFinal)">
+      <div class="col-1 check" (click)="exportarDados(selectedBanco, dataInicial, dataFinal)" >
         <svg cIcon name="cilCheck"></svg>
       </div>
       <div class="col-sm-2 custom-col-2" id="button-details" >
-        <button class="btn-details" (click)="exportToExcel()">
+        <button
+          class="btn-details"
+          (click)="exportToExcel()"
+          [class.disabled]="isExportDisabled">
+
           <svg class="icon" cIcon name="cilCloudDownload"></svg>
           <span> Exportar</span>
         </button>
