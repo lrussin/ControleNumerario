@@ -45,7 +45,7 @@ export class UsersListComponent implements OnInit {
   searchUsers(): void {
     if (this.searchTerm) {
       this.filteredUsers = this.users.filter((user: any) =>
-        user.descNomeUsuario.toLowerCase().includes(this.searchTerm.toLowerCase())
+        user.descNomeUsuario.toLowerCase().includes(this.searchTerm.toLowerCase()) 
       );
     } else {
       this.filteredUsers = this.users;
