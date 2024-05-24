@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class HomeService {
     private httpClient : HttpClient,
   ) { }
 
-  GetAllPA(pageNumber: number, pageSize: number, descriptogradado: boolean): Observable<any> {
+  GetAllPA(pageNumber: number, pageSize: number, descriptogradado: boolean): Observable<PontoAtendimento[]> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString())

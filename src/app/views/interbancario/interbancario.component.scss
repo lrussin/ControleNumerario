@@ -65,6 +65,14 @@ option {
       width: 19px; // Largura do ícone
       height: 19px; // Altura do ícone
     }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5; // Exemplo de estilização para um botão desativado
+
+      &:hover {
+        background-color: var(--green); // Cor de fundo do botão
+      }
+    }
   }
 }
 
@@ -77,6 +85,7 @@ option {
 #button-details:last-child {
   border-right: none;
 }
+
 
 .date-ini,
 .date-fin {
