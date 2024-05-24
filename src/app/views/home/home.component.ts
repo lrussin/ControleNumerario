@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
   nextPage() {
     if (this.pageNumber < this.totalPages) {
       this.pageNumber++;
-      this.changePage(this.pageNumber);
+      this.loadData();
     }
   }
 
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
 
   goToPage(page: number) {
     this.pageNumber = page;
-    this.changePage(this.pageNumber);
+    this.loadData();
   }
 
   changePage(page: number) {

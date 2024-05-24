@@ -90,9 +90,11 @@ table.table td a:hover {
 table.table td a.edit {
   color: #ffc107;
   margin-right: 20%;
+  cursor: pointer;
 }
 table.table td a.delete {
   color: #f44336;
+  cursor: pointer;
 }
 table.table td i {
   font-size: 19px;
@@ -102,39 +104,45 @@ table.table .avatar {
   vertical-align: middle;
   margin-right: 10px;
 }
+.paginacao {
+  display: flex;
+  justify-content: flex-end; // Posiciona a div no canto direito
+  margin-right: 20px; // Espaço à direita, ajuste conforme necessário
+}
+
+.page-link{
+  cursor: pointer;
+}
+
+.page-link:hover {
+  color: var(--tempThemeButton);
+}
+
 .pagination {
-  float: right;
-  margin: 0 0 5px;
+  .page-item {
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+
+      .page-link {
+        cursor: not-allowed;
+        color: black; // Cor para o texto desabilitado
+        background-color: #f5f5f5; // Cor de fundo desabilitada
+        border-color: #ddd; // Cor da borda desabilitada
+      }
+    }
+  }
 }
-.pagination li a {
-  border: none;
-  font-size: 13px;
-  min-width: 30px;
-  min-height: 30px;
-  color: var(--cui-body-color);
-  margin: 0 2px;
-  line-height: 30px;
-  border-radius: 2px !important;
-  text-align: center;
-  padding: 0 6px;
+
+.resgister{
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
-.pagination li a:hover {
-  color: #666;
-}
-.pagination li.active a,
-.pagination li.active a.page-link {
-  background: #03a9f4;
-}
-.pagination li.active a:hover {
-  background: #0397d6;
-}
-.pagination li.disabled i {
-  color: #ccc;
-}
-.pagination li i {
-  font-size: 16px;
-  padding-top: 6px;
-}
+
 .hint-text {
   float: left;
   margin-top: 10px;

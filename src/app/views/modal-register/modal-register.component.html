@@ -1,5 +1,5 @@
-<ng-container *ngIf="isModalOpen">
-  <div class="modal">
+<ng-container>
+  <div class="modal" *ngIf="isModalOpen">
     <!-- <div class="modal-content"> -->
         <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center modal-content">
           <c-container>
@@ -9,30 +9,30 @@
                   <c-card-body class="p-4">
                     <span class="close" (click)="onCloseModal()">&times;</span>
                     <form cForm>
-                      <h1>Registrar</h1>
-                      <p class="text-body-secondary">Criar um novo usuário</p>
+                      <h1>{{ isEditMode ? 'Editar Usuário' : 'Registrar'}}</h1>
+                      <p class="text-body-secondary">{{ isEditMode ? 'Editar informações do usuário' : 'Criar um novo usuário'}}</p>
                       <c-input-group class="mb-3">
                         <span cInputGroupText>
                           <svg cIcon name="cilUser"></svg>
                         </span>
-                        <input autoComplete="name" cFormControl placeholder="Nome e Sobrenome" />
+                        <input autoComplete="name" cFormControl placeholder="Nome e Sobrenome" [value]="userData?.idUsuario || ''" />
                       </c-input-group>
                       <c-input-group class="mb-3">
                         <span cInputGroupText>&#64;</span>
-                        <input autoComplete="email" cFormControl placeholder="Email" />
+                        <input autoComplete="email" cFormControl placeholder="Email" [value]="userData?.descNomeUsuario || ''" />
                       </c-input-group>
-                      <c-input-group class="mb-3">
+                      <!-- <c-input-group class="mb-3">
                         <span cInputGroupText>
                           <svg cIcon name="cilLockLocked"></svg>
                         </span>
                         <input autoComplete="new-password" cFormControl placeholder="Senha" type="password" />
-                      </c-input-group>
-                      <c-input-group class="mb-4">
+                      </c-input-group> -->
+                      <!-- <c-input-group class="mb-4">
                         <span cInputGroupText>
                           <svg cIcon name="cilLockLocked"></svg>
                         </span>
                         <input autoComplete="new-password" cFormControl placeholder="Repetir Senha" type="password" />
-                      </c-input-group>
+                      </c-input-group> -->
                       <div class="permission">
                         Permissão
                       </div>
@@ -41,7 +41,7 @@
                         [disabled]="false">
                       </dual-listbox>
                       <div class="d-grid create-account">
-                        <button cButton class="create">Criar conta</button>
+                        <button cButton class="create">{{ isEditMode ? 'Salvar Alterações' : 'Criar conta' }}</button>
                       </div>
                     </form>
                   </c-card-body>
@@ -52,7 +52,5 @@
         </div>
     <!-- </div> -->
   </div>
-</ng-container>
-<ng-container *ngIf="isModalOpen">
-  <div (click)="onCloseModal()"></div>
+  <div (click)="onCloseModal()" *ngIf="isModalOpen"></div>
 </ng-container>

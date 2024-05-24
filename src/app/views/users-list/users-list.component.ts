@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { IconDirective } from '@coreui/icons-angular';
 import { UsersListService } from './Service/users-list.service';
 import { FormsModule } from '@angular/forms';
+import { UserList } from 'src/app/util/interfaces/UserList';
 
 
 @Component({
@@ -16,16 +17,27 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  users: any;
-  pageNumber = 1;
-  pageSize = 10;
-  isModalOpen: boolean = false;
-  isLoading: boolean = false;
-  error: string | null = null;
-  filteredUsers:string = '';
+  users: UserList[] = [];
+  pageNumber: number = 1;
+  pageSize: number = 3;
+
+  page: number[] = [];
+  totalPages: number = 2;
+
+  filteredData: UserList[] = [];
   searchTerm:string = '';
 
-  constructor(private userslistService: UsersListService) {}
+  isModalDelet: boolean = false;
+
+  userDelet: number | null = null;
+
+  isModalOpen: boolean = false;
+  isEditMode: boolean = false;
+  currentUser: UserList | null = null;
+
+  constructor(private userslistService: UsersListService) {
+    this.page = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
 
   ngOnInit(): void {
     this.loadData();
@@ -35,20 +47,32 @@ export class UsersListComponent implements OnInit {
     this.userslistService.GetAllUsers(this.pageNumber, this.pageSize).subscribe({
       next: (response) => {
         this.users = response;
-        this.filteredUsers = response; // Initialize filteredUsers
+        this.filteredData = response;
+        console.log(this.users)
       },
-      error: (error) => {
+      error:  (error) => {
         console.error('Erro ao buscar dados', error);
       }
     });
   }
-  searchUsers(): void {
+
+  onSearchInput() {
+    this.filterItems();
+  }
+
+  performSearch() {
+    this.filterItems();
+  }
+
+  filterItems(): void {
     if (this.searchTerm) {
-      this.filteredUsers = this.users.filter((user: any) =>
-        user.descNomeUsuario.toLowerCase().includes(this.searchTerm.toLowerCase()) 
+      console.log(this.searchTerm);
+      this.filteredData = this.users.filter(item =>
+        item.descNomeUsuario.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
+      console.log(this.filteredData)
     } else {
-      this.filteredUsers = this.users;
+      this.filteredData = [ ... this.users];
     }
   }
 
@@ -64,17 +88,39 @@ export class UsersListComponent implements OnInit {
     this.loadData();
   }
 
-  setPage(page: number): void {
+  goToPage(page: number) {
     this.pageNumber = page;
     this.loadData();
   }
 
-  openModal(): void {
+  changePage(page: number) {
+    this.loadData();
+  }
+
+  openModal() {
+    this.isEditMode = false;
+    this.currentUser = null;
     this.isModalOpen = true;
   }
 
-  closeModal(): void {
+  openEditModal(user: UserList) {
+    this.isEditMode = true;
+    this.currentUser = user;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
     this.isModalOpen = false;
+  }
+
+  openDeletModal(user: number) {
+    this.isModalDelet = true;
+    this.userDelet = user;
+  }
+
+  closeDeletModal() {
+    this.isModalDelet = false;
+    this.userDelet = null;
   }
 
   get pagesArray(): number[] {
