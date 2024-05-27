@@ -1,3 +1,4 @@
+import { ParameterComponent } from './views/parameter/parameter.component';
 import { UsersListComponent } from './views/users-list/users-list.component';
 import { InterbancarioComponent } from './views/interbancario/interbancario.component';
 import { HomeComponent } from './views/home/home.component';
@@ -60,6 +61,10 @@ export const routes: Routes = [
       {
         path: 'modal-register',
         component: ModalRegisterComponent
+      },
+      {
+        path: 'parameter',
+        component: ParameterComponent
       },
       {
         path: 'theme',

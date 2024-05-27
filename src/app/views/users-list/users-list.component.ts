@@ -17,6 +17,8 @@ import { UserList } from 'src/app/util/interfaces/UserList';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+  data: any;
+
   users: UserList[] = [];
   pageNumber: number = 1;
   pageSize: number = 3;
@@ -29,7 +31,7 @@ export class UsersListComponent implements OnInit {
 
   isModalDelet: boolean = false;
 
-  userDelet: number | null = null;
+  userDelet: UserList | null = null;
 
   isModalOpen: boolean = false;
   isEditMode: boolean = false;
@@ -113,7 +115,7 @@ export class UsersListComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  openDeletModal(user: number) {
+  openDeletModal(user: UserList) {
     this.isModalDelet = true;
     this.userDelet = user;
   }
@@ -121,6 +123,28 @@ export class UsersListComponent implements OnInit {
   closeDeletModal() {
     this.isModalDelet = false;
     this.userDelet = null;
+  }
+
+  deleteUser(userId : number | undefined) {
+    if (userId) {
+      this.userslistService.deleteUser(userId).subscribe({
+        next: (response) => {
+          console.log('Usuário deletado com sucesso', response);
+          this.closeDeletModal();
+          this.loadData();
+        },
+        error: (error) => {
+          console.error('Erro ao deletar usuário', error);
+
+        try {
+          const errorMsg = JSON.parse(error.message);
+          console.error('Erro detalhado:', errorMsg);
+        } catch (e) {
+          console.error('Resposta do servidor não é um JSON válido:', error.message);
+        }
+      }
+      })
+    }
   }
 
   get pagesArray(): number[] {

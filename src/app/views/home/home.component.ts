@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   PA: PontoAtendimento[] = [];
   pageNumber = 1;
   pageSize = 10;
-  descriptografado = true;
   totalPages: number = 7;
 
   page: number[] = [];
@@ -39,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadData(): void {
-    this.homeService.GetAllPA(this.pageNumber, this.pageSize, this.descriptografado).subscribe({
+    this.homeService.GetAllPA(this.pageNumber, this.pageSize).subscribe({
       next: (response ) => {
         this.PA = response;
         console.log(response);

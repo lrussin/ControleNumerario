@@ -204,20 +204,24 @@ table.table .avatar {
 
 
 /* Modal styles */
-.modal .modal-dialog {
-  max-width: 400px;
-}
-.modal .modal-header,
-.modal .modal-body,
-.modal .modal-footer {
-  padding: 20px 30px;
-}
+// .modal .modal-dialog {
+//   max-width: 400px;
+// }
+// .modal .modal-header,
+// .modal .modal-body,
+// .modal .modal-footer {
+//   padding: 20px 30px;
+// }
 .modal .modal-content {
   border-radius: 3px;
   font-size: 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  background-color: var(--cui-body-bg);
+  --cui-bg-opacity: 1 !important;
 }
 .modal .modal-footer {
-  background: #ecf0f1;
+  background-color: var(--cui-body-bg);
   border-radius: 0 0 3px 3px;
 }
 .modal .modal-title {
@@ -237,4 +241,15 @@ table.table .avatar {
 }
 .modal form label {
   font-weight: normal;
+}
+
+.modal .btn-default {
+  border-color: var(--cui-body-color);
+}
+
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
+  color: var(--cui-body-color);
 }

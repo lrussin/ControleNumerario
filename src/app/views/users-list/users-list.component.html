@@ -57,7 +57,7 @@
                 <a class="edit" (click)="openEditModal(item)">
                   <svg cIcon name="cilPencil" size="lg"></svg>
                 </a>
-                <a class="delete" (click)="openDeletModal(item.id)">
+                <a class="delete" (click)="openDeletModal(item)">
                   <svg cIcon name="cilTrash" size="lg"></svg>
                 </a>
               </td>
@@ -121,11 +121,16 @@
           </div>
           <div class="modal-body">
             <p>Tem certeza de que deseja excluir esses registros?</p>
+            <div class="teste">
+              <span>Id Usuario: {{this.userDelet?.idUsuario}}</span>
+              <br>
+              <span>Descrição do Usuario: {{this.userDelet?.descNomeUsuario}}</span>
+            </div>
             <p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn btn-default" (click)="closeDeletModal()" value="Cancelar">
-            <input type="button" class="btn btn-danger" value="Deletar">
+            <input type="button" class="btn btn-danger" (click)="deleteUser(this.userDelet?.id)" click  value="Deletar">
           </div>
         </form>
       </div>

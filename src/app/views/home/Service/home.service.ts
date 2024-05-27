@@ -15,11 +15,10 @@ export class HomeService {
     private httpClient : HttpClient,
   ) { }
 
-  GetAllPA(pageNumber: number, pageSize: number, descriptogradado: boolean): Observable<PontoAtendimento[]> {
+  GetAllPA(pageNumber: number, pageSize: number): Observable<PontoAtendimento[]> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString())
-      .set('descriptogradado', descriptogradado.toString())
 
     return this.httpClient.get<any>(this.baseUrl, { params });
   }
