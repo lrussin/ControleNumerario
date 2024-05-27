@@ -1,0 +1,37 @@
+<ng-container *ngIf="isModalOpen">
+  <div class="modal" >
+    <!-- <div class="modal-content"> -->
+        <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center modal-content">
+          <c-container>
+            <c-row class="justify-content-center">
+              <c-col lg="7" md="9" xl="6">
+                <c-card class="mx-4">
+                  <c-card-body class="p-4">
+                    <span class="close" (click)="onCloseModal()">&times;</span>
+                    <form cForm>
+                      <h1>{{ isEditMode ? 'Editar Parâmetro' : 'Registrar Parâmetro'}}</h1>
+                      <p class="text-body-secondary">{{ isEditMode ? 'Editar informações do parâmetro' : 'Criar um novo parâmetro'}}</p>
+                      <c-input-group class="mb-3">
+                        <span cInputGroupText>
+                          <svg cIcon name="cilUser"></svg>
+                        </span>
+                        <input autoComplete="name" cFormControl placeholder="Nome parâmetro" [value]="userData?.idUsuario || ''" [disabled]="isEditMode"/>
+                      </c-input-group>
+                      <c-input-group class="mb-3">
+                        <span cInputGroupText>&#64;</span>
+                        <input autoComplete="email" cFormControl placeholder="Localidade parâmetro" [value]="userData?.descNomeUsuario || ''" />
+                      </c-input-group>
+                      <div class="d-grid create-account">
+                        <button cButton class="create">{{ isEditMode ? 'Salvar Alterações' : 'Criar parâmetro' }}</button>
+                      </div>
+                    </form>
+                  </c-card-body>
+                </c-card>
+              </c-col>
+            </c-row>
+          </c-container>
+        </div>
+    <!-- </div> -->
+  </div>
+  <div (click)="onCloseModal()" *ngIf="isModalOpen"></div>
+</ng-container>
