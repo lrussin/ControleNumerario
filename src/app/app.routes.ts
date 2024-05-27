@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ModalRegisterComponent } from './views/modal-register/modal-register.component';
 import { CommonModule } from '@angular/common';
 import { UsersListService } from './views/users-list/Service/users-list.service';
+import {ParameterService} from './views/parameter/Service/parameter.service';
 
 
 export const routes: Routes = [
@@ -150,7 +151,7 @@ export const routes: Routes = [
     MatIconModule,
     CommonModule
   ],
-  providers: [HomeService, UsersListService ,SidebarNavHelper],
+  providers: [HomeService, UsersListService ,SidebarNavHelper,ParameterService],
   exports: [RouterModule]
 })
 export class AppRoutes {
