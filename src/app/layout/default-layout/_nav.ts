@@ -1,15 +1,15 @@
 import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
-  {
-    name: 'Home',
-    url: '/home',
-    iconComponent: { name: 'cil-home' },
+  // {
+  //   name: 'Home',
+  //   url: '/home',
+  //   iconComponent: { name: 'cil-home' },
     // badge: {
     //   color: 'info',
     //   text: 'NEW'
     // }
-  },
+  // },
   {
     name: 'Ponto de Atendimento',
     url: '/pointService',

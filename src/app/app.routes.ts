@@ -1,3 +1,4 @@
+import { DetailsPaComponent } from './views/details-pa/details-pa.component';
 import { ModalParameterService } from './views/modal-parameter/Service/modal-parameter.service';
 import { ParameterComponent } from './views/parameter/parameter.component';
 import { UsersListComponent } from './views/users-list/users-list.component';
@@ -26,23 +27,22 @@ import { ModalRegisterComponent } from './views/modal-register/modal-register.co
 import { CommonModule } from '@angular/common';
 import { UsersListService } from './views/users-list/Service/users-list.service';
 import {ParameterService} from './views/parameter/Service/parameter.service';
+import { PointService } from './views/point-service/Service/point.service';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  // { path: 'dashboard', redirectTo: 'dashboard' },
-  // { path: 'pointService', component: PointServiceComponent },
   { path: '',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
+    // data: {
+    //   title: 'Home'
+    // },
     children: [
-      {
-        path: 'home',
-        component: HomeComponent
-      },
+      // {
+      //   path: 'home',
+      //   component: HomeComponent
+      // },
       {
         path: 'dashboard',
         // loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
@@ -51,6 +51,10 @@ export const routes: Routes = [
       {
         path: 'pointService',
         component: PointServiceComponent
+      },
+      {
+        path: 'pointService/details/:idPa',
+        component: DetailsPaComponent
       },
       {
         path: 'interbancario',
@@ -67,6 +71,10 @@ export const routes: Routes = [
       {
         path: 'parameter',
         component: ParameterComponent
+      },
+      {
+        path: 'details',
+        component: DetailsPaComponent
       },
       {
         path: 'theme',
@@ -152,7 +160,7 @@ export const routes: Routes = [
     MatIconModule,
     CommonModule
   ],
-  providers: [HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService],
+  providers: [HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService, PointService],
   exports: [RouterModule]
 })
 export class AppRoutes {

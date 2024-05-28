@@ -50,8 +50,6 @@ export class ParameterComponent implements OnInit {
         this.param = response.items;
         this.totalPages = response.totalPages;
         this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-        console.log(this.param);
-        console.log(this.totalPages);
       },
       error: (error) => {
         console.error('Erro ao buscar dados', error);

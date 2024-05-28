@@ -1,0 +1,240 @@
+.container {
+  .row-header {
+    border-bottom: 1px solid #ccc; /* Adiciona uma borda inferior a todas as linhas */
+    margin-bottom: 20px; /* Adiciona espaço extra abaixo de todas as linhas */
+  }
+}
+
+.custom-col-4,
+.custom-col-3,
+.custom-col-2 {
+  color: var(--cui-secondary-color);
+  font-size: 14px;
+  border-right: 2px solid #ccc; /* Cor e estilo da borda */
+  padding-right: 15px;
+  margin-bottom: 5px;
+
+  @media (max-width: 576px) {
+    border-right: none;
+    margin-bottom: 15px;
+  }
+}
+
+.cus-col-8,
+.cus-col-15,
+.cus-col-20 {
+  color: var(--cui-body-color);
+  font-size: 16px;
+  display: flex; // Ativa o layout de flexbox
+  flex-direction: column;
+  justify-content: flex-end; // Alinha os itens na parte inferior
+  height: 60%; // Garante que a div ocupe toda a altura disponível
+  padding-left: 0;
+}
+
+#button-details {
+  display: flex; // Ativa o layout de flexbox
+  align-items: center; // Centraliza verticalmente os itens
+  justify-content: center; // Centraliza horizontalmente os itens
+
+  .btn-details {
+    background-color: var(--green); // Cor de fundo do botão
+    color: #fff; // Cor do texto do botão
+    border: none; // Remove a borda do botão
+    padding: 5px 20px; // Espaçamento interno do botão
+    border-radius: 5px; // Arredonda as bordas do botão
+    cursor: pointer; // Altera o cursor para indicar que é clicável
+    transition: background-color 0.3s ease; // Transição suave ao passar o mouse
+    font-size: 20px;
+
+    .icon {
+      width: 19px; // Largura do ícone
+      height: 19px; // Altura do ícone
+    }
+  }
+}
+
+#button-details {
+  .btn-details:hover {
+    background-color: var(
+      --green-water
+    ); // Cor de fundo do botão ao passar o mouse
+  }
+}
+
+#button-details:last-child {
+  border-right: none;
+}
+
+.container{
+  .row-content-atm,
+  .row-content-recicly {
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
+
+    @media(max-width: 576px) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.atm {
+  font-size: 25px;
+  margin-bottom: 12px;
+  color: var(--cui-secondary-color);
+  margin-top: 40px;
+
+}
+
+.atm-recycler {
+  margin-bottom: 10%;
+}
+
+.atm-Nu-users {
+  margin-right: 50px;
+  color: var(--cui-body-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Define o layout para coluna */
+  text-align: center; /* Alinha o texto ao centro */
+  font-size: 42px;
+
+  @media(max-width: 576px) {
+    margin-top: 15px;
+  }
+}
+
+.atm-No-users {
+  font-size: 20px; /* Tamanho da fonte para o nome de usuário */
+  margin-top: 10px; /* Adiciona um espaço entre o número e o nome de usuário */
+  color: var(--cui-secondary-color);
+}
+
+.dados {
+  color: var(--cui-secondary-color);
+}
+
+.limite-in {
+  margin-top: 20px;
+}
+
+.limite-in,
+.mediano,
+.limite-su {
+  color: var(--cui-body-color);
+  padding-left: 0;
+
+  @media(max-width: 576px) {
+    margin-bottom: 5px;
+  }
+}
+
+.balance {
+  color: var(--cui-secondary-color);
+
+  @media(max-width: 576px) {
+    margin-top: 20px;
+  }
+}
+
+.circle {
+  margin-top: 25px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  position: relative;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px; /* Ajuste conforme necessário */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.balance-value {
+  margin-left: 40px; /* Espaçamento entre o círculo e o texto */
+  font-size: 30px;
+  color: var(--cui-body-color);
+}
+
+#icone {
+  background-color: var(--cui-tertiary-bg-dark);
+  border-radius: 10px 0px 0px 10px;
+  position: relative; //
+  display: flex; // Ativa o layout de flexbox
+  align-items: center; // Centraliza verticalmente os itens
+  justify-content: center; // Centraliza horizontalmente os itens
+  margin-right: 30px;
+
+  svg[name="cilLocationPin"] {
+    color: var(--cui-body-color);
+    height: 100%;
+
+    @media (max-width: 576px) {
+      // Aplique este estilo apenas em dispositivos com largura máxima de 576px (dispositivos móveis)
+      border-right: none; // Remova a borda à direita
+      padding-bottom: 10px; // Adicione um espaçamento abaixo do elemento
+    }
+  }
+  @media (max-width: 576px) {
+    border-radius: 10px 10px 0px 0px;
+  }
+}
+
+.graphic {
+  color: var(--cui-secondary-color);
+  text-align: center;
+
+  @media(max-width: 576px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Define o layout para coluna */
+    margin-top: 20px;
+  }
+}
+
+#exp-graphic {
+  margin-top: 30px;
+  background-color: var(--green); // Cor de fundo do botão
+  color: #fff; // Cor do texto do botão
+  border: none; // Remove a borda do botão
+  padding: 5px 20px; // Espaçamento interno do botão
+  border-radius: 5px; // Arredonda as bordas do botão
+  cursor: pointer; // Altera o cursor para indicar que é clicável
+  transition: background-color 0.3s ease; // Transição suave ao passar o mouse
+  .icon {
+    width: 60px;
+    height: 35px;
+  }
+}
+
+#exp-graphic:hover {
+  background-color: var(
+   --green-water
+  );  // Cor de fundo do botão ao passar o mouse
+}
+
+@media screen and (max-width: 767px) {
+  #exp-graphic {
+    margin-top: 5px;
+  }
+}

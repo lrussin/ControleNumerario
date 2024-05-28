@@ -1,0 +1,109 @@
+<ng-container>
+  <div class="container">
+    <div class="row row-header">
+      <div class="col-sm-4 custom-col-4">
+        Ponto atendimento :
+        <div class="col-20 cus-col-8">
+          01 - PA - LONDRINA - RUA: QUINTINO BOCAIÚVA
+        </div>
+      </div>
+      <div class="col-sm-3 custom-col-3">
+        Saldo Total :
+        <div class="col-8 cus-col-8">
+          R$: 9.847.536.593,00
+        </div>
+      </div>
+      <div class="col-sm-3 custom-col-3">
+        Data Atualização :
+        <div class="col-15 cus-col-15">
+          23/01/2024 às 18:30:20
+        </div>
+      </div>
+      <div class="col-sm-2 custom-col-2" id="button-details">
+        <button class="btn-details">
+          <svg class="icon" cIcon name="cilCloudDownload"></svg>
+          <span> Exportar</span>
+        </button>
+      </div>
+    </div>
+    <div class="atm">ATM</div>
+    <div class="row row-content-atm">
+      <div class="col-sm-2" id="icone">
+        <svg cIcon name="cilLocationPin" size="8xl"></svg>
+      </div>
+      <div class="col-sm-2 atm-Nu-users">
+        99
+        <div class="col-20 atm-No-users">
+          Nome de Usuário
+        </div>
+      </div>
+      <div class="col-sm-3 dados">
+        DADOS
+        <div class="col-20 limite-in">
+          Limite Inferior: 14.457,50
+        </div>
+        <div class="col-20 mediano">
+          Mediano: 20.245,00
+        </div>
+        <div class="col-10 limite-su">
+          Limite Superior: 27.477,50
+        </div>
+      </div>
+      <div class="col-sm-3 balance">
+        SALDO<br>R$
+        <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
+          <div class="balance-value">{{ balanceValue }}</div>
+          <div class="tooltip">{{ circleTooltip }}</div>
+        </div>
+      </div>
+      <div class="col-sm-1 graphic">
+        GRÁFICO
+        <button class="btn-details" id="exp-graphic" (click)="openModal()">
+          <svg class="icon" cIcon name="cilGraph"></svg>
+        </button>
+      </div>
+    </div>
+    <div class="atm">ATM RECICLADOR</div>
+    <div class="row row-content-recicly">
+      <div class="col-sm-2" id="icone">
+        <svg cIcon name="cilLocationPin" size="8xl"></svg>
+      </div>
+      <div class="col-sm-2 atm-Nu-users">
+        99
+        <div class="col-20 atm-No-users">
+          Nome de Usuário
+        </div>
+      </div>
+      <div class="col-sm-3 dados">
+        DADOS
+        <div class="col-20 limite-in">
+          Limite Inferior: 20.244,99
+        </div>
+        <div class="col-20 mediano">
+          Mediano: 20.245,00
+        </div>
+        <div class="col-10 limite-su">
+          Limite Superior: 27.477,50
+        </div>
+      </div>
+      <div class="col-sm-3 balance">
+        SALDO<br>R$
+        <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
+          <div class="balance-value">{{ balanceValue }}</div>
+          <div class="tooltip">{{ circleTooltip }}</div>
+        </div>
+      </div>
+      <div class="col-sm-1 graphic">
+        GRÁFICO
+        <button class="btn-details" id="exp-graphic" (click)="openModal()">
+          <svg class="icon" cIcon name="cilGraph"></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- Modal -->
+<ng-container *ngIf="isModalOpen">
+  <app-modal-point [isModalOpen]="isModalOpen" (closeModal)="closeModal()"></app-modal-point>
+</ng-container>
