@@ -20,22 +20,12 @@
                 <i class="material-icons">&#xe147;</i>
                 <span>Adicionar Novo Usuário</span>
               </a>
-              <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal">
-                <i class="material-icons">&#xe644;</i>
-                <span>Deletar Usuário</span>
-              </a>
             </div>
           </div>
         </div>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th>
-                <span class="custom-checkbox">
-                  <input type="checkbox" id="selectAll">
-                  <label for="selectAll"></label>
-                </span>
-              </th>
               <th>Id Usuario</th>
               <th>Id Unidade de Instituição</th>
               <th>Descrição do Usuario</th>
@@ -44,12 +34,6 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of filteredData">
-              <td>
-                <span class="custom-checkbox">
-                  <input type="checkbox" id="checkbox{{ item.idUsuario }}" name="options[]" value="{{ item.idUsuario }}">
-                  <label for="checkbox{{ item.idUsuario }}"></label>
-                </span>
-              </td>
               <td>{{ item.idUsuario }}</td>
               <td>{{ item.idUnidadeInst }}</td>
               <td>{{ item.descNomeUsuario }}</td>

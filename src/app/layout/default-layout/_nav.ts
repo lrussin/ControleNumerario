@@ -28,7 +28,7 @@ export const navItems: INavData[] = [
   {
     name: 'Parametrização',
     url: '/parameter',
-    iconComponent: { name: 'cil-user' },
+    iconComponent: { name: 'cil-list' },
   },
   // {
   //   name: 'Dashboard',

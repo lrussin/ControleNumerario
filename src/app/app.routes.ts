@@ -1,3 +1,4 @@
+import { ModalParameterService } from './views/modal-parameter/Service/modal-parameter.service';
 import { ParameterComponent } from './views/parameter/parameter.component';
 import { UsersListComponent } from './views/users-list/users-list.component';
 import { InterbancarioComponent } from './views/interbancario/interbancario.component';
@@ -151,7 +152,7 @@ export const routes: Routes = [
     MatIconModule,
     CommonModule
   ],
-  providers: [HomeService, UsersListService ,SidebarNavHelper,ParameterService],
+  providers: [HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService],
   exports: [RouterModule]
 })
 export class AppRoutes {

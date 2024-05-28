@@ -25,41 +25,32 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td>ConnectionStrings:DefaultConnection</td>
-              <td>Server=DESKTOP-31O90OJ\\SQLEXPRESS;Database=GetParameter;User Id=sa;Password=Root123;TrustServerCertificate=true;</td>
-              <td>2024-05-05</td>
+            <tr *ngFor="let item of param" >
+              <td>{{ item.name }}</td>
+              <td>{{ item.value }}</td>
+              <td>{{ item.updatedAt | date: 'dd/MM/yyyy' }}</td>
               <td>
-                <a class="edit" (click)="openEditModal(this.currentUser)">
+                <a class="edit" (click)="openEditModal(item)">
                   <svg cIcon name="cilPencil" size="lg"></svg>
                 </a>
               </td>
-              <tr >
-                <td>ConnectionStrings:DefaultConnection</td>
-                <td>Server=DESKTOP-31O90OJ\\SQLEXPRESS;Database=GetParameter;User Id=sa;Password=Root123;TrustServerCertificate=true;</td>
-                <td>2024-05-05</td>
-                <td>
-                  <a class="edit">
-                    <svg cIcon name="cilPencil" size="lg"></svg>
-                  </a>
-                </td>
             </tr>
           </tbody>
         </table>
-        <!-- <div class="hint-text">Mostrando <b>{{ filteredData.length }}</b> de <b>{{ users.length }}</b> Total</div>
+        <div class="hint-text">Mostrando <b>{{ param.length }}</b> de <b>{{ param.length }}</b> Total</div>
         <div class="paginacao">
           <ul class="pagination">
             <li class="page-item prev" (click)="prevPage()" [class.disabled]="pageNumber === 1">
               <a class="page-link">Anterior</a>
             </li>
-            <li class="page-item" *ngFor="let pages of page" (click)="goToPage(pages)" [class.active]="pages === pageNumber">
+            <li class="page-item" *ngFor="let pages of pagesArray" (click)="goToPage(pages)" [class.active]="pages === pageNumber">
               <a class="page-link">{{ pages }}</a>
             </li>
             <li class="page-item" (click)="nextPage()" [class.disabled]="pageNumber === totalPages">
               <a class="page-link">Próximo</a>
             </li>
           </ul>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

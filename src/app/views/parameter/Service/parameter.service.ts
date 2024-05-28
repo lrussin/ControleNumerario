@@ -14,13 +14,13 @@ constructor(
   private httpClient:HttpClient
 ) { }
 
-GetAllParams(pageNumber:number,pageSize: number):Observable<ParameterList[]>{
+GetAllParams(pageNumber:number,pageSize: number):Observable<ParameterList>{
   let params = new HttpParams()
   .set('pageNumber',pageNumber.toString())
   .set('pageSize',pageSize.toString())
-  .set('descriptografado',true);
+  .set('descriptogradado',true);
 
-  return this.httpClient.get<any>(this.baseUrl,{params})
+  return this.httpClient.get<ParameterList>(this.baseUrl, { params })
 }
 
 }

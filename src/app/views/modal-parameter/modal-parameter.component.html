@@ -15,14 +15,17 @@
                         <span cInputGroupText>
                           <svg cIcon name="cilUser"></svg>
                         </span>
-                        <input autoComplete="name" cFormControl placeholder="Nome parâmetro" [value]="userData?.idUsuario || ''" [disabled]="isEditMode"/>
+                        <input autoComplete="name" cFormControl placeholder="Nome parâmetro" [value]="userData?.name|| ''" [disabled]="isEditMode"/>
                       </c-input-group>
                       <c-input-group class="mb-3">
                         <span cInputGroupText>&#64;</span>
-                        <input autoComplete="email" cFormControl placeholder="Localidade parâmetro" [value]="userData?.descNomeUsuario || ''" />
+                        <input autoComplete="email"
+                          cFormControl placeholder="Localidade parâmetro"
+                          [value]="userData?.value || ''"
+                          (ngModelChange)="userData.value = $event"/>
                       </c-input-group>
                       <div class="d-grid create-account">
-                        <button cButton class="create">{{ isEditMode ? 'Salvar Alterações' : 'Criar parâmetro' }}</button>
+                        <button cButton class="create" (click)="validateForm()">{{ isEditMode ? 'Salvar Alterações' : 'Criar parâmetro' }}</button>
                       </div>
                     </form>
                   </c-card-body>
