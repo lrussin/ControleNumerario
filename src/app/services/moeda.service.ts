@@ -25,7 +25,7 @@ export class MoedaService {
     });
 
     // Adicionar o símbolo de moeda
-    return `R$ ${formattedValue}`;
+    return ` ${formattedValue}`;
   }
 
 }

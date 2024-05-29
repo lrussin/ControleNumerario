@@ -21,7 +21,7 @@
       <div class="col-sm-3">
         Saldo Total:
         <div class="col-10" >
-          {{ formatCurrency(item.saldo) }}
+          R$: {{ formatCurrency(item.saldo) }}
         </div>
       </div>
       <div class="col-sm-2">
@@ -30,7 +30,7 @@
           {{ item.modifiedAt | date: 'dd/MM/yyyy HH:mm:ss' }}
         </div>
       </div>
-      <div class="col-sm-2" id="button-details"  (click)="navigateToDetails(item.id)">
+      <div class="col-sm-2" id="button-details"  (click)="navigateToDetails(item)">
         <button class="btn-details">
           <svg cIcon name="cilPlus" size="2xl"></svg>
           <span> Mais Detalhes</span>

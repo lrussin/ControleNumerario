@@ -52,8 +52,9 @@ export class PointServiceComponent implements OnInit{
     });
   }
 
-  navigateToDetails(idPa : number) {
-    this.Router.navigate(['/pointService/details', idPa]);
+  navigateToDetails(item: PontoAtendimento) {
+    this.PointService.setData([item]);
+    this.Router.navigate(['/pointService/details']);
   }
 
   formatCurrency(value: number): string {

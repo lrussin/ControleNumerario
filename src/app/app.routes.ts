@@ -53,7 +53,7 @@ export const routes: Routes = [
         component: PointServiceComponent
       },
       {
-        path: 'pointService/details/:idPa',
+        path: 'pointService/details',
         component: DetailsPaComponent
       },
       {

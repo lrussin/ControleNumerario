@@ -1,107 +1,88 @@
-<ng-container>
-  <div class="container">
-    <div class="row row-header">
-      <div class="col-sm-4 custom-col-4">
-        Ponto atendimento :
-        <div class="col-20 cus-col-8">
-          01 - PA - LONDRINA - RUA: QUINTINO BOCAIÚVA
-        </div>
-      </div>
-      <div class="col-sm-3 custom-col-3">
-        Saldo Total :
-        <div class="col-8 cus-col-8">
-          R$: 9.847.536.593,00
-        </div>
-      </div>
-      <div class="col-sm-3 custom-col-3">
-        Data Atualização :
-        <div class="col-15 cus-col-15">
-          23/01/2024 às 18:30:20
-        </div>
-      </div>
-      <div class="col-sm-2 custom-col-2" id="button-details">
-        <button class="btn-details">
-          <svg class="icon" cIcon name="cilCloudDownload"></svg>
-          <span> Exportar</span>
-        </button>
+<div class="container">
+  <div class="row row-header">
+    <div class="col-sm-4 custom-col-4">
+      Ponto atendimento :
+      <div class="col-20 cus-col-8">
+        {{ paDetails?.nomeUnidade }}
       </div>
     </div>
-    <div class="atm">ATM</div>
-    <div class="row row-content-atm">
-      <div class="col-sm-2" id="icone">
-        <svg cIcon name="cilLocationPin" size="8xl"></svg>
-      </div>
-      <div class="col-sm-2 atm-Nu-users">
-        99
-        <div class="col-20 atm-No-users">
-          Nome de Usuário
-        </div>
-      </div>
-      <div class="col-sm-3 dados">
-        DADOS
-        <div class="col-20 limite-in">
-          Limite Inferior: 14.457,50
-        </div>
-        <div class="col-20 mediano">
-          Mediano: 20.245,00
-        </div>
-        <div class="col-10 limite-su">
-          Limite Superior: 27.477,50
-        </div>
-      </div>
-      <div class="col-sm-3 balance">
-        SALDO<br>R$
-        <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
-          <div class="balance-value">{{ balanceValue }}</div>
-          <div class="tooltip">{{ circleTooltip }}</div>
-        </div>
-      </div>
-      <div class="col-sm-1 graphic">
-        GRÁFICO
-        <button class="btn-details" id="exp-graphic" (click)="openModal()">
-          <svg class="icon" cIcon name="cilGraph"></svg>
-        </button>
+    <div class="col-sm-3 custom-col-3">
+      Saldo Total :
+      <div class="col-8 cus-col-8">
+        R$: {{ formatCurrency(paDetails?.saldo ?? 0) }}
       </div>
     </div>
-    <div class="atm">ATM RECICLADOR</div>
-    <div class="row row-content-recicly">
-      <div class="col-sm-2" id="icone">
-        <svg cIcon name="cilLocationPin" size="8xl"></svg>
+    <div class="col-sm-3 custom-col-3">
+      Data Atualização :
+      <div class="col-15 cus-col-15">
+        {{ paDetails?.modifiedAt |  date: 'dd/MM/yyyy'}}
       </div>
-      <div class="col-sm-2 atm-Nu-users">
-        99
-        <div class="col-20 atm-No-users">
-          Nome de Usuário
-        </div>
-      </div>
-      <div class="col-sm-3 dados">
-        DADOS
-        <div class="col-20 limite-in">
-          Limite Inferior: 20.244,99
-        </div>
-        <div class="col-20 mediano">
-          Mediano: 20.245,00
-        </div>
-        <div class="col-10 limite-su">
-          Limite Superior: 27.477,50
-        </div>
-      </div>
-      <div class="col-sm-3 balance">
-        SALDO<br>R$
-        <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
-          <div class="balance-value">{{ balanceValue }}</div>
-          <div class="tooltip">{{ circleTooltip }}</div>
-        </div>
-      </div>
-      <div class="col-sm-1 graphic">
-        GRÁFICO
-        <button class="btn-details" id="exp-graphic" (click)="openModal()">
-          <svg class="icon" cIcon name="cilGraph"></svg>
-        </button>
-      </div>
+    </div>
+    <div class="col-sm-2 custom-col-2" id="button-details">
+      <button class="btn-details">
+        <svg class="icon" cIcon name="cilCloudDownload"></svg>
+        <span> Exportar</span>
+      </button>
     </div>
   </div>
-</ng-container>
+  <ng-container *ngFor="let descricao of description">
+    <div>
+      <span class="atm"> {{ descricao }} </span>
+      <ng-container *ngFor="let terminalItem of terminal">
+        <div class="row row-content-atm" *ngIf="terminalItem.tipoTerminal.descricao === descricao">
+          <div class="col-sm-2" id="icone">
+            <svg cIcon name="cilLocationPin" size="8xl"></svg>
+          </div>
+          <div class="col-sm-2 atm-Nu-users">
+            {{ terminalItem.codigo }}
+            <div class="col-20 atm-No-users">
+              {{ terminalItem.usuario }}
+            </div>
+          </div>
+          <div class="col-sm-3 dados">
+            DADOS
+            <div class="col-20 limite-in">
+              Limite Inferior: {{ formatCurrency(terminalItem.tipoTerminal.limInferior) }}
+            </div>
+            <div class="col-20 mediano">
+              Mediano: {{ formatCurrency(terminalItem.tipoTerminal.mediana) }}
+            </div>
+            <div class="col-20 limite-su">
+              Limite Superior: {{ formatCurrency(terminalItem.tipoTerminal.limSuperior) }}
+            </div>
+          </div>
+          <div class="col-sm-3 balance">
+            SALDO<br>R$
+            <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor(terminalItem) }">
+              <div class="balance-value">{{ formatCurrency(terminalItem.saldo) }}</div>
+              <div class="tooltip">{{ tooltip(terminalItem) }}</div>
+            </div>
+          </div>
+          <div class="col-sm-1 graphic">
+            GRÁFICO
+            <button class="btn-details" id="exp-graphic" (click)="openModal()">
+              <svg class="icon" cIcon name="cilGraph"></svg>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <div class="hint-text">Mostrando <b>{{ tipoTerminal.length }}</b> de <b>{{ tipoTerminal.length }}</b> Total</div>
+        <div class="paginacao">
+          <ul class="pagination">
+            <li class="page-item prev" (click)="prevPage()" [class.disabled]="pageNumber === 1">
+              <a class="page-link">Anterior</a>
+            </li>
+            <li class="page-item" *ngFor="let pages of pagesArray" (click)="goToPage(pages)" [class.active]="pages === pageNumber">
+              <a class="page-link">{{ pages }}</a>
+            </li>
+            <li class="page-item" (click)="nextPage()" [class.disabled]="pageNumber === totalPages">
+              <a class="page-link">Próximo</a>
+            </li>
+          </ul>
+        </div>
+</div>
 
 <!-- Modal -->
 <ng-container *ngIf="isModalOpen">
