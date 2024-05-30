@@ -50,7 +50,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
   height: 120px;
-  width: 30%;
+  width: 31%;
 }
 
 .date-ini,
@@ -63,7 +63,7 @@
 .date-final {
   border-radius: 5px;
   box-shadow: 0 0 10px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
-  width: 100%;
+  width: 120%;
   height: 45px;
   margin-top: 30%;
   margin-left: 13%;
@@ -99,7 +99,9 @@ input {
 }
 
 .atm-No-users {
-  color: var(--cui-secondary-color);
+  color: black;
+  font-weight: bold;
+  margin-left: 5%;
 }
 
 .dados {
@@ -162,7 +164,7 @@ input {
 }
 
 .check {
-  margin-top: 12%;
+  margin-top: 10%;
   margin-left: 7%;
   margin-bottom: 4%;
   height: 45px;

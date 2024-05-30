@@ -12,12 +12,12 @@
               <div class="col-sm-1">
                 <div class="row">
                   <div class="col-5 atm-Nu-users">
-                    99
+                    {{ terminalByPA.codigo }}
                   </div>
                 </div>
               </div>
               <div class="col-12 atm-No-users">
-                Nome de Usuário
+                {{ terminalByPA.usuario }}
               </div>
             </div>
           </div>
@@ -25,20 +25,20 @@
           <div class="col-sm-4 dados">
             DADOS
             <div class="col-20 limite-in">
-              Limite Inferior: 14.457,50
+              Limite Inferior: {{ formatCurrency(terminalByPA.tipoTerminal.limInferior) }}
             </div>
             <div class="col-20 mediano">
-              Mediano: 20.245,00
+              Mediano: {{ formatCurrency(terminalByPA.tipoTerminal.mediana) }}
             </div>
             <div class="col-20 limite-su">
-              Limite Superior: 27.477,50
+              Limite Superior: {{ formatCurrency(terminalByPA.tipoTerminal.limSuperior) }}
             </div>
           </div>
           <div class="col-sm-5 balance">
             SALDO<br>R$
-            <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor }">
-              <div class="balance-value">{{ balanceValue }}</div>
-              <div class="tooltip">{{ circleTooltip }}</div>
+            <div class="col-20 circle" [ngStyle]="{ 'background-color': circleColor(terminalByPA) }">
+              <div class="balance-value">{{ formatCurrency(terminalByPA.saldo) }}</div>
+              <div class="tooltip">{{ tooltip(terminalByPA) }}</div>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
               <!-- <button class="date-inicial">
                 11/02/2021
               </button> -->
-              <input class="date-final" type="date">
+              <input class="date-inicial" type="date">
             </div>
           </div>
           <div class="col-sm-4 date-fin">

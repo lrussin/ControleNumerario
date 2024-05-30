@@ -19,7 +19,6 @@ constructor(
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
       let getByPaUrl = this.getPaUrl + "?id=" + id;
-      console.log(getByPaUrl, { params })
 
     return this.httpClient.get<{ unidadeInstituicao: UnidadeInstituicao }>(getByPaUrl, { params });
   }

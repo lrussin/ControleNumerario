@@ -28,6 +28,7 @@ export class DetailsPaComponent implements OnInit{
   totalPages: number = 7;
   pagesArray: number[] = [];
   paDetails: PontoAtendimento | undefined;
+  terminalsBy: any;
 
   tipoTerminal: TipoTerminal[] = [];
   description = new Set<string>();
@@ -49,8 +50,6 @@ export class DetailsPaComponent implements OnInit{
     const data = this.PointService.getData();
     if (data.length > 0) {
       this.paDetails = data[0];
-
-
     }
   }
 
@@ -69,15 +68,13 @@ export class DetailsPaComponent implements OnInit{
 
         // Você está acessando os terminais dentro de unidadeInstituicao e atribuindo-os à propriedade terminal
         this.terminal = unidadeInstituicao.terminals;
-        console.log(unidadeInstituicao)
-        console.log(this.terminal)
 
         this.tipoTerminal = [];
 
         // Assim, você pode mapear os terminais para seus tipos de terminal e adicioná-los ao array tipoTerminal
         this.tipoTerminal = this.terminal.map(terminal => terminal.tipoTerminal);
+        this.description = new Set(this.tipoTerminal.map(item => item.descricao));
         this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-        this.descriptionExibidas();
       },
       error: (error) => {
         console.error('Erro ao buscar dados', error);
@@ -85,12 +82,9 @@ export class DetailsPaComponent implements OnInit{
     });
   }
 
-  descriptionExibidas(): void {
-    this.description = new Set(this.tipoTerminal.map(item => item.descricao));
-  }
-
-  openModal() {
+  openModal(terminals: Terminal) {
     this.isModalOpen = true;
+    this.terminalsBy = terminals;
   }
 
   closeModal() {

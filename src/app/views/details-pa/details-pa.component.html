@@ -60,7 +60,7 @@
           </div>
           <div class="col-sm-1 graphic">
             GRÁFICO
-            <button class="btn-details" id="exp-graphic" (click)="openModal()">
+            <button class="btn-details" id="exp-graphic" (click)="openModal(terminalItem)">
               <svg class="icon" cIcon name="cilGraph"></svg>
             </button>
           </div>
@@ -86,5 +86,9 @@
 
 <!-- Modal -->
 <ng-container *ngIf="isModalOpen">
-  <app-modal-point [isModalOpen]="isModalOpen" (closeModal)="closeModal()"></app-modal-point>
+  <app-modal-point
+  [isModalOpen]="isModalOpen"
+  [terminalByPA]="terminalsBy"
+  (closeModal)="closeModal()">
+</app-modal-point>
 </ng-container>

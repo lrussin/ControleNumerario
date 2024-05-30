@@ -72,7 +72,6 @@ export class ParameterComponent implements OnInit {
   openEditModal(user: Item): void {
     this.isModalOpen = true;
     this.isEditMode = true;
-    console.log(user)
     this.currentUser = user;
   }
 
