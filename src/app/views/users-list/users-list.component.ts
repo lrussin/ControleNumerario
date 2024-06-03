@@ -35,7 +35,12 @@ export class UsersListComponent implements OnInit {
 
   isModalOpen: boolean = false;
   isEditMode: boolean = false;
-  currentUser: UserList | null = null;
+  currentUser: UserList = {
+    email: '',
+    firstName: '',
+    lastName:'',
+    userId: ''
+  }
 
   constructor(private userslistService: UsersListService) {
     this.page = Array.from({ length: this.totalPages }, (_, i) => i + 1);
@@ -46,7 +51,7 @@ export class UsersListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.userslistService.GetAllUsers(this.pageNumber, this.pageSize).subscribe({
+    this.userslistService.GetAllUsers().subscribe({
       next: (response) => {
         this.users = response;
         this.filteredData = response;
@@ -68,9 +73,8 @@ export class UsersListComponent implements OnInit {
 
   filterItems(): void {
     if (this.searchTerm) {
-      console.log(this.searchTerm);
       this.filteredData = this.users.filter(item =>
-        item.descNomeUsuario.toLowerCase().includes(this.searchTerm.toLowerCase())
+        item.firstName.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       console.log(this.filteredData)
     } else {
@@ -101,7 +105,7 @@ export class UsersListComponent implements OnInit {
 
   openModal() {
     this.isEditMode = false;
-    this.currentUser = null;
+    this.currentUser = this.currentUser;
     this.isModalOpen = true;
   }
 
@@ -125,7 +129,7 @@ export class UsersListComponent implements OnInit {
     this.userDelet = null;
   }
 
-  deleteUser(userId : number | undefined) {
+  deleteUser(userId : string | undefined) {
     if (userId) {
       this.userslistService.deleteUser(userId).subscribe({
         next: (response) => {

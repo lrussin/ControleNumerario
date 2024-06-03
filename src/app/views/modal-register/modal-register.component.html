@@ -1,6 +1,5 @@
 <ng-container *ngIf="isModalOpen">
   <div class="modal" >
-    <!-- <div class="modal-content"> -->
         <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center modal-content">
           <c-container>
             <c-row class="justify-content-center">
@@ -15,24 +14,39 @@
                         <span cInputGroupText>
                           <svg cIcon name="cilUser"></svg>
                         </span>
-                        <input autoComplete="name" cFormControl placeholder="Nome e Sobrenome" [value]="userData?.idUsuario || ''" />
+                        <input
+                          autoComplete="name"
+                          cFormControl
+                          placeholder="Nome"
+                          [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="userData.firstName"
+                          [value]="userData.firstName || '' "
+                          [disabled]="isEditMode"/>
+                      </c-input-group>
+                      <c-input-group class="mb-3">
+                        <span cInputGroupText>
+                          <svg cIcon name="cilUser"></svg>
+                        </span>
+                        <input
+                          autoComplete="name"
+                          cFormControl
+                          placeholder="Sobrenome"
+                          [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="userData.lastName"
+                          [value]="userData.lastName || '' "
+                          [disabled]="isEditMode"/>
                       </c-input-group>
                       <c-input-group class="mb-3">
                         <span cInputGroupText>&#64;</span>
-                        <input autoComplete="email" cFormControl placeholder="Email" [value]="userData?.descNomeUsuario || ''" />
+                        <input
+                          autoComplete="email"
+                          cFormControl
+                          placeholder="Email"
+                          [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="userData.email"
+                          [value]="userData.email || ''"
+                          [disabled]="isEditMode"/>
                       </c-input-group>
-                      <!-- <c-input-group class="mb-3">
-                        <span cInputGroupText>
-                          <svg cIcon name="cilLockLocked"></svg>
-                        </span>
-                        <input autoComplete="new-password" cFormControl placeholder="Senha" type="password" />
-                      </c-input-group> -->
-                      <!-- <c-input-group class="mb-4">
-                        <span cInputGroupText>
-                          <svg cIcon name="cilLockLocked"></svg>
-                        </span>
-                        <input autoComplete="new-password" cFormControl placeholder="Repetir Senha" type="password" />
-                      </c-input-group> -->
                       <div class="permission">
                         Permissão
                       </div>
@@ -41,7 +55,7 @@
                         [disabled]="false">
                       </dual-listbox>
                       <div class="d-grid create-account">
-                        <button cButton class="create">{{ isEditMode ? 'Salvar Alterações' : 'Criar conta' }}</button>
+                        <button cButton class="create" (click)="createUser()">{{ isEditMode ? 'Salvar Alterações' : 'Criar conta' }}</button>
                       </div>
                     </form>
                   </c-card-body>
@@ -50,7 +64,6 @@
             </c-row>
           </c-container>
         </div>
-    <!-- </div> -->
   </div>
   <div (click)="onCloseModal()" *ngIf="isModalOpen"></div>
 </ng-container>

@@ -1,3 +1,4 @@
+import { NotificationService } from './../../services/notification.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardBodyComponent, CardComponent, ColComponent, ContainerComponent, InputGroupComponent, InputGroupTextDirective, RowComponent } from '@coreui/angular';
@@ -33,7 +34,11 @@ export class ModalParameterComponent implements OnInit{
   }
 
 
-  constructor( private ModalParameterService: ModalParameterService )
+  constructor(
+    private ModalParameterService: ModalParameterService,
+    private NotificationService: NotificationService,
+
+  )
   { }
 
   onCloseModal() {
@@ -46,7 +51,8 @@ export class ModalParameterComponent implements OnInit{
         next: (response) => {
           console.log('Notificação parâmetro criado com sucesso.')
           this.onCloseModal();
-          window.location.reload();
+          this.NotificationService.setNotificationMessage('Erro ao Criar Usuário')
+          // window.location.reload();
         },
         error: (error) => {
           console.error('Erro ao buscar dados', error);

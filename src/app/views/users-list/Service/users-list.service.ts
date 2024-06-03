@@ -7,22 +7,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersListService {
-  private baseUrl = 'https://localhost:7162/api/Usuario';
+  private baseUrl = 'https://localhost:7162/api/User/listUser';
   private deleteUrl =  'https://localhost:7162/api/Usuario';
 
   constructor(
     private httpClient: HttpClient
   ) {}
 
-  GetAllUsers(pageNumber: number, pageSize: number): Observable<UserList[]> {
-    let params = new HttpParams()
-      .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString());
+  GetAllUsers(): Observable<UserList[]> {
 
-    return this.httpClient.get<any>(this.baseUrl, { params });
+    return this.httpClient.get<any>(this.baseUrl);
   }
 
-  deleteUser(userId : number): Observable<any> {
+  deleteUser(userId : string): Observable<any> {
     let deleteUserUrl = this.deleteUrl + '?id=' + userId;
     return this.httpClient.delete(deleteUserUrl,  { responseType: 'text' });
     // return this.httpClient.delete<any>(deleteUserUrl);

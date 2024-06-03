@@ -60,11 +60,11 @@
               <!-- </button> -->
             </div>
           </div>
-          <div class="col-sm-2 check">
+          <div class="col-sm-2 check" (click)="grafic()">
             <svg cIcon name="cilCheck"></svg>
           </div>
         </div>
-        <app-dashboard></app-dashboard>
+        <app-dashboard *ngIf="graficoVisual"></app-dashboard>
       </div>
     </div>
   </div>

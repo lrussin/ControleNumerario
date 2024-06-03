@@ -26,17 +26,17 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th>Id Usuario</th>
-              <th>Id Unidade de Instituição</th>
-              <th>Descrição do Usuario</th>
+              <th>Email</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of filteredData">
-              <td>{{ item.idUsuario }}</td>
-              <td>{{ item.idUnidadeInst }}</td>
-              <td>{{ item.descNomeUsuario }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.firstName }}</td>
+              <td>{{ item.lastName }}</td>
               <td>
                 <a class="edit" (click)="openEditModal(item)">
                   <svg cIcon name="cilPencil" size="lg"></svg>
@@ -76,6 +76,25 @@
       <svg cIcon name="cilSearch" size="lg"></svg>
     </button>
   </div>
+  <div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2><b>Usuários</b></h2>
+            </div>
+            <div class="col-sm-6">
+              <a (click)="openModal()" class="btn btn-success">
+                <i class="material-icons">&#xe147;</i>
+                <span>Adicionar Novo Usuário</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <span class="resgister">Nenhum Usuário Encontrado.</span>
   <div class="hint-text">Mostrando <b>{{ filteredData.length }}</b> de <b>{{ users.length }}</b> Total</div>
   <div class="paginacao">
@@ -106,15 +125,15 @@
           <div class="modal-body">
             <p>Tem certeza de que deseja excluir esses registros?</p>
             <div class="teste">
-              <span>Id Usuario: {{this.userDelet?.idUsuario}}</span>
+              <span>Email Usuario: {{this.userDelet?.email}}</span>
               <br>
-              <span>Descrição do Usuario: {{this.userDelet?.descNomeUsuario}}</span>
+              <span>Nome Usuario: {{this.userDelet?.firstName}} {{this.userDelet?.lastName}}</span>
             </div>
             <p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn btn-default" (click)="closeDeletModal()" value="Cancelar">
-            <input type="button" class="btn btn-danger" (click)="deleteUser(this.userDelet?.id)" click  value="Deletar">
+            <input type="button" class="btn btn-danger" (click)="deleteUser(this.userDelet?.userId)" click  value="Deletar">
           </div>
         </form>
       </div>

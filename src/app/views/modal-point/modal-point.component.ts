@@ -32,6 +32,8 @@ export class ModalPointComponent implements OnInit{
     }
   };
 
+  graficoVisual: boolean = false;
+
   constructor(
     private MoedaService : MoedaService,
   ) {}
@@ -80,6 +82,10 @@ export class ModalPointComponent implements OnInit{
 
   formatCurrency(value: number): string {
     return this.MoedaService.formatCurrency(value);
+  }
+
+  grafic(){
+    this.graficoVisual = true;
   }
 
 }
