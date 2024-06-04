@@ -1,11 +1,11 @@
 import { MoedaService } from './../../services/moeda.service';
-import { CommonModule, NgFor, NgIf, NgStyle } from '@angular/common';
+import { CommonModule, DatePipe, NgFor, NgIf, NgStyle, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AccordionButtonDirective, AccordionComponent, AccordionItemComponent, TemplateIdDirective} from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { InterbancarioService } from './Service/Interbancario.service';
-import { DadosInterbancario } from 'src/app/util/interfaces/DadosInterbancario';
+import { DadosInterbancario, Item } from 'src/app/util/interfaces/DadosInterbancario';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -21,7 +21,8 @@ import * as XLSX from 'xlsx';
     AccordionItemComponent,
     TemplateIdDirective,
     NgFor,
-    CommonModule
+    CommonModule,
+    DatePipe
   ],
   templateUrl: './interbancario.component.html',
   styleUrl: './interbancario.component.scss',
@@ -36,7 +37,7 @@ export class InterbancarioComponent {
   selectedBanco: number = 0;
   dataInicial: string = '';
   dataFinal: string = '';
-  dadosInter: DadosInterbancario[] = [];
+  dadosInter: Item[] = [];
   resultInter: boolean = false
   valorTotal: string = '';
   isExportDisabled: boolean = true;
@@ -47,11 +48,13 @@ export class InterbancarioComponent {
   ) {  }
 
   ngOnInit(): void {
-    console.log('Iniciando component Interbancario');
+    this.getByBanco();
+  }
+
+  getByBanco() {
     this.interbancarioService.GetInterbancario().subscribe({
       next: (response) => {
         this.bancoDebito = response;
-        console.log(this.bancoDebito);
       },
       error: (error) => {
         console.error('Erro ao buscar Transações', error);
@@ -60,13 +63,16 @@ export class InterbancarioComponent {
   }
 
   exportarDados(selectedBanco: number, dataInicial: string, dataFinal: string): void {
-    console.log(selectedBanco)
+
+    const dataInicialFormatted= formatDate(dataInicial, 'dd/MM/yyyy', 'en-US');
+    const dataFinalFormatted = formatDate(dataFinal, 'dd/MM/yyyy', 'en-US');
+
     if (selectedBanco != 0) {
-      this.interbancarioService.GetInterAllDados(selectedBanco, dataInicial, dataFinal, this.pageNumber,this.pageSize).subscribe({
-        next: (response) => {
-          this.dadosInter = response;
+      this.interbancarioService.GetInterAllDados(selectedBanco, dataInicialFormatted, dataFinalFormatted, this.pageNumber,this.pageSize).subscribe({
+        next: (response : DadosInterbancario) => {
+          this.dadosInter = response.items;
           this.resultInter = true
-          this.valorTotal = this.calcularValorTotal(response);
+          this.valorTotal = this.calcularValorTotal(response.items);
           this.isExportDisabled = false;
         },
         error: (error) => {
@@ -75,11 +81,11 @@ export class InterbancarioComponent {
       });
     }
     else {
-      this.interbancarioService.GetInterDate(dataInicial, dataFinal).subscribe({
-        next: (response) => {
-          this.dadosInter = response;
+      this.interbancarioService.GetInterDate(this.pageNumber,this.pageSize,dataInicialFormatted, dataFinalFormatted).subscribe({
+        next: (response : DadosInterbancario) => {
+          this.dadosInter = response.items;
           this.resultInter = true
-          this.valorTotal = this.calcularValorTotal(response);
+          this.valorTotal = this.calcularValorTotal(response.items);
           this.isExportDisabled = false;
         },
         error: (error) => {
@@ -100,8 +106,10 @@ export class InterbancarioComponent {
 
   exportToExcel(): void {
     if (!this.isExportDisabled) {
-      this.interbancarioService.getExcelImport(this.selectedBanco,this.dataInicial,this.dataFinal,this.pageNumber,this.pageSize).subscribe(data => {
-        const filteredData = data.map(row => {
+      const dataInicialFormatted= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
+      const dataFinalFormatted = formatDate(this.dataFinal, 'dd/MM/yyyy', 'en-US');
+      this.interbancarioService.getExcelImport(this.selectedBanco,dataInicialFormatted,dataFinalFormatted,this.pageNumber,this.pageSize).subscribe((data: DadosInterbancario) => {
+        const filteredData = data.items.map((row: Item) => {
 
           const dateParts = row.dataHora.split('T')[0].split('-');
           const dataMovimentacao = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
@@ -109,7 +117,7 @@ export class InterbancarioComponent {
           return {
             DataMovimentacao: dataMovimentacao,
             Banco: row.bancoDebito,
-            AgenciaDebito: row.agenciaDebito,
+            AgenciaDebito: row,
             AgenciaCredito: row.agenciaCredito,
             Situacao: row.situacao,
             Valor: valorFormatado,

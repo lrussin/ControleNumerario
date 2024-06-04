@@ -1,4 +1,4 @@
-import { PontoAtendimento } from './../../util/interfaces/PontoAtendimento';
+import { Item, PontoAtendimento } from './../../util/interfaces/PontoAtendimento';
 import { MoedaService } from './../../services/moeda.service';
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './service/home.service';
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  PA: PontoAtendimento[] = [];
+  PA: Item[] = [];
   pageNumber = 1;
   pageSize = 10;
   totalPages: number = 7;
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   page: number[] = [];
 
   searchTerm: string = '';
-  filteredData: PontoAtendimento[] = [];
+  filteredData: Item[] = [];
 
   constructor(
     private homeService: HomeService,
@@ -39,8 +39,8 @@ export class HomeComponent implements OnInit {
 
   loadData(): void {
     this.homeService.GetAllPA(this.pageNumber, this.pageSize).subscribe({
-      next: (response ) => {
-        this.PA = response;
+      next: (response : PontoAtendimento) => {
+        this.PA = response.items;
         console.log(response);
         this.filterItems();
       },

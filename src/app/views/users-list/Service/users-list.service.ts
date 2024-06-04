@@ -14,9 +14,11 @@ export class UsersListService {
     private httpClient: HttpClient
   ) {}
 
-  GetAllUsers(): Observable<UserList[]> {
-
-    return this.httpClient.get<any>(this.baseUrl);
+  GetAllUsers(pageNumber:number,pageSize: number): Observable<UserList> {
+    let params = new HttpParams()
+    .set('pageNumber',pageNumber.toString())
+    .set('pageSize',pageSize.toString())
+    return this.httpClient.get<any>(this.baseUrl, { params });
   }
 
   deleteUser(userId : string): Observable<any> {

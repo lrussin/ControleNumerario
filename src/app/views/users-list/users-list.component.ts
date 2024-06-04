@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { IconDirective } from '@coreui/icons-angular';
 import { UsersListService } from './Service/users-list.service';
 import { FormsModule } from '@angular/forms';
-import { UserList } from 'src/app/util/interfaces/UserList';
+import { Item, UserList } from 'src/app/util/interfaces/UserList';
 
 
 @Component({
@@ -19,23 +19,23 @@ import { UserList } from 'src/app/util/interfaces/UserList';
 export class UsersListComponent implements OnInit {
   data: any;
 
-  users: UserList[] = [];
+  users: Item[] = [];
   pageNumber: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 10;
 
-  page: number[] = [];
-  totalPages: number = 2;
+  pagesArray: number[] = [];
+  totalPages: number = 0;
 
-  filteredData: UserList[] = [];
+  filteredData: Item[] = [];
   searchTerm:string = '';
 
   isModalDelet: boolean = false;
 
-  userDelet: UserList | null = null;
+  userDelet: Item | null = null;
 
   isModalOpen: boolean = false;
   isEditMode: boolean = false;
-  currentUser: UserList = {
+  currentUser: Item = {
     email: '',
     firstName: '',
     lastName:'',
@@ -43,7 +43,7 @@ export class UsersListComponent implements OnInit {
   }
 
   constructor(private userslistService: UsersListService) {
-    this.page = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+
   }
 
   ngOnInit(): void {
@@ -51,11 +51,14 @@ export class UsersListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.userslistService.GetAllUsers().subscribe({
-      next: (response) => {
-        this.users = response;
-        this.filteredData = response;
-        console.log(this.users)
+    this.userslistService.GetAllUsers(this.pageNumber, this.pageSize).subscribe({
+      next: (response : UserList) => {
+
+        this.filteredData =  response.items;
+        this.users = response.items;
+        console.log(response)
+        this.totalPages = response.totalPages;
+        this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
       },
       error:  (error) => {
         console.error('Erro ao buscar dados', error);
@@ -109,7 +112,7 @@ export class UsersListComponent implements OnInit {
     this.isModalOpen = true;
   }
 
-  openEditModal(user: UserList) {
+  openEditModal(user: Item) {
     this.isEditMode = true;
     this.currentUser = user;
     this.isModalOpen = true;
@@ -119,7 +122,7 @@ export class UsersListComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  openDeletModal(user: UserList) {
+  openDeletModal(user: Item) {
     this.isModalDelet = true;
     this.userDelet = user;
   }
@@ -149,9 +152,5 @@ export class UsersListComponent implements OnInit {
       }
       })
     }
-  }
-
-  get pagesArray(): number[] {
-    return Array(Math.ceil(this.users.length / this.pageSize)).fill(0).map((x, i) => i + 1);
   }
 }

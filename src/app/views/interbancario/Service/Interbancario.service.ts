@@ -22,7 +22,7 @@ export class InterbancarioService {
     );
   }
 
-  GetInterAllDados(selectedBanco: number, dataInicial: string, dataFinal: string, pageNumber: number, pageSize: number): Observable<DadosInterbancario[]> {
+  GetInterAllDados(selectedBanco: number, dataInicial: string, dataFinal: string, pageNumber: number, pageSize: number): Observable<DadosInterbancario> {
     let getInterDados = this.getInterbancario + 'banco='  + selectedBanco + '&dataInicial=' + dataInicial + '&dataFinal=' + dataFinal;
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
@@ -30,18 +30,23 @@ export class InterbancarioService {
     return this.httpClient.get<any>(getInterDados, { params } );
   }
 
-  GetInterDate(dataInicial: string, dataFinal: string): Observable<DadosInterbancario[]> {
-    let getInterDados = this.getInterDate + 'dataInicial=' + dataInicial + '&dataFinal=' + dataFinal;
-    return this.httpClient.get<any>(getInterDados);
+  GetInterDate(pageNumber: number, pageSize: number,dataInicial: string, dataFinal: string): Observable<DadosInterbancario> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString())
+      .set('dataInicial', dataInicial)
+      .set('dataFinal', dataFinal);
+
+    return this.httpClient.get<any>(this.getInterDate, { params });
   }
 
-  getExcelImport(selectedBanco: number,dataInicial: string,dataFinal: string,pageNumber: number,pageSize: number): Observable<any[]> {
+  getExcelImport(selectedBanco: number,dataInicial: string,dataFinal: string,pageNumber: number,pageSize: number): Observable<any> {
     let exportUrl: string;
 
     if (selectedBanco !== 0) {
       exportUrl = this.getInterbancario + `banco=${selectedBanco}&dataInicial=${(dataInicial)}&dataFinal=${(dataFinal)}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
     } else {
-      exportUrl = this.getInterDate + `dataInicial=${(dataInicial)}&dataFinal=${(dataFinal)}`;
+      exportUrl = this.getInterDate + `pageNumber=${pageNumber}&pageSize=${pageSize}&dataInicial=${(dataInicial)}&dataFinal=${(dataFinal)}`;
     }
 
     return this.httpClient.get<any[]>(exportUrl);

@@ -15,7 +15,7 @@ export class HomeService {
     private httpClient : HttpClient,
   ) { }
 
-  GetAllPA(pageNumber: number, pageSize: number): Observable<PontoAtendimento[]> {
+  GetAllPA(pageNumber: number, pageSize: number): Observable<PontoAtendimento> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString())

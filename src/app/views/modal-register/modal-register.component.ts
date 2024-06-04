@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CardBodyComponent, ColComponent, ContainerComponent, InputGroupComponent, InputGroupTextDirective, RowComponent, CardComponent } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { AngularDualListboxComponent, CmAngularDualListboxModule } from 'cm-angular-dual-listbox';
-import { UserList } from 'src/app/util/interfaces/UserList';
+import { Item } from 'src/app/util/interfaces/UserList';
 
 @Component({
   selector: 'app-modal-register',
@@ -20,12 +20,12 @@ export class ModalRegisterComponent implements OnInit {
   @Input() isModalOpen: boolean = false;
   @Output() closeModal = new EventEmitter<void>();
   @Input() isEditMode: boolean = false;
-  @Input() userData: UserList  = {
+  @Input() userData: Item = {
     email: '',
     firstName: '',
     lastName:'',
     userId: ''
-  }
+  };
 
   constructor (
     private modalRegisterService: ModalRegisterService,

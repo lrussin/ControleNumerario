@@ -6,6 +6,8 @@ export interface UnidadeInstituicao {
   idUnidadeInst: number
   modifiedAt: string
   terminals: Terminal[]
+  totalPages: number
+  totalItems: number
 }
 
 export interface Terminal {

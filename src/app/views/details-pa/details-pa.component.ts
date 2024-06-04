@@ -7,7 +7,7 @@ import { ModalPointComponent } from '../modal-point/modal-point.component';
 import { Component, OnInit } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
 import { ActivatedRoute } from '@angular/router';
-import { PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
+import { Item, PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
 import { FormsModule } from '@angular/forms';
 import { Terminal, UnidadeInstituicao } from 'src/app/util/interfaces/UnidadeInstituicao';
 
@@ -20,14 +20,12 @@ import { Terminal, UnidadeInstituicao } from 'src/app/util/interfaces/UnidadeIns
 })
 export class DetailsPaComponent implements OnInit{
 
-  balanceValue: string = '20.250,99'; // Defina o valor manualmente aqui
-
   isModalOpen: boolean = false;
   pageNumber = 1;
   pageSize = 10;
-  totalPages: number = 7;
+  totalPages: number = 0;
   pagesArray: number[] = [];
-  paDetails: PontoAtendimento | undefined;
+  paDetails: Item | undefined;
   terminalsBy: any;
 
   tipoTerminal: TipoTerminal[] = [];
@@ -68,6 +66,7 @@ export class DetailsPaComponent implements OnInit{
 
         // Você está acessando os terminais dentro de unidadeInstituicao e atribuindo-os à propriedade terminal
         this.terminal = unidadeInstituicao.terminals;
+        this.totalPages = unidadeInstituicao.totalPages;
 
         this.tipoTerminal = [];
 

@@ -1,5 +1,5 @@
 import { PointService } from './Service/point.service';
-import { PontoAtendimento } from './../../util/interfaces/PontoAtendimento';
+import { Item, PontoAtendimento } from './../../util/interfaces/PontoAtendimento';
 import { MoedaService } from './../../services/moeda.service';
 import { Component, OnInit } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
@@ -17,23 +17,21 @@ import { Router } from '@angular/router';
 })
 export class PointServiceComponent implements OnInit{
 
-  PA: PontoAtendimento[] = [];
+  PA: Item[] = [];
   pageNumber = 1;
   pageSize = 10;
-  totalPages: number = 7;
-
-  page: number[] = [];
-
   searchTerm: string = '';
-  filteredData: PontoAtendimento[] = [];
+  filteredData: Item[] = [];
+
+  pagesArray: number[] = [];
+
+  totalPages: number = 0;
 
   constructor(
     private PointService: PointService,
     private MoedaService: MoedaService,
     private Router : Router
-  ) {
-    this.page = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-   }
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -41,10 +39,11 @@ export class PointServiceComponent implements OnInit{
 
   loadData(): void {
     this.PointService.GetAllPA(this.pageNumber, this.pageSize).subscribe({
-      next: (response ) => {
-        this.PA = response;
-        console.log(response);
+      next: (response : PontoAtendimento ) => {
+        this.PA = response.items;
         this.filterItems();
+        this.totalPages = response.totalPages;
+        this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
       },
       error: (error) => {
         console.error('Erro ao buscar dados', error);
@@ -52,7 +51,7 @@ export class PointServiceComponent implements OnInit{
     });
   }
 
-  navigateToDetails(item: PontoAtendimento) {
+  navigateToDetails(item: Item) {
     this.PointService.setData([item]);
     this.Router.navigate(['/pointService/details']);
   }
