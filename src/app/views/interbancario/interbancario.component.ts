@@ -96,7 +96,7 @@ export class InterbancarioComponent {
   }
 
   calcularValorTotal(dados: any[]): string {
-    const total = dados.reduce((sum, item) => sum + item.valor, 0);
+    const total = dados.reduce((sum, item) => sum + item.valor, 0); 
     return this.MoedaService.maskCurrency(total);
   }
 
