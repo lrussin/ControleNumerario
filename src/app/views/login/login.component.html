@@ -25,14 +25,20 @@
                       type="password"
                     />
                   </c-input-group>
-                  <c-col class="text-right" xs="6">
+                  <c-input-group class="mb-4">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilLockUnlocked"></svg>
+                    </span>
+                    <input autoComplete="current-password" cFormControl placeholder="AUTH Code" type="text"/>
+                  </c-input-group>
+                  <c-col class="forgotPassword" xs="6">
                     <button cButton class="px-0 custom-button" color="link" (click)="changeView()">
-                      Forgot your password
+                      Esqueci minha senha
                     </button>
                   </c-col>
                   <c-row>
-                    <c-col xs="6">
-                      <button cButton class="px-4" color="primary">
+                    <c-col class="buttonLogin" xs="6">
+                      <button cButton class="buttonLogin px-4" color="primary">
                         Login
                       </button>
                     </c-col>
@@ -40,20 +46,6 @@
                 </form>
               </c-card-body>
             </c-card>
-            <!-- <c-card [ngStyle]="{'minWidth.%': 44}" class="text-white bg-primary py-5">
-              <c-card-body class="text-center">
-                <div>
-                  <h2>Sign up</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-                  <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
-                    Register Now!
-                  </button>
-                </div>
-              </c-card-body>
-            </c-card> -->
           </c-card-group>
         </c-col>
       </c-row>
@@ -68,22 +60,22 @@
             <c-card class="p-4">
               <c-card-body>
                 <form cForm>
-                  <h1 class="d-flex justify-content-center" >Login</h1>
+                  <h1 class="d-flex justify-content-center" >Resetar Senha</h1>
                   <c-input-group class="mb-3">
                     <span cInputGroupText>
                       <svg cIcon name="cilUser"></svg>
                     </span>
                     <input autoComplete="username" cFormControl placeholder="Email" />
                   </c-input-group>
-                  <c-col class="text-right" xs="6">
+                  <c-col xs="6">
                     <button cButton class="px-0 custom-button" color="link" (click)="changeView()">
-                      Back
+                      Voltar
                     </button>
                   </c-col>
                   <c-row>
                     <c-col xs="6">
-                      <button cButton class="px-4 justify-content-center" color="primary">
-                        Reset Password
+                      <button cButton class="px-4 justify-content-center buttonReset" color="primary">
+                        Resetar Senha
                       </button>
                     </c-col>
                   </c-row>

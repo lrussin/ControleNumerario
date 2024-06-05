@@ -13,7 +13,7 @@ export class ModalParameterService {
   private updateParamUrl = 'https://localhost:7162/parameters/Parameters/{id}'
 
 constructor(
-  private httpCliente : HttpClient
+  private httpClient : HttpClient
 ) { }
 
 
@@ -24,7 +24,7 @@ registerParam (formUpdate: Item): Observable<any> {
     "value": formUpdate.value
   };
 
-  return this.httpCliente.post(this.registerParamUrl, body);
+  return this.httpClient.post(this.registerParamUrl, body);
 }
 
   updateParam (formUpdate: Item): Observable<any> {
@@ -34,6 +34,6 @@ registerParam (formUpdate: Item): Observable<any> {
       "value": formUpdate.value
     };
 
-    return this.httpCliente.put(updateParamURL, body);
+    return this.httpClient.put(updateParamURL, body);
   }
 }

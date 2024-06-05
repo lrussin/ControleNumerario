@@ -7,7 +7,7 @@ import { HomeComponent } from './views/home/home.component';
 import { PointServiceComponent } from './views/point-service/point-service.component'
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
-import { LoginComponent } from './views/pages/login/login.component';
+import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';

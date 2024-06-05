@@ -1,3 +1,4 @@
+import { LoginService } from './Service/login.service';
 import { Component } from '@angular/core';
 import { CommonModule, NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
@@ -12,7 +13,9 @@ import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, Tex
 })
 export class LoginComponent {
 
-  constructor() { }
+  constructor(
+    private LoginService: LoginService,
+  ) { }
 
   username : string = "";
   password : string = "";
