@@ -1,18 +1,23 @@
 <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
-  <ng-container *ngIf="!isForgotPassword">
+  <ng-container *ngIf="!isForgotPassword && !isChangePassword">
     <c-container breakpoint="md">
       <c-row class="justify-content-center">
         <c-col lg="10" xl="5">
           <c-card-group>
             <c-card class="p-4">
               <c-card-body>
-                <form cForm>
+                <form (ngSubmit)="loginCreate()" #loginForm="ngForm" cForm>
                   <h1 class="d-flex justify-content-center" >Login</h1>
                   <c-input-group class="mb-3">
                     <span cInputGroupText>
                       <svg cIcon name="cilUser"></svg>
                     </span>
-                    <input autoComplete="username" cFormControl placeholder="Email" />
+                    <input
+                      autoComplete="email"
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="authLogin.email"
+                      cFormControl
+                      placeholder="Email" />
                   </c-input-group>
                   <c-input-group class="mb-4">
                     <span cInputGroupText>
@@ -20,6 +25,8 @@
                     </span>
                     <input
                       autoComplete="current-password"
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="authLogin.password"
                       cFormControl
                       placeholder="Password"
                       type="password"
@@ -29,7 +36,13 @@
                     <span cInputGroupText>
                       <svg cIcon name="cilLockUnlocked"></svg>
                     </span>
-                    <input autoComplete="current-password" cFormControl placeholder="AUTH Code" type="text"/>
+                    <input
+                      autoComplete="current-password"
+                      cFormControl
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="authLogin.authCode"
+                      placeholder="AUTH Code"
+                      type="text"/>
                   </c-input-group>
                   <c-col class="forgotPassword" xs="6">
                     <button cButton class="px-0 custom-button" color="link" (click)="changeView()">
@@ -38,7 +51,7 @@
                   </c-col>
                   <c-row>
                     <c-col class="buttonLogin" xs="6">
-                      <button cButton class="buttonLogin px-4" color="primary">
+                      <button cButton class="buttonLogin px-4" color="primary" type="submit">
                         Login
                       </button>
                     </c-col>
@@ -52,7 +65,7 @@
     </c-container>
   </ng-container>
 
-  <ng-container *ngIf="isForgotPassword">
+  <ng-container *ngIf="isForgotPassword && !isChangePassword">
     <c-container breakpoint="md">
       <c-row class="justify-content-center">
         <c-col lg="10" xl="5">
@@ -76,6 +89,58 @@
                     <c-col xs="6">
                       <button cButton class="px-4 justify-content-center buttonReset" color="primary">
                         Resetar Senha
+                      </button>
+                    </c-col>
+                  </c-row>
+                </form>
+              </c-card-body>
+            </c-card>
+          </c-card-group>
+        </c-col>
+      </c-row>
+    </c-container>
+  </ng-container>
+
+  <ng-container *ngIf="isChangePassword">
+    <c-container breakpoint="md">
+      <c-row class="justify-content-center">
+        <c-col lg="10" xl="5">
+          <c-card-group>
+            <c-card class="p-4">
+              <c-card-body>
+                <form cForm>
+                  <h1 class="d-flex justify-content-center" >Criar Nova Senha</h1>
+                  <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilLockLocked"></svg>
+                    </span>
+                    <input autoComplete="password"
+                    [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="authLogin.password"
+                    cFormControl
+                    placeholder="Senha Antiga"
+                    type="password"/>
+                  </c-input-group>
+                  <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilLockLocked"></svg>
+                    </span>
+                    <input autoComplete="password"
+                    [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="newPassword"
+                    cFormControl
+                    placeholder="Nova Senha"
+                    type="password"/>
+                  </c-input-group>
+                  <c-col xs="6">
+                    <button cButton class="px-0 custom-button" color="link" (click)="changeView()">
+                      Voltar
+                    </button>
+                  </c-col>
+                  <c-row>
+                    <c-col xs="6">
+                      <button cButton class="px-4 justify-content-center buttonReset" color="primary" (click)="firstAcess()">
+                        Criar Senha
                       </button>
                     </c-col>
                   </c-row>

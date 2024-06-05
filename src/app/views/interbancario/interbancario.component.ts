@@ -41,6 +41,7 @@ export class InterbancarioComponent {
   resultInter: boolean = false
   valorTotal: string = '';
   isExportDisabled: boolean = true;
+  isVisible: boolean = false;
 
   constructor(
     private interbancarioService: InterbancarioService,
@@ -54,6 +55,7 @@ export class InterbancarioComponent {
   getByBanco() {
     this.interbancarioService.GetInterbancario().subscribe({
       next: (response) => {
+        this.isVisible = true;
         this.bancoDebito = response;
       },
       error: (error) => {
@@ -96,7 +98,7 @@ export class InterbancarioComponent {
   }
 
   calcularValorTotal(dados: any[]): string {
-    const total = dados.reduce((sum, item) => sum + item.valor, 0); 
+    const total = dados.reduce((sum, item) => sum + item.valor, 0);
     return this.MoedaService.maskCurrency(total);
   }
 

@@ -3,7 +3,6 @@ import { ModalParameterService } from './views/modal-parameter/Service/modal-par
 import { ParameterComponent } from './views/parameter/parameter.component';
 import { UsersListComponent } from './views/users-list/users-list.component';
 import { InterbancarioComponent } from './views/interbancario/interbancario.component';
-import { HomeComponent } from './views/home/home.component';
 import { PointServiceComponent } from './views/point-service/point-service.component'
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';

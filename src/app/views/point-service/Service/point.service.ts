@@ -1,6 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { LoginService } from './../../login/Service/login.service';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Item, PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
 
 @Injectable({
@@ -14,14 +15,16 @@ export class PointService {
 
   constructor(
     private HttpClient : HttpClient,
+    private LoginService: LoginService,
   ) { }
 
   GetAllPA(pageNumber: number, pageSize: number): Observable<PontoAtendimento> {
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString())
 
-    return this.HttpClient.get<any>(this.baseUrl, { params });
+    return this.HttpClient.get<any>(this.baseUrl, { params, headers : headers });
   }
 
   setData(data: Item[]): void {

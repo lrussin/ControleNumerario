@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
 
   private postLoginUrl = 'https://localhost:7162/api/User/login'
+  private postChangePassword = 'https://localhost:7162/api/User/changePassword'
 
   constructor(
     private httpClient : HttpClient,
@@ -14,11 +16,39 @@ export class LoginService {
 
   postLogin(email: string, password: string, authcode: string) {
     let body = {
-      "email": '',
-      "password": '',
-      "authCode": ''
+      "email": email,
+      "password": password,
+      "otpCode": authcode
     }
 
     return this.httpClient.post(this.postLoginUrl, body);
+  }
+
+  setSessionToken(token : string) : void {
+    if( token ) localStorage.setItem('authToken', token);
+    else throw new Error("Cannot set authToken with undefined");
+  }
+
+  removeSessionToken() : void {
+    localStorage.removeItem('authToken');
+  }
+
+
+  getSessionToken() : string {
+    return localStorage.getItem('authToken') || '';
+  }
+
+  isLoggedIn() : boolean {
+    if( this.getSessionToken() ) return true;
+    else return false;
+  }
+
+  changePassword(token : string, oldPassword : string, newPassword: string): Observable<any> {
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json;charset=UTF-8' });
+    let body = {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    }
+    return this.httpClient.post(this.postChangePassword, body, {headers : headers, responseType: 'text'});
   }
 }
