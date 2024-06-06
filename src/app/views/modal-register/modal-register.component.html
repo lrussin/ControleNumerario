@@ -50,12 +50,13 @@
                       <div class="permission">
                         Permissão
                       </div>
-                      <dual-listbox [sort]="true" [source]="source" key="id" display="name"
+                      <dual-listbox [sort]="true" [source]="source" key="id" display="normalizedName"
                         [filter]="true" [(destination)]="confirmed" height="150px"
-                        [disabled]="false">
+                        [disabled]="false" [format]="format">
                       </dual-listbox>
                       <div class="d-grid create-account">
-                        <button cButton class="create" (click)="createUser()">{{ isEditMode ? 'Salvar Alterações' : 'Criar conta' }}</button>
+                        <button cButton class="create" (click)="editPermission()" [hidden]="!isEditMode">Salvar Alterações</button>
+                        <button cButton class="create" (click)="createUser()" [hidden]="isEditMode">Criar conta</button>
                       </div>
                     </form>
                   </c-card-body>

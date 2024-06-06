@@ -125,15 +125,15 @@
           <div class="modal-body">
             <p>Tem certeza de que deseja excluir esses registros?</p>
             <div class="teste">
-              <span>Email Usuario: {{this.userDelet?.email}}</span>
+              <span>Email Usuario: {{this.currentUser.email}}</span>
               <br>
-              <span>Nome Usuario: {{this.userDelet?.firstName}} {{this.userDelet?.lastName}}</span>
+              <span>Nome Usuario: {{this.currentUser.firstName}} {{this.currentUser.lastName}}</span>
             </div>
             <p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn btn-default" (click)="closeDeletModal()" value="Cancelar">
-            <input type="button" class="btn btn-danger" (click)="deleteUser(this.userDelet?.userId)" click  value="Deletar">
+            <input type="button" class="btn btn-danger" (click)="deleteUser()" click  value="Deletar">
           </div>
         </form>
       </div>

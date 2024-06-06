@@ -1,3 +1,4 @@
+import { PermissionGuardService } from './util/guards/permission-guard.service';
 import { DetailsPaComponent } from './views/details-pa/details-pa.component';
 import { ModalParameterService } from './views/modal-parameter/Service/modal-parameter.service';
 import { ParameterComponent } from './views/parameter/parameter.component';
@@ -27,6 +28,8 @@ import { CommonModule } from '@angular/common';
 import { UsersListService } from './views/users-list/Service/users-list.service';
 import {ParameterService} from './views/parameter/Service/parameter.service';
 import { PointService } from './views/point-service/Service/point.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { CryptoService } from './services/crypto.service';
 
 
 export const routes: Routes = [
@@ -61,11 +64,9 @@ export const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersListComponent
-      },
-      {
-        path: 'modal-register',
-        component: ModalRegisterComponent
+        component: UsersListComponent,
+        canActivate: [PermissionGuardService], // Usar o guardião de rota aqui
+        data:{rules: ["Admin"]} //
       },
       {
         path: 'parameter',
@@ -153,9 +154,16 @@ export const routes: Routes = [
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('authToken'); // Exemplo de como obter o token JWT armazenado no localStorage
+        }
+      }
+    })
   ],
-  providers: [HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService, PointService],
+  providers: [CryptoService,HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService, PointService],
   exports: [RouterModule]
 })
 export class AppRoutes {

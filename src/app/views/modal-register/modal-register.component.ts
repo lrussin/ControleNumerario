@@ -39,6 +39,9 @@ export class ModalRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.permission();
+    if (this.isEditMode && this.userData.email) {
+      this.loadUserPermissions(this.userData.email);
+    }
   }
 
   createUser() {
@@ -62,7 +65,6 @@ export class ModalRegisterComponent implements OnInit {
 
   setPermission() {
     if (this.confirmed.length === 1) {
-      console.log('teste')
 
       const email = this.userData.email;
       const permissao = this.confirmed[0].normalizedName;
@@ -85,11 +87,30 @@ export class ModalRegisterComponent implements OnInit {
     this.modalRegisterService.getPermission().subscribe({
       next: (response) => {
         this.source = response
+        if (this.isEditMode && this.userData.email) {
+          this.loadUserPermissions(this.userData.email);
+        }
+
       },
       error:  (error) => {
         console.error('Erro ao buscar dados', error);
       }
     })
+  }
+
+   loadUserPermissions(email: string): void {
+    this.modalRegisterService.loadPermission(email).subscribe({
+      next: (permissions) => {
+        this.confirmed = permissions;
+      },
+      error: (error) => {
+        console.error('Erro ao buscar permissões do usuário', error);
+      }
+    });
+  }
+
+  editPermission(){
+    this.setPermission();
   }
 
   format = {

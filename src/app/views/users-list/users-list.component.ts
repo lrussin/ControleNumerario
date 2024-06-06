@@ -26,12 +26,14 @@ export class UsersListComponent implements OnInit {
   pagesArray: number[] = [];
   totalPages: number = 0;
 
+  userPermissions: any[] = [];
+
   filteredData: Item[] = [];
   searchTerm:string = '';
 
   isModalDelet: boolean = false;
 
-  userDelet: Item | null = null;
+  // userDelet: Item | null = [];
 
   isModalOpen: boolean = false;
   isEditMode: boolean = false;
@@ -42,9 +44,9 @@ export class UsersListComponent implements OnInit {
     userId: ''
   }
 
-  constructor(private userslistService: UsersListService) {
-
-  }
+  constructor(
+    private userslistService: UsersListService
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -56,7 +58,6 @@ export class UsersListComponent implements OnInit {
 
         this.filteredData =  response.items;
         this.users = response.items;
-        console.log(response)
         this.totalPages = response.totalPages;
         this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
       },
@@ -124,17 +125,16 @@ export class UsersListComponent implements OnInit {
 
   openDeletModal(user: Item) {
     this.isModalDelet = true;
-    this.userDelet = user;
+    this.currentUser = user;
   }
 
   closeDeletModal() {
     this.isModalDelet = false;
-    this.userDelet = null;
   }
 
-  deleteUser(userId : string | undefined) {
-    if (userId) {
-      this.userslistService.deleteUser(userId).subscribe({
+  deleteUser() {
+    if (this.currentUser) {
+      this.userslistService.deleteUser(this.currentUser).subscribe({
         next: (response) => {
           console.log('Usuário deletado com sucesso', response);
           this.closeDeletModal();
@@ -142,14 +142,7 @@ export class UsersListComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro ao deletar usuário', error);
-
-        try {
-          const errorMsg = JSON.parse(error.message);
-          console.error('Erro detalhado:', errorMsg);
-        } catch (e) {
-          console.error('Resposta do servidor não é um JSON válido:', error.message);
         }
-      }
       })
     }
   }

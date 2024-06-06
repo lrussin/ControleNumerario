@@ -48,11 +48,12 @@ export class LoginComponent implements OnInit{
 
 
   loginCreate() {
-    if (this.authLogin.email && this.authLogin.password != '' && this.authLogin.authCode != '') {
+    if (this.authLogin.email && this.authLogin.password && this.authLogin.authCode) {
       this.LoginService.postLogin(this.authLogin.email, this.authLogin.password, this.authLogin.authCode).subscribe({
         next: (AuthTokenJson: any) => {
           this.LoginService.setSessionToken(AuthTokenJson.Data.Token);
           const temporaryPassword = AuthTokenJson.Data.TemporaryPassword;
+          console.log(this.CryptoService.decrypt(AuthTokenJson.Data.Token))
           this.token = AuthTokenJson.Data.Token;
           if (temporaryPassword){
             this.isChangePassword = true;
