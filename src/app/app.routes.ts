@@ -30,6 +30,7 @@ import {ParameterService} from './views/parameter/Service/parameter.service';
 import { PointService } from './views/point-service/Service/point.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { CryptoService } from './services/crypto.service';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 export const routes: Routes = [
@@ -37,14 +38,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '',
     component: DefaultLayoutComponent,
-    // data: {
-    //   title: 'Home'
-    // },
     children: [
-      // {
-      //   path: 'home',
-      //   component: HomeComponent
-      // },
       {
         path: 'dashboard',
         // loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
@@ -70,12 +64,14 @@ export const routes: Routes = [
       },
       {
         path: 'parameter',
-        component: ParameterComponent
+        component: ParameterComponent,
+        canActivate: [PermissionGuardService],
+        data:{rules: ["Admin"]}
       },
-      {
-        path: 'details',
-        component: DetailsPaComponent
-      },
+      // {
+      //   path: 'details',
+      //   component: DetailsPaComponent
+      // },
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes),
@@ -155,6 +151,7 @@ export const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     CommonModule,
+    NgApexchartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

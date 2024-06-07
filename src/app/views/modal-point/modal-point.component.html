@@ -49,14 +49,14 @@
               <!-- <button class="date-inicial">
                 11/02/2021
               </button> -->
-              <input class="date-inicial" type="date">
+              <input class="date-inicial" type="date" [(ngModel)]="dataInicial">
             </div>
           </div>
           <div class="col-sm-4 date-fin">
             Data Final
             <div class="col-10 ">
               <!-- <button class="date-final"> -->
-              <input class="date-final" type="date">
+              <input class="date-final" type="date" [(ngModel)]="dataFinal">
               <!-- </button> -->
             </div>
           </div>
@@ -64,7 +64,14 @@
             <svg cIcon name="cilCheck"></svg>
           </div>
         </div>
-        <app-dashboard *ngIf="graficoVisual"></app-dashboard>
+        <ng-container>
+          <div class="row grafico">
+            <div class="canvas-container">
+              <canvas id="canvas" class="grafico" ></canvas>
+            </div>
+          </div>
+          <div *ngIf="callFunction()" style="display:none;"></div>
+        </ng-container>
       </div>
     </div>
   </div>

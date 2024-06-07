@@ -27,6 +27,7 @@ export class DetailsPaComponent implements OnInit{
   pagesArray: number[] = [];
   paDetails: Item | undefined;
   terminalsBy: any;
+  idUnidade: any;
 
   tipoTerminal: TipoTerminal[] = [];
   description = new Set<string>();
@@ -81,9 +82,10 @@ export class DetailsPaComponent implements OnInit{
     });
   }
 
-  openModal(terminals: Terminal) {
+  openModal(terminals: Terminal, idUnidade : any) {
     this.isModalOpen = true;
     this.terminalsBy = terminals;
+    this.idUnidade = idUnidade;
   }
 
   closeModal() {

@@ -27,13 +27,10 @@ export class InterbancarioService {
 
   GetInterAllDados(selectedBanco: number, dataInicial: string, dataFinal: string, pageNumber: number, pageSize: number): Observable<DadosInterbancario> {
     let getInterDados = this.getInterbancario + 'banco='  + selectedBanco + '&dataInicial=' + dataInicial + '&dataFinal=' + dataFinal;
-    let params = new HttpParams()
-      .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString());
 
     let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
 
-    return this.httpClient.get<any>(getInterDados, { params, headers: headers} );
+    return this.httpClient.get<any>(getInterDados, { headers: headers} );
   }
 
   GetInterDate(pageNumber: number, pageSize: number,dataInicial: string, dataFinal: string): Observable<DadosInterbancario> {

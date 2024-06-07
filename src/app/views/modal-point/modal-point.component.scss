@@ -185,3 +185,21 @@ input {
 .check:hover {
   background-color: var(--green-water);
 }
+
+
+.grafico{
+  width: 1650px;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#canvas {
+  width: 80% !important;
+  height: 100% !important;
+  margin-top: 1%;
+}
