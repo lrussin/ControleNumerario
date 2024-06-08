@@ -182,27 +182,21 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
     const dataIni= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
     const dataFi = formatDate(this.dataFinal, 'dd/MM/yyyy', 'en-US');
 
-    this.modalPointService.opCaixa(numTerminal, pa, dataIni, dataFi).subscribe({
+    this.modalPointService.opCaixaSaldo(numTerminal, pa, dataIni, dataFi).subscribe({
       next: (response) => {
         this.datasOp = [];
         this.valoresOp = [];
 
-        response.terminal.forEach((terminal: any) => {
+        console.log(response.transacoes);
+        // Percorre o objeto response.transacoes
+        for (const [key, value] of Object.entries(response.transacoes)) {
+          // Adiciona a data no formato desejado
+          this.datasOp.push(formatDate(new Date(key), 'dd/MM/yyyy', 'en-US'));
 
-          // Verifica se o array opCaixa existe e possui pelo menos um elemento
-          if (terminal.opCaixa && terminal.opCaixa.length > 0) {
+          // Adiciona o valor como número
+          this.valoresOp.push(Number(value));
+        }
 
-            terminal.opCaixa.forEach((op: any) => {
-
-              console.log(terminal.opCaixa)
-
-              this.datasOp.push(formatDate(op.data, 'dd/MM/yyyy', 'en-US'));
-              this.valoresOp.push(Number(op.valor));
-
-
-            });
-          }
-        })
         this.renderChart();
       },
       error: (error) => {
