@@ -177,12 +177,12 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
   grafic() {
     this.graficoVisual = true;
 
-    const numTerminal = this.idUnidade;
-    const pA = this.terminalByPA.tipoTerminal.codigo;
+    const numTerminal = this.terminalByPA.codigo;
+    const pa = this.idUnidade;
     const dataIni= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
     const dataFi = formatDate(this.dataFinal, 'dd/MM/yyyy', 'en-US');
 
-    this.modalPointService.opCaixa(numTerminal, pA, dataIni, dataFi, this.pageNumber, this.pageSize).subscribe({
+    this.modalPointService.opCaixa(numTerminal, pa, dataIni, dataFi).subscribe({
       next: (response) => {
         this.datasOp = [];
         this.valoresOp = [];
