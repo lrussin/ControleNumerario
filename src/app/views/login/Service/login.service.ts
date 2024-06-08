@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,6 +13,7 @@ export class LoginService {
 
   constructor(
     private httpClient : HttpClient,
+    private jwtHelper: JwtHelperService
   ) { }
 
   postLogin(email: string, password: string, authcode: string) {
@@ -39,7 +41,9 @@ export class LoginService {
   }
 
   isLoggedIn() : boolean {
-    if( this.getSessionToken() ) return true;
+    const token = this.getSessionToken();
+
+    if( token && !this.jwtHelper.isTokenExpired(token)) return true;
     else return false;
   }
 

@@ -12,6 +12,7 @@ export class ModalRegisterService {
   private postPermissionUrl = 'https://localhost:7162/api/Role/SetUserRole';
   private getPermissionUrl = 'https://localhost:7162/api/Role/GetRoles';
   private getLoadPermissionUrl = 'https://localhost:7162/api/Role/GetUserRole'
+  private postReenviarQrCodeUrl = 'https://localhost:7162/api/User/ResendQrCode/'
 
   constructor(
     private httpClient: HttpClient,
@@ -46,5 +47,13 @@ export class ModalRegisterService {
     let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
 
     return this.httpClient.get<any>(getLoadPermission,{ headers : headers })
+  }
+
+  reenviarQrCode(email: string): Observable<any> {
+
+    let reenviarQrCode = this.postReenviarQrCodeUrl + email
+
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
+    return this.httpClient.post(reenviarQrCode, null ,{ headers : headers, responseType: 'text' })
   }
 }

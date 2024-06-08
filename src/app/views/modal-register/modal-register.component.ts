@@ -27,6 +27,8 @@ export class ModalRegisterComponent implements OnInit {
     userId: ''
   };
 
+  teste: string = 'teste notificação'
+
   constructor (
     private modalRegisterService: ModalRegisterService,
     private NotificationService: NotificationService,
@@ -113,6 +115,20 @@ export class ModalRegisterComponent implements OnInit {
     this.setPermission();
   }
 
+  reenviarQrCode(email: string): void {
+    this.modalRegisterService.reenviarQrCode(email).subscribe({
+      next: (qrCode) => {
+        this.NotificationService.setNotificationMessage(this.teste);
+        console.log('Notificação qrCode enviado com sucesso', qrCode)
+        // this.onCloseModal();
+        // window.location.reload();
+      },
+      error: (error) => {
+        console.error('Erro ao reenviar qrCode ao usuário', error);
+      }
+    });
+  }
+
   format = {
     add: 'Adicionar',
     remove: 'Remover',
@@ -124,6 +140,7 @@ export class ModalRegisterComponent implements OnInit {
 
     onCloseModal() {
       this.closeModal.emit();
+      window.location.reload();
     }
 
 }

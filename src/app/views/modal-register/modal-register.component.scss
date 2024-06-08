@@ -54,9 +54,25 @@ input {
   background-color: var(--cui-tertiary-bg-dark);
   color: black;
   border-radius: 5px;
+  height: 35px;
 }
 
 .create:hover {
+  border: none;
+  color: black;
+  background-color: var(--green); // Cor de fundo do botão
+}
+
+.reenviar {
+  border: none;
+  background-color: var(--cui-tertiary-bg-dark);
+  color: black;
+  border-radius: 5px;
+  margin-bottom: 2%;
+  height: 35px;
+}
+
+.reenviar:hover {
   border: none;
   color: black;
   background-color: var(--green); // Cor de fundo do botão

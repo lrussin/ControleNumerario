@@ -8,11 +8,7 @@ import { PointServiceComponent } from './views/point-service/point-service.compo
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import { LoginComponent } from './views/login/login.component';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { Page404Component } from './views/pages/page404/page404.component';
-import { Page500Component } from './views/pages/page500/page500.component';
-import { ApplicationRef, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { RegisterComponent } from './views/pages/register/register.component';
+import { ApplicationRef, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +19,6 @@ import { AppComponent } from './app.component';
 import { SidebarNavHelper } from '@coreui/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ModalRegisterComponent } from './views/modal-register/modal-register.component';
 import { CommonModule } from '@angular/common';
 import { UsersListService } from './views/users-list/Service/users-list.service';
 import {ParameterService} from './views/parameter/Service/parameter.service';
@@ -38,12 +33,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '',
     component: DefaultLayoutComponent,
+    canActivate: [PermissionGuardService],
     children: [
-      {
-        path: 'dashboard',
-        // loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
-        component: DashboardComponent
-      },
       {
         path: 'pointService',
         component: PointServiceComponent
@@ -68,77 +59,9 @@ export const routes: Routes = [
         canActivate: [PermissionGuardService],
         data:{rules: ["Admin"]}
       },
-      // {
-      //   path: 'details',
-      //   component: DetailsPaComponent
-      // },
-      {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/routes').then((m) => m.routes),
-      },
-      {
-        path: 'base',
-        loadChildren: () => import('./views/base/routes').then((m) => m.routes)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/routes').then((m) => m.routes)
-      },
-      {
-        path: 'forms',
-        loadChildren: () => import('./views/forms/routes').then((m) => m.routes)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/routes').then((m) => m.routes)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./views/widgets/routes').then((m) => m.routes)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
-      },
-      {
-        path: 'pages',
-        loadChildren: () => import('./views/pages/routes').then((m) => m.routes)
-      }
     ]
   },
-  {
-    path: '404',
-    // loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),
-    component:Page404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    // loadComponent: () => import('./views/pages/page500/page500.component').then(m => m.Page500Component),
-    component:Page500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  // {
-  //   path: 'login',
-  //   // loadComponent: () => import('./views/pages/login/login.component').then(m => m.LoginComponent),
-  //   component: LoginComponent,
-  //   data: {
-  //     title: 'Login Page'
-  //   }
-  // },
-  {
-    path: 'register',
-    // loadComponent: () => import('./views/pages/register/register.component').then(m => m.RegisterComponent),
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
-  { path: '**', redirectTo: 'Home' }
+  { path: '**', redirectTo: '/pointService' }
 ];
 
 @NgModule({

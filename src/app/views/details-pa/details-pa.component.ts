@@ -6,10 +6,10 @@ import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { ModalPointComponent } from '../modal-point/modal-point.component';
 import { Component, OnInit } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
-import { ActivatedRoute } from '@angular/router';
-import { Item, PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
+import { Item } from 'src/app/util/interfaces/PontoAtendimento';
 import { FormsModule } from '@angular/forms';
 import { Terminal, UnidadeInstituicao } from 'src/app/util/interfaces/UnidadeInstituicao';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-details-pa',
@@ -28,6 +28,7 @@ export class DetailsPaComponent implements OnInit{
   paDetails: Item | undefined;
   terminalsBy: any;
   idUnidade: any;
+  totalItems: number = 0;
 
   tipoTerminal: TipoTerminal[] = [];
   description = new Set<string>();
@@ -64,10 +65,12 @@ export class DetailsPaComponent implements OnInit{
 
         // unidadeInstituicao e armazenando-a em uma variável local chamada unidadeInstituicao
         const unidadeInstituicao = response.unidadeInstituicao;
+        this.idUnidade = unidadeInstituicao.idUnidadeInst
 
         // Você está acessando os terminais dentro de unidadeInstituicao e atribuindo-os à propriedade terminal
         this.terminal = unidadeInstituicao.terminals;
         this.totalPages = unidadeInstituicao.totalPages;
+        this.totalItems = unidadeInstituicao.totalItems;
 
         this.tipoTerminal = [];
 
@@ -139,5 +142,30 @@ export class DetailsPaComponent implements OnInit{
     } else {
       return 'Tooltip padrão';
     }
+  }
+
+  exportToExcel(): void{
+    this.DetailsPaService.getExcelImport(this.idUnidade ,this.pageNumber,this.totalItems).subscribe((response: { unidadeInstituicao: UnidadeInstituicao}) => {
+      const unidadeInstituicao = response.unidadeInstituicao;
+      const filteredData = unidadeInstituicao.terminals.map(terminal => {
+        return {
+          UnidadeInstituicao: unidadeInstituicao.idUnidadeInst,
+          NomeInstituicao: this.paDetails?.nomeUnidade,
+          Codigo: terminal.codigo,
+          Saldo: Number(terminal.saldo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+          Usuario: terminal.usuario,
+          Descricao: terminal.tipoTerminal.descricao,
+          LimiteSuperior: Number(terminal.tipoTerminal.limSuperior).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+          Mediana: Number(terminal.tipoTerminal.mediana).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+          LimiteInferior: Number(terminal.tipoTerminal.limInferior).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        };
+      });
+
+      // Convertendo para Excel
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(filteredData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      XLSX.writeFile(workbook, 'Terminais.xlsx');
+    });
   }
 }

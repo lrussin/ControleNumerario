@@ -26,4 +26,12 @@ constructor(
     return this.httpClient.get<{ unidadeInstituicao: UnidadeInstituicao }>(getByPaUrl, { params, headers : headers });
   }
 
+  getExcelImport(idTerminal: number,pageNumber: number,pageSize: number): Observable<any> {
+
+    let exportUrl = this.getPaUrl + '?id=' + idTerminal + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize;
+
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
+    return this.httpClient.get<any[]>(exportUrl, {headers: headers});
+  }
+
 }

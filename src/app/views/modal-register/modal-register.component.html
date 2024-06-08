@@ -55,6 +55,7 @@
                         [disabled]="false" [format]="format">
                       </dual-listbox>
                       <div class="d-grid create-account">
+                        <button cButton class="reenviar" (click)="reenviarQrCode(userData.email)" [hidden]="!isEditMode">Reenviar QrCode</button>
                         <button cButton class="create" (click)="editPermission()" [hidden]="!isEditMode">Salvar Alterações</button>
                         <button cButton class="create" (click)="createUser()" [hidden]="isEditMode">Criar conta</button>
                       </div>

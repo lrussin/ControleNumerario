@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { NgClass } from '@angular/common';
 
@@ -7,9 +7,10 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [NgClass],
   templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss']
+  styleUrls: ['./notifications.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationsComponent {
+export class NotificationsComponent implements OnInit {
 
   constructor(
     public NotificationService: NotificationService,
@@ -18,6 +19,7 @@ export class NotificationsComponent {
 
   ngOnInit() {
     this.NotificationService.notificationLine = [...this.NotificationService.notificationLine];
+    console.log('teste')
     this.cdr.detectChanges();
   }
 }

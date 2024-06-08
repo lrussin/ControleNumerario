@@ -8,20 +8,21 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 export class PermissionGuardService implements CanActivate {
 
   constructor(
-    private Router: Router,
-    private CryptoService: CryptoService
+    private router: Router,
+    private cryptoService: CryptoService
   ) { }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('authToken');
     if (token) {
-      const decodedToken = this.CryptoService.decrypt(token);
+      const decodedToken = this.cryptoService.decrypt(token);
       if (decodedToken && decodedToken.role && decodedToken.role.includes('Admin')) {
         return true;
       }
     }
-    // Redirecionar para uma página de acesso negado ou página inicial
-    // this.Router.navigate(['/access-denied']); // Você pode personalizar isso de acordo com suas necessidades
+
+    // Redirecionar para a página de login com a URL de retorno
+    this.router.navigate(['/login']);
     return false;
   }
 }
-
