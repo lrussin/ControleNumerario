@@ -31,6 +31,9 @@ export class InterbancarioComponent {
 
   pageNumber = 1;
   pageSize = 20;
+  totalPages: number = 0;
+  pagesArray: number[] = [];
+  totalItems: number = 0;
 
   buttonExport: boolean = false
   bancoDebito: DadosInterbancario[] = [];
@@ -64,18 +67,21 @@ export class InterbancarioComponent {
     });
   }
 
-  exportarDados(selectedBanco: number, dataInicial: string, dataFinal: string): void {
+  exportarDados(): void {
 
-    const dataInicialFormatted= formatDate(dataInicial, 'dd/MM/yyyy', 'en-US');
-    const dataFinalFormatted = formatDate(dataFinal, 'dd/MM/yyyy', 'en-US');
+    const dataInicialFormatted= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
+    const dataFinalFormatted = formatDate(this.dataFinal, 'dd/MM/yyyy', 'en-US');
 
-    if (selectedBanco != 0) {
-      this.interbancarioService.GetInterAllDados(selectedBanco, dataInicialFormatted, dataFinalFormatted, this.pageNumber,this.pageSize).subscribe({
+    if (this.selectedBanco != 0) {
+      this.interbancarioService.GetInterAllDados(this.selectedBanco, dataInicialFormatted, dataFinalFormatted, this.pageNumber,this.pageSize).subscribe({
         next: (response : DadosInterbancario) => {
           this.dadosInter = response.items;
+          this.totalPages = response.totalPages;
+          this.totalItems = response.totalItems;
           this.resultInter = true
           this.valorTotal = this.calcularValorTotal(response.items);
           this.isExportDisabled = false;
+          this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
         },
         error: (error) => {
           console.error('Erro ao buscar Transações', error);
@@ -86,9 +92,12 @@ export class InterbancarioComponent {
       this.interbancarioService.GetInterDate(this.pageNumber,this.pageSize,dataInicialFormatted, dataFinalFormatted).subscribe({
         next: (response : DadosInterbancario) => {
           this.dadosInter = response.items;
+          this.totalPages = response.totalPages;
+          this.totalItems = response.totalItems;
           this.resultInter = true
           this.valorTotal = this.calcularValorTotal(response.items);
           this.isExportDisabled = false;
+          this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
         },
         error: (error) => {
           console.error('Erro ao buscar Transações', error);
@@ -119,7 +128,7 @@ export class InterbancarioComponent {
           return {
             DataMovimentacao: dataMovimentacao,
             Banco: row.bancoDebito,
-            AgenciaDebito: row,
+            AgenciaDebito: row.agenciaDebito,
             AgenciaCredito: row.agenciaCredito,
             Situacao: row.situacao,
             Valor: valorFormatado,
@@ -132,6 +141,25 @@ export class InterbancarioComponent {
         XLSX.writeFile(workbook, 'TransaçõesInterbancaria.xlsx');
       });
     }
+  }
+
+  nextPage() {
+    if (this.pageNumber < this.totalPages) {
+      this.pageNumber++;
+      this.exportarDados();
+    }
+  }
+
+  prevPage(): void {
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
+    }
+    this.exportarDados();
+  }
+
+  goToPage(page: number) {
+    this.pageNumber = page;
+    this.exportarDados();
   }
 
 }
