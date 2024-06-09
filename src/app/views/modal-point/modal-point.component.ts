@@ -1,4 +1,5 @@
-import { OpCaixa, TipoOperacao } from './../../util/interfaces/opCaixa';
+import { logo } from './../../icons/logo';
+import { OpCaixa, OpTerminal, TipoOperacao } from './../../util/interfaces/opCaixa';
 import { ModalPointService } from './Services/modal-point.service';
 import { MoedaService } from './../../services/moeda.service';
 import { NgIf, NgStyle, formatDate } from '@angular/common';
@@ -8,6 +9,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { Terminal } from 'src/app/util/interfaces/UnidadeInstituicao';
 import { Chart, registerables } from 'chart.js';
+import * as XLSX from 'xlsx';
 import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 
@@ -45,7 +47,13 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
     valor: 0,
     numTerminal: 0,
     pontoAtendimento: 0,
-    terminal: []
+    terminal: [],
+    tipoOperacao: {
+      codHistorico: 0,
+      codOperacao: '',
+      descHistorico: '',
+      descOperacao: ''
+    }
   }
 
   dataInicial: string = '';
@@ -73,10 +81,8 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
 
   ngAfterViewInit() {
     this.terminalsBy();
-    // if (this.graficoVisual) {
       const canvas = document.querySelector('canvas') as HTMLCanvasElement;
       const context = canvas.getContext('2d');
-    // }
   }
 
 
@@ -175,8 +181,6 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
   }
 
   grafic() {
-    this.graficoVisual = true;
-
     const numTerminal = this.terminalByPA.codigo;
     const pa = this.idUnidade;
     const dataIni= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
@@ -184,6 +188,7 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
 
     this.modalPointService.opCaixaSaldo(numTerminal, pa, dataIni, dataFi).subscribe({
       next: (response) => {
+        this.graficoVisual = true;
         this.datasOp = [];
         this.valoresOp = [];
 
@@ -205,11 +210,38 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
     })
   }
 
+  exportToExcel(): void{
+
+    const numTerminal = this.terminalByPA.codigo;
+    const pa = this.idUnidade;
+    const dataIni= formatDate(this.dataInicial, 'dd/MM/yyyy', 'en-US');
+    const dataFi = formatDate(this.dataFinal, 'dd/MM/yyyy', 'en-US');
+
+    this.modalPointService.getExcelImport(numTerminal, pa, dataIni, dataFi).subscribe((response: OpCaixa) => {
+
+      const filteredData = response.terminal.flatMap((opTerminal: OpTerminal) =>
+        opTerminal.opCaixa.map((op: OpCaixa) => ({
+
+          numTerminal: numTerminal,
+          pontoAtendimento: pa,
+          data: formatDate(op.data, 'dd/MM/yyyy', 'en-US'),
+          codOperacao: op.tipoOperacao.codOperacao,
+          descOperacao: op.tipoOperacao.descOperacao,
+          codHistorico: op.tipoOperacao.codHistorico,
+          descHistorico: op.tipoOperacao.descHistorico,
+          valor: Number(op.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+        })));
+      // Convertendo para Excel
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(filteredData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      XLSX.writeFile(workbook, 'OperacoesTerminais.xlsx');
+    })
+  }
+
 
   callFunction(): boolean {
-    if (this.graficoVisual) {
-      this.ngAfterViewInit();
-    }
+    this.ngAfterViewInit();
     return true;
   }
 }

@@ -203,3 +203,33 @@ input {
   height: 100% !important;
   margin-top: 1%;
 }
+
+.export{
+  margin-top: -31%;
+}
+
+.btn-details{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 150px;
+  background-color: var(--green); // Cor de fundo do botão
+  color: #fff; // Cor do texto do botão
+  border: none; // Remove a borda do botão
+  padding: 5px 20px; // Espaçamento interno do botão
+  border-radius: 5px; // Arredonda as bordas do botão
+  cursor: pointer; // Altera o cursor para indicar que é clicável
+  transition: background-color 0.3s ease; // Transição suave ao passar o mouse
+  font-size: 20px;
+
+  .icon {
+    width: 19px; // Largura do ícone
+    height: 19px; // Altura do ícone
+  }
+}
+
+#button-details {
+  .btn-details:hover {
+    background-color: var(--green-water); // Cor de fundo do botão ao passar o mouse
+  }
+}

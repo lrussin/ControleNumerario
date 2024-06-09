@@ -1,16 +1,17 @@
 export interface OpCaixa {
   numTerminal: number
   pontoAtendimento: number
-  terminal: Terminal[]
+  terminal: OpTerminal[]
 }
 
-export interface Terminal {
-  opCaixa: OpCaixa[]
+export interface OpTerminal {
+  opCaixa: OpCaixa []
 }
 
 export interface OpCaixa {
   data: string
   valor: number
+  tipoOperacao: TipoOperacao
 }
 
 export interface TipoOperacao {

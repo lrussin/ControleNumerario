@@ -10,7 +10,7 @@ import { Item } from 'src/app/util/interfaces/UserList';
 })
 export class UsersListService {
   private baseUrl = 'https://localhost:7162/api/User/listUser';
-  private deleteUrl =  'https://localhost:7162/api/Usuario';
+  private deleteUrl =  'https://localhost:7162/api/User/delete';
 
   constructor(
     private httpClient: HttpClient,

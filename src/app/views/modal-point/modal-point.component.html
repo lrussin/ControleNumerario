@@ -68,11 +68,19 @@
           <div class="row grafico">
             <div class="canvas-container">
               <canvas id="canvas" class="grafico" ></canvas>
+              <div class="export" id="button-details" >
+                <button
+                  class="btn-details" *ngIf="graficoVisual"  (click)="exportToExcel()">
+                  <svg class="icon" cIcon name="cilCloudDownload"></svg>
+                  <span> Exportar</span>
+                </button>
+              </div>
             </div>
           </div>
           <div *ngIf="callFunction()" style="display:none;"></div>
         </ng-container>
       </div>
+
     </div>
   </div>
 </ng-container>

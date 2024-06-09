@@ -145,6 +145,7 @@ export class DetailsPaComponent implements OnInit{
   }
 
   exportToExcel(): void{
+    this.pageNumber = 1;
     this.DetailsPaService.getExcelImport(this.idUnidade ,this.pageNumber,this.totalItems).subscribe((response: { unidadeInstituicao: UnidadeInstituicao}) => {
       const unidadeInstituicao = response.unidadeInstituicao;
       const filteredData = unidadeInstituicao.terminals.map(terminal => {
@@ -152,8 +153,8 @@ export class DetailsPaComponent implements OnInit{
           UnidadeInstituicao: unidadeInstituicao.idUnidadeInst,
           NomeInstituicao: this.paDetails?.nomeUnidade,
           Codigo: terminal.codigo,
-          Saldo: Number(terminal.saldo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           Usuario: terminal.usuario,
+          Saldo: Number(terminal.saldo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           Descricao: terminal.tipoTerminal.descricao,
           LimiteSuperior: Number(terminal.tipoTerminal.limSuperior).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           Mediana: Number(terminal.tipoTerminal.mediana).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),

@@ -16,7 +16,7 @@ constructor(
   private LoginService: LoginService
 ) { }
 
-  opCaixa(numTerminal : number, pa : number, dataInicial: string, dataFinal: string): Observable<any> {
+getExcelImport(numTerminal : number, pa : number, dataInicial: string, dataFinal: string): Observable<any> {
 
     let params = new HttpParams()
       .set('numTerminal', numTerminal)
