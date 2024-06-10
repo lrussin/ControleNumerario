@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { LoginService } from 'src/app/views/login/Service/login.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/util/interfaces/ParameterList';
@@ -14,7 +15,8 @@ export class ModalParameterService {
   private updateParamUrl = environment.baseApiUrl + '/api/Parameters/{id}'
 
 constructor(
-  private httpClient : HttpClient
+  private httpClient : HttpClient,
+  private LoginService: LoginService
 ) { }
 
 
@@ -25,7 +27,8 @@ registerParam (formUpdate: Item): Observable<any> {
     "value": formUpdate.value
   };
 
-  return this.httpClient.post(this.registerParamUrl, body);
+  let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
+  return this.httpClient.post(this.registerParamUrl, body, { headers : headers});
 }
 
   updateParam (formUpdate: Item): Observable<any> {
@@ -34,7 +37,7 @@ registerParam (formUpdate: Item): Observable<any> {
       "name": formUpdate.name,
       "value": formUpdate.value
     };
-
-    return this.httpClient.put(updateParamURL, body);
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
+    return this.httpClient.put(updateParamURL, body, { headers : headers});
   }
 }

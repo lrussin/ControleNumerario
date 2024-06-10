@@ -47,38 +47,40 @@ export class ModalRegisterComponent implements OnInit {
   }
 
   createUser() {
-    if (this.userData.email !== '' && this.userData.firstName !== '' && this.userData.lastName !== '' && this.confirmed.length === 1) {
+    if (this.userData.email !== '' && this.userData.firstName !== '' && this.userData.lastName !== '' && this.confirmed.length >= 1) {
       this.modalRegisterService.createUser(this.userData.email, this.userData.firstName, this.userData.lastName).subscribe({
         next:() => {
           this.setPermission();
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
         },
         error: (error) => {
-          console.error('Erro ao criar usuário', error);
           this.NotificationService.setNotificationMessage('Erro ao Criar Usuário')
-          this.setPermission();
         }
       });
     }
     else {
-      this.NotificationService.setNotificationMessage('Erro ao Criar Usuário')
-      console.log('Campos obrigatorios')
+      this.NotificationService.setNotificationMessage('Campos obrigatorios')
     }
   }
 
   setPermission() {
-    if (this.confirmed.length === 1) {
+    if (this.confirmed.length >= 1) {
 
       const email = this.userData.email;
       const permissao = this.confirmed[0].normalizedName;
 
       this.modalRegisterService.setPermission(email, permissao).subscribe({
         next: (response) => {
-          console.log('Notificação usuario criado com sucesso', response)
-          this.onCloseModal();
-          window.location.reload();
+          this.isModalOpen = false
+          this.NotificationService.setNotificationMessage('Usuário criado com sucesso')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
         },
         error: (error) => {
-          console.error('Erro ao criar usuário', error);
+          this.NotificationService.setNotificationMessage('Erro ao inserir permissão do usuário')
         }
       })
     }
@@ -95,7 +97,7 @@ export class ModalRegisterComponent implements OnInit {
 
       },
       error:  (error) => {
-        console.error('Erro ao buscar dados', error);
+        this.NotificationService.setNotificationMessage('Erro ao buscar as permissões')
       }
     })
   }
@@ -106,7 +108,7 @@ export class ModalRegisterComponent implements OnInit {
         this.confirmed = permissions;
       },
       error: (error) => {
-        console.error('Erro ao buscar permissões do usuário', error);
+        this.NotificationService.setNotificationMessage('Erro ao buscar permissões do usuário')
       }
     });
   }
@@ -118,13 +120,14 @@ export class ModalRegisterComponent implements OnInit {
   reenviarQrCode(email: string): void {
     this.modalRegisterService.reenviarQrCode(email).subscribe({
       next: (qrCode) => {
-        this.NotificationService.setNotificationMessage(this.teste);
-        console.log('Notificação qrCode enviado com sucesso', qrCode)
-        // this.onCloseModal();
-        // window.location.reload();
+        this.isModalOpen = false
+          this.NotificationService.setNotificationMessage('QrCode enviado com sucesso para usuário')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
       },
       error: (error) => {
-        console.error('Erro ao reenviar qrCode ao usuário', error);
+        this.NotificationService.setNotificationMessage('Erro ao reenviar qrCode ao usuário')
       }
     });
   }
@@ -140,7 +143,6 @@ export class ModalRegisterComponent implements OnInit {
 
     onCloseModal() {
       this.closeModal.emit();
-      window.location.reload();
     }
 
 }

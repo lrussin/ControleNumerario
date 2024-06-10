@@ -1,3 +1,4 @@
+import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { CryptoService } from './../../services/crypto.service';
 import { LoginService } from './Service/login.service';
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit{
     private LoginService: LoginService,
     private CryptoService: CryptoService,
     private Router: Router,
+    public NotificationService: NotificationService
   ) { }
 
   isAlertVisible : boolean = false;
@@ -57,20 +59,20 @@ export class LoginComponent implements OnInit{
           if (temporaryPassword){
             this.isChangePassword = true;
             this.authLogin.password = '';
-            console.log('notificação Criar uma nova senha')
+            this.NotificationService.setNotificationMessage('Criar uma Nova Senha')
           }
           else {
-            console.log('notificação Login Feito com Sucesso')
+            this.NotificationService.setNotificationMessage('Login Feito com Sucesso')
             this.Router.navigateByUrl('/pointService');
           }
         },
         error: (error) => {
-          console.error('Erro ao logar usuário', error);
+          this.NotificationService.setNotificationMessage('Erro ao logar usuário')
         }
       });
     }
     else {
-      console.log('notificação Campos Obrigatorios')
+      this.NotificationService.setNotificationMessage('Campos Obrigatório')
     }
   }
 
@@ -78,11 +80,14 @@ export class LoginComponent implements OnInit{
     if (this.token != '' && this.authLogin.password != '' && this.newPassword != '') {
       this.LoginService.changePassword(this.token, this.authLogin.password, this.newPassword).subscribe({
         next: (response) => {
-            console.log('Notificação', response)
-            location.reload();
+          this.NotificationService.setNotificationMessage('Nova senha inserido com sucesso')
+          this.NotificationService.setNotificationMessage('Faça o login novamente, com a nova senha')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 5000);
         },
         error: (error) => {
-          console.error('Erro ao inserir uma nova senha', error);
+          this.NotificationService.setNotificationMessage('Erro ao inserir uma nova senha')
         }
       })
 
@@ -103,11 +108,14 @@ export class LoginComponent implements OnInit{
     if (this.authLogin.email) {
       this.LoginService.resetSenha(this.authLogin.email).subscribe({
         next: (response) => {
-          console.log('Notificação Sucesso ao resetar a senha')
-          location.reload();
+          this.NotificationService.setNotificationMessage('Senha enviada no email solicitado')
+          this.NotificationService.setNotificationMessage('Faça o login novamente, com a nova senha')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 5000);
       },
       error: (error) => {
-        console.error('Erro ao resetar senha', error);
+        this.NotificationService.setNotificationMessage('Erro ao inserir uma nova senha')
       }
       })
     }

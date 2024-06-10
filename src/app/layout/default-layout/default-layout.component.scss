@@ -8,6 +8,55 @@
   }
 }
 
+.notification-container {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  z-index: 99;
+  width: 40%;
+  max-width: 40%;
+}
+
+.notification-container .notification {
+  margin-bottom: 8px;
+}
+
+.notification-container .notification.toLeave {
+  animation: toLeave 0.4s ease-in-out;
+}
+
+@keyframes toLeave {
+  100% {
+      transform: translateX(200%);
+  }
+}
+
+.notification-container .notification .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color-1);
+  padding: 0px 8px;
+  color: var(--const-white);
+}
+
+.notification-container .notification .header span:last-of-type:hover {
+  cursor: pointer;
+  color: var(--primary-color-2);
+}
+
+.notification-container .notification .body {
+  padding: 4px 8px 10px 8px;
+  background-color: var(--black);
+  border: 1px solid var(--primary-color-1);
+}
+
+.notification-container .notification .body.function:hover {
+  cursor: pointer;
+  color: var(--primary-color-2);
+}
+
+
 // ng-scrollbar css variables
 // .cui-scrollbar {
 //  --scrollbar-border-radius: 7px;

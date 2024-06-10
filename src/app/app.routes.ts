@@ -14,7 +14,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CmAngularDualListboxModule } from 'cm-angular-dual-listbox';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeService } from './views/home/service/home.service';
 import { AppComponent } from './app.component';
 import { SidebarNavHelper } from '@coreui/angular';
 import { MatIconModule } from '@angular/material/icon';
@@ -90,7 +89,7 @@ export const routes: Routes = [
       }
     })
   ],
-  providers: [CryptoService,HomeService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService, PointService],
+  providers: [CryptoService, UsersListService ,SidebarNavHelper, ParameterService, ModalParameterService, PointService],
   exports: [RouterModule]
 })
 export class AppRoutes {

@@ -65,6 +65,18 @@
     </c-container>
   </ng-container>
 
+  <div class="notification-container">
+    <div class="notification" [ngClass]="{'toLeave': notification.toLeave}" *ngFor="let notification of NotificationService.notificationLine; let index = index">
+      <div class="header">
+        <span>Notificação</span>
+        <span (click)="NotificationService.closeNotification(index)">X</span>
+      </div>
+      <div class="body" [ngClass]="{'function': notification.functionOnMessage}" (click)="notification.functionOnMessage ? notification.functionOnMessage() : null">
+        {{notification.notificationMessage}}
+      </div>
+    </div>
+  </div>
+
   <ng-container *ngIf="isForgotPassword && !isChangePassword">
     <c-container breakpoint="md">
       <c-row class="justify-content-center">

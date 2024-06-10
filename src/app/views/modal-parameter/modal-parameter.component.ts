@@ -47,17 +47,24 @@ export class ModalParameterComponent implements OnInit{
 
   regisParam() {
     if (!this.isEditMode) {
-      this.ModalParameterService.registerParam(this.userData).subscribe({
-        next: (response) => {
-          console.log('Notificação parâmetro criado com sucesso.')
-          this.onCloseModal();
-          this.NotificationService.setNotificationMessage('Erro ao Criar Usuário')
-          // window.location.reload();
-        },
-        error: (error) => {
-          console.error('Erro ao buscar dados', error);
-        }
-      });
+      if (this.userData.value !== "" || this.userData.name !== "") {
+        this.ModalParameterService.registerParam(this.userData).subscribe({
+          next: (response) => {
+            this.onCloseModal();
+            this.NotificationService.setNotificationMessage('Parâmetro Criado com Sucesso')
+            window.setTimeout(function() {
+              window.location.reload();
+            }, 6000);
+          },
+          error: (error) => {
+            this.onCloseModal();
+            this.NotificationService.setNotificationMessage('Erro ao Criar Parâmetro')
+          }
+        });
+      }
+      else {
+        this.NotificationService.setNotificationMessage('Campos Obrigatório')
+      }
     }
   }
 
@@ -65,12 +72,15 @@ export class ModalParameterComponent implements OnInit{
     if (this.userData.id) {
       this.ModalParameterService.updateParam(this.userData).subscribe({
         next: (response) => {
-          console.log('Notificação parâmetro atualizado com sucesso.')
           this.onCloseModal();
-          window.location.reload();
+          this.NotificationService.setNotificationMessage('Parâmetro Atualizado com Sucesso')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
         },
         error: (error) => {
-          console.error('Erro ao buscar dados', error);
+          this.onCloseModal();
+          this.NotificationService.setNotificationMessage('Erro ao Atualizar Parâmetro')
         }
       });
     }
@@ -79,7 +89,7 @@ export class ModalParameterComponent implements OnInit{
   validateForm() {
     if (this.isEditMode) {
       if (this.userData.value === "" || this.userData.value === null ) {
-        console.log('Notificação Adicionar um novo caminho para o parâmetro')
+        this.NotificationService.setNotificationMessage('Campos Obrigatório')
       } else {
         this.editParam();
       }

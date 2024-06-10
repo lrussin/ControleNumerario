@@ -33,7 +33,6 @@ export class ModalRegisterService {
     };
 
     let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
-    console.log({ headers : headers })
     return this.httpClient.post<any>(this.postCreateUserUrl, body, { headers : headers})
   }
 

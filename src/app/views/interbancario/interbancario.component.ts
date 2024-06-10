@@ -1,3 +1,4 @@
+import { NotificationService } from 'src/app/services/notification.service';
 import { MoedaService } from './../../services/moeda.service';
 import { CommonModule, DatePipe, NgFor, NgIf, NgStyle, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
@@ -48,7 +49,8 @@ export class InterbancarioComponent {
 
   constructor(
     private interbancarioService: InterbancarioService,
-    private MoedaService : MoedaService
+    private MoedaService : MoedaService,
+    private NotificationService: NotificationService
   ) {  }
 
   ngOnInit(): void {
@@ -84,7 +86,7 @@ export class InterbancarioComponent {
           this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
         },
         error: (error) => {
-          console.error('Erro ao buscar Transações', error);
+          this.NotificationService.setNotificationMessage('Nenhum resultado encontrado')
         },
       });
     }
@@ -100,7 +102,7 @@ export class InterbancarioComponent {
           this.pagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
         },
         error: (error) => {
-          console.error('Erro ao buscar Transações', error);
+          this.NotificationService.setNotificationMessage('Nenhum resultado encontrado')
         },
       });
     }

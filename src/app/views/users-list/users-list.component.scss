@@ -252,3 +252,84 @@ button:not(:disabled),
 [type=submit]:not(:disabled) {
   color: var(--cui-body-color);
 }
+
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente para destacar o modal */
+  color: var(--cui-body-color);
+}
+
+.modal-content {
+  background-color: var(--cui-body-bg);
+  // padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para destacar o modal do fundo */
+  // width: 80%;
+  // height: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  color: var(--cui-body-color);
+  font-size: 20px; /* Ajuste o tamanho conforme necessário */
+  transform: scale(1.5); /* Aumenta o tamanho do ícone */
+}
+
+.permission {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+input {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.dual-list[_ngcontent-ng-c790108258] .button-bar[_ngcontent-ng-c790108258] button[_ngcontent-ng-c790108258] {
+  background-color: black; /* Adicione esta linha para alterar a cor de fundo */
+}
+
+.delet-account {
+  margin-top: 20px;
+}
+
+.delet {
+  border: none;
+  background-color: #ff0000;
+  color: black;
+  border-radius: 5px;
+  height: 35px;
+}
+
+.delet:hover {
+  border: none;
+  color: black;
+  background-color: #ff0000; // Cor de fundo do botão
+}
+
+.cancel {
+  border: none;
+  background-color: var(--tempThemeButton);
+  color: black;
+  border-radius: 5px;
+  margin-bottom: 2%;
+  height: 35px;
+}
+
+.cancel:hover {
+  border: none;
+  color: black;
+  background-color: var(--tempThemeButtonHover); // Cor de fundo do botão
+}

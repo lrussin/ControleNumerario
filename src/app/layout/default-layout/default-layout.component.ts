@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { PermissionGuardService } from './../../util/guards/permission-guard.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 import { IconDirective } from '@coreui/icons-angular';
 import {
   ContainerComponent,
+  INavData,
   ShadowOnScrollDirective,
   SidebarBrandComponent,
   SidebarComponent,
@@ -17,6 +19,8 @@ import {
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from './_nav';
+import { NotificationService } from 'src/app/services/notification.service';
+import { NgClass, NgFor } from '@angular/common';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -45,11 +49,25 @@ function isOverflown(element: HTMLElement) {
     ShadowOnScrollDirective,
     ContainerComponent,
     RouterOutlet,
-    DefaultFooterComponent
+    DefaultFooterComponent,
+    NgClass,
+    NgFor
   ]
 })
-export class DefaultLayoutComponent {
-  public navItems = navItems;
+export class DefaultLayoutComponent implements OnInit {
+  public navItems: INavData[] = []; // Tipagem explícita
+
+  constructor(
+    private PermissionGuardService: PermissionGuardService,
+    public NotificationService: NotificationService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.navItems = this.PermissionGuardService.getFilteredNavItems(navItems);
+    this.NotificationService.notificationLine = [...this.NotificationService.notificationLine];
+    this.cdr.detectChanges();
+  }
 
   onScrollbarUpdate($event: any) {
     // if ($event.verticalUsed) {

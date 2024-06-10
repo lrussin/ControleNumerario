@@ -1,22 +1,27 @@
+import { NotificationService } from './../../services/notification.service';
 import { ModalRegisterComponent } from './../modal-register/modal-register.component';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconDirective } from '@coreui/icons-angular';
 import { UsersListService } from './Service/users-list.service';
 import { FormsModule } from '@angular/forms';
 import { Item, UserList } from 'src/app/util/interfaces/UserList';
+import { CardBodyComponent, CardComponent, ColComponent, ContainerComponent, InputGroupComponent, InputGroupTextDirective, RowComponent } from '@coreui/angular';
 
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [IconDirective, MatButtonModule, MatIconModule, NgIf, ModalRegisterComponent,NgFor,FormsModule],
+  imports: [IconDirective, MatButtonModule, MatIconModule, NgIf, ModalRegisterComponent,NgFor,FormsModule, CardComponent,CardBodyComponent,ColComponent,RowComponent, ContainerComponent, InputGroupComponent, InputGroupTextDirective],
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+
+  @Output() closeModalDelet = new EventEmitter<void>();
+
   data: any;
 
   users: Item[] = [];
@@ -45,7 +50,8 @@ export class UsersListComponent implements OnInit {
   }
 
   constructor(
-    private userslistService: UsersListService
+    private userslistService: UsersListService,
+    private NotificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -80,7 +86,6 @@ export class UsersListComponent implements OnInit {
       this.filteredData = this.users.filter(item =>
         item.firstName.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
-      console.log(this.filteredData)
     } else {
       this.filteredData = [ ... this.users];
     }
@@ -136,14 +141,22 @@ export class UsersListComponent implements OnInit {
     if (this.currentUser) {
       this.userslistService.deleteUser(this.currentUser).subscribe({
         next: (response) => {
-          console.log('Usuário deletado com sucesso', response);
           this.closeDeletModal();
+          this.NotificationService.setNotificationMessage('Usuário deletado com sucesso')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
           this.loadData();
         },
         error: (error) => {
-          console.error('Erro ao deletar usuário', error);
+          this.NotificationService.setNotificationMessage('Erro ao deletar usuário')
         }
       })
     }
+  }
+
+  onCloseModal() {
+    this.closeModalDelet.emit();
+    window.location.reload();
   }
 }

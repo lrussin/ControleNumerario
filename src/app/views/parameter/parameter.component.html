@@ -37,7 +37,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="hint-text">Mostrando <b>{{ param.length }}</b> de <b>{{ param.length }}</b> Total</div>
+        <div class="hint-text">Mostrando <b>{{ param.length }}</b> de <b>{{ pageSize }}</b> Total</div>
         <div class="paginacao">
           <ul class="pagination">
             <li class="page-item prev" (click)="prevPage()" [class.disabled]="pageNumber === 1">

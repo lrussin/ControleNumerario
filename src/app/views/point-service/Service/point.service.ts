@@ -20,11 +20,11 @@ export class PointService {
   ) { }
 
   GetAllPA(pageNumber: number, pageSize: number): Observable<PontoAtendimento> {
-    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString())
+      .set('pageSize', pageSize.toString());
 
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.LoginService.getSessionToken(), 'Content-Type': 'application/json;charset=UTF-8' });
     return this.HttpClient.get<any>(this.baseUrl, { params, headers : headers });
   }
 

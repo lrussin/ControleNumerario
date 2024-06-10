@@ -1,8 +1,9 @@
+import { NotificationService } from 'src/app/services/notification.service';
 import { logo } from './../../icons/logo';
 import { OpCaixa, OpTerminal, TipoOperacao } from './../../util/interfaces/opCaixa';
 import { ModalPointService } from './Services/modal-point.service';
 import { MoedaService } from './../../services/moeda.service';
-import { NgIf, NgStyle, formatDate } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle, formatDate } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +20,7 @@ Chart.register(annotationPlugin);
 @Component({
   selector: 'app-modal-point',
   standalone: true,
-  imports: [NgIf, NgStyle, IconDirective, FormsModule],
+  imports: [NgIf, NgStyle, IconDirective, FormsModule, NgClass, NgFor],
   templateUrl: './modal-point.component.html',
   styleUrls: ['./modal-point.component.scss']
 })
@@ -71,6 +72,7 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
   constructor(
     private MoedaService: MoedaService,
     private modalPointService: ModalPointService,
+    public NotificationService: NotificationService
   ) {
    }
 
@@ -191,7 +193,6 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
         this.datasOp = [];
         this.valoresOp = [];
 
-        console.log(response.transacoes);
         // Percorre o objeto response.transacoes
         for (const [key, value] of Object.entries(response.transacoes)) {
           // Adiciona a data no formato desejado
@@ -204,7 +205,7 @@ export class ModalPointComponent implements OnInit,  AfterViewInit {
         this.renderChart();
       },
       error: (error) => {
-        console.error('Erro ao buscar operação de caixa', error);
+        this.NotificationService.setNotificationMessage('Nenhum resultado encontrado');
       },
     })
   }
