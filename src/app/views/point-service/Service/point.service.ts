@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item, PontoAtendimento } from 'src/app/util/interfaces/PontoAtendimento';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PointService {
 
-  private baseUrl = 'https://localhost:7162/PA/GetAllPA';
+  private baseUrl = environment.baseApiUrl + '/api/PA/GetAllPA';
 
   private paData: Item[] = [];
 

@@ -2,17 +2,18 @@ import { LoginService } from 'src/app/views/login/Service/login.service';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalRegisterService {
 
-  private postCreateUserUrl = 'https://localhost:7162/api/User/register';
-  private postPermissionUrl = 'https://localhost:7162/api/Role/SetUserRole';
-  private getPermissionUrl = 'https://localhost:7162/api/Role/GetRoles';
-  private getLoadPermissionUrl = 'https://localhost:7162/api/Role/GetUserRole'
-  private postReenviarQrCodeUrl = 'https://localhost:7162/api/User/ResendQrCode/'
+  private postCreateUserUrl = environment.baseApiUrl + '/api/User/register';
+  private postPermissionUrl = environment.baseApiUrl + '/api/Role/SetUserRole';
+  private getPermissionUrl = environment.baseApiUrl + '/api/Role/GetRoles';
+  private getLoadPermissionUrl = environment.baseApiUrl + '/api/Role/GetUserRole'
+  private postReenviarQrCodeUrl = environment.baseApiUrl + '/api/User/ResendQrCode/'
 
   constructor(
     private httpClient: HttpClient,

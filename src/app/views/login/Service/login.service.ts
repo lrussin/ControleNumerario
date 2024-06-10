@@ -2,14 +2,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private postLoginUrl = 'https://localhost:7162/api/User/login'
-  private postChangePassword = 'https://localhost:7162/api/User/changePassword'
+  private postLoginUrl = environment.baseApiUrl + '/api/User/login'
+  private postChangePassword = environment.baseApiUrl + '/api/User/changePassword'
 
   constructor(
     private httpClient : HttpClient,

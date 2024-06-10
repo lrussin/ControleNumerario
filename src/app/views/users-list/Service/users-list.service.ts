@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/util/interfaces/UserList';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersListService {
-  private baseUrl = 'https://localhost:7162/api/User/listUser';
-  private deleteUrl =  'https://localhost:7162/api/User/delete';
+  private baseUrl = environment.baseApiUrl + '/api/User/listUser';
+  private deleteUrl =  environment.baseApiUrl + '/api/User/delete';
 
   constructor(
     private httpClient: HttpClient,

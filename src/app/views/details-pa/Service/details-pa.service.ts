@@ -3,6 +3,7 @@ import { UnidadeInstituicao } from './../../../util/interfaces/UnidadeInstituica
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ constructor(
   private LoginService: LoginService
 ) { }
 
-  private getPaUrl = 'https://localhost:7162/PA/GetPA';
+  private getPaUrl = environment.baseApiUrl + '/api/PA/GetPA';
 
   GetByPA(pageNumber: number, pageSize: number, id?: number): Observable<{ unidadeInstituicao: UnidadeInstituicao }> {
     let params = new HttpParams()

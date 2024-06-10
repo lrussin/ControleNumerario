@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TimeScale } from 'chart.js';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParameterService {
-  private baseUrl = 'https://localhost:7162/parameters/Parameters';
+  private baseUrl = environment.baseApiUrl + '/api/Parameters';
 
 constructor(
   private httpClient:HttpClient

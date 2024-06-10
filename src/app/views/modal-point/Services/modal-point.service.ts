@@ -2,14 +2,15 @@ import { LoginService } from './../../login/Service/login.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalPointService {
 
-  private getOpCaixaUrl = 'https://localhost:7162/api/OpCaixa/GetOpCaixa';
-  private getOpCaixaSaldoUrl = 'https://localhost:7162/api/OpCaixa/GetOpCaixaSaldo';
+  private getOpCaixaUrl = environment.baseApiUrl +'/api/OpCaixa/GetOpCaixa';
+  private getOpCaixaSaldoUrl = environment.baseApiUrl + '/api/OpCaixa/GetOpCaixaSaldo';
 
 constructor(
   private httpClient: HttpClient,

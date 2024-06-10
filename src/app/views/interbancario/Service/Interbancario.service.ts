@@ -3,15 +3,16 @@ import { DadosInterbancario } from '../../../util/interfaces/DadosInterbancario'
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InterbancarioService {
 
-  private getInterAll ='https://localhost:7162/api/TransacoesInterbancario/byAllInterbancario';
-  private getInterbancario = 'https://localhost:7162/api/TransacoesInterbancario/byBanco?';
-  private getInterDate = 'https://localhost:7162/api/TransacoesInterbancario/byDate?'
+  private getInterAll = environment.baseApiUrl + '/api/TransacoesInterbancario/byAllInterbancario';
+  private getInterbancario = environment.baseApiUrl + '/api/TransacoesInterbancario/byBanco?';
+  private getInterDate = environment.baseApiUrl + '/api/TransacoesInterbancario/byDate?'
 
   constructor(
     private httpClient: HttpClient,

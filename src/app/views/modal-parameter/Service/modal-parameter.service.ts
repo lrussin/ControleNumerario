@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/util/interfaces/ParameterList';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { Item } from 'src/app/util/interfaces/ParameterList';
 export class ModalParameterService {
 
 
-  private registerParamUrl = 'https://localhost:7162/parameters/Parameters'
-  private updateParamUrl = 'https://localhost:7162/parameters/Parameters/{id}'
+  private registerParamUrl = environment.baseApiUrl + '/api/Parameters'
+  private updateParamUrl = environment.baseApiUrl + '/api/Parameters/{id}'
 
 constructor(
   private httpClient : HttpClient
