@@ -16,8 +16,13 @@ export class PermissionGuardService implements CanActivate {
     const token = localStorage.getItem('authToken');
     if (token) {
       const decodedToken = this.cryptoService.decrypt(token);
-      if (decodedToken && decodedToken.role && decodedToken.role.includes('Admin')) {
-        return true;
+      if (decodedToken && decodedToken.role) {
+        const userRoles = decodedToken.role as Array<string>;
+        const requiredRoles = route.data['rules'] as Array<string>;
+
+        if (userRoles && requiredRoles && requiredRoles.some(role => userRoles.includes(role))) {
+          return true;
+        }
       }
     }
 

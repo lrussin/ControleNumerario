@@ -78,7 +78,12 @@
                     <span cInputGroupText>
                       <svg cIcon name="cilUser"></svg>
                     </span>
-                    <input autoComplete="username" cFormControl placeholder="Email" />
+                    <input
+                      autoComplete="email"
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="authLogin.email"
+                      cFormControl
+                      placeholder="Email"/>
                   </c-input-group>
                   <c-col xs="6">
                     <button cButton class="px-0 custom-button" color="link" (click)="changeView()">
@@ -87,7 +92,7 @@
                   </c-col>
                   <c-row>
                     <c-col xs="6">
-                      <button cButton class="px-4 justify-content-center buttonReset" color="primary">
+                      <button cButton class="px-4 justify-content-center buttonReset" color="primary" (click)="resetarSenha()">
                         Resetar Senha
                       </button>
                     </c-col>

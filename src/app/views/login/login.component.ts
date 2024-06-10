@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit{
         next: (AuthTokenJson: any) => {
           this.LoginService.setSessionToken(AuthTokenJson.Data.Token);
           const temporaryPassword = AuthTokenJson.Data.TemporaryPassword;
-          console.log(this.CryptoService.decrypt(AuthTokenJson.Data.Token))
           this.token = AuthTokenJson.Data.Token;
           if (temporaryPassword){
             this.isChangePassword = true;
@@ -66,7 +65,7 @@ export class LoginComponent implements OnInit{
           }
         },
         error: (error) => {
-          console.error('Erro ao criar usuário', error);
+          console.error('Erro ao logar usuário', error);
         }
       });
     }
@@ -98,6 +97,21 @@ export class LoginComponent implements OnInit{
       authCode: ''
     };
     this.alertMessage = "";
+  }
+
+  resetarSenha(){
+    if (this.authLogin.email) {
+      this.LoginService.resetSenha(this.authLogin.email).subscribe({
+        next: (response) => {
+          console.log('Notificação Sucesso ao resetar a senha')
+          location.reload();
+      },
+      error: (error) => {
+        console.error('Erro ao resetar senha', error);
+      }
+      })
+    }
+
   }
 
   verifyInput(event : KeyboardEvent) {

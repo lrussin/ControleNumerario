@@ -5,7 +5,6 @@ import { MoedaService } from './../../services/moeda.service';
 import { NgIf, NgStyle, formatDate } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IconDirective } from '@coreui/icons-angular';
-import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { Terminal } from 'src/app/util/interfaces/UnidadeInstituicao';
 import { Chart, registerables } from 'chart.js';
@@ -20,7 +19,7 @@ Chart.register(annotationPlugin);
 @Component({
   selector: 'app-modal-point',
   standalone: true,
-  imports: [NgIf, NgStyle, IconDirective, DashboardComponent, FormsModule],
+  imports: [NgIf, NgStyle, IconDirective, FormsModule],
   templateUrl: './modal-point.component.html',
   styleUrls: ['./modal-point.component.scss']
 })

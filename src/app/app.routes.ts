@@ -34,18 +34,25 @@ export const routes: Routes = [
   { path: '',
     component: DefaultLayoutComponent,
     canActivate: [PermissionGuardService],
+    data:{rules: ["Gerente", "Admin", "Membro"]},
     children: [
       {
         path: 'pointService',
-        component: PointServiceComponent
+        component: PointServiceComponent,
+        canActivate: [PermissionGuardService],
+        data:{rules: ["Gerente", "Admin", "Membro"]}
       },
       {
         path: 'pointService/details',
-        component: DetailsPaComponent
+        component: DetailsPaComponent,
+        canActivate: [PermissionGuardService],
+        data:{rules: ["Gerente", "Admin", "Membro"]}
       },
       {
         path: 'interbancario',
-        component: InterbancarioComponent
+        component: InterbancarioComponent,
+        canActivate: [PermissionGuardService],
+        data:{rules: ["Gerente", "Admin", "Membro"]}
       },
       {
         path: 'users',

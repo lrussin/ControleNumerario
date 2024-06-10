@@ -11,6 +11,7 @@ export class LoginService {
 
   private postLoginUrl = environment.baseApiUrl + '/api/User/login'
   private postChangePassword = environment.baseApiUrl + '/api/User/changePassword'
+   private postResetSenhaUrl = environment.baseApiUrl + '/api/User/forgotPassword'
 
   constructor(
     private httpClient : HttpClient,
@@ -55,5 +56,13 @@ export class LoginService {
       "newPassword": newPassword
     }
     return this.httpClient.post(this.postChangePassword, body, {headers : headers, responseType: 'text'});
+  }
+
+  resetSenha(email : string) {
+    let body = {
+      "email": email
+    }
+
+    return this.httpClient.post(this.postResetSenhaUrl, body);
   }
 }
