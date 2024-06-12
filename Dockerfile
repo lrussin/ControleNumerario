@@ -19,7 +19,9 @@ RUN npm run build --prod
 # Etapa 2: Configurar o Nginx para servir a aplicação Angular
 FROM nginx:alpine
 COPY --from=build /app/dist/coreui-free-angular-admin-template /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY certs /etc/nginx/certs
 
 EXPOSE 80
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
