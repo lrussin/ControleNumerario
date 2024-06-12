@@ -1,7 +1,7 @@
-<ng-container *ngIf="isVisible" >
+<ng-container *ngIf="isVisible">
   <div class="container">
     <div class="row align-items-start">
-      <div class="col-sm-4 custom-col-4">
+      <div class="col-12 col-sm-4 custom-col-4">
         Banco
         <div class="col-20 cus-col-8">
           <select class="banco" [(ngModel)]="selectedBanco">
@@ -9,22 +9,22 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-2 date-ini">
-        Data Incial
+      <div class="col-12 col-sm-2 date-ini">
+        Data Inicial
         <div class="col-10">
           <input class="date-final" type="date" [(ngModel)]="dataInicial">
         </div>
       </div>
-      <div class="col-sm-2 date-fin">
+      <div class="col-12 col-sm-2 date-fin">
         Data Final
         <div class="col-10">
           <input class="date-final" type="date" [(ngModel)]="dataFinal">
         </div>
       </div>
-      <div class="col-1 check" (click)="exportarDados()" >
+      <div class="col-12 col-sm-1 check" (click)="exportarDados()">
         <svg cIcon name="cilCheck"></svg>
       </div>
-      <div class="col-sm-2 custom-col-2" id="button-details" >
+      <div class="col-12 col-sm-2 custom-col-2" id="button-details">
         <button
           class="btn-details"
           (click)="exportToExcel()"
@@ -37,13 +37,12 @@
     </div>
     <div class="row align-items-center" *ngIf="resultInter">
       <c-accordion class="accordion" [flush]="true">
-        <c-accordion-item  #item0="cAccordionItem" [visible]="false">
+        <c-accordion-item #item0="cAccordionItem" [visible]="false">
           <ng-template class="accordion-button" cTemplateId="accordionHeaderTemplate">
             <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
               <svg cIcon name="cilMoney" size="3xl"></svg>
               <span class="interbancario">Transações SPB</span>
               <div class="col-sm-2 amount">VALOR TOTAL | R$
-                <!-- <br> -->
                 <div class="col-10 value">
                   {{ valorTotal }}</div>
               </div>
@@ -66,7 +65,7 @@
                 <tbody>
                   <tr *ngFor="let dado of dadosInter; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ dado.dataHora| date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ dado.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                     <td>{{ dado.bancoDebito }}</td>
                     <td>{{ dado.agenciaDebito }}</td>
                     <td>{{ dado.agenciaCredito }}</td>
@@ -76,7 +75,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="hint-text">Mostrando <b>{{ dadosInter.length }}</b> de <b>{{ pageSize }}</b> Total</div>
+            <div class="hint-text">Mostrando <b>{{ dadosInter.length }}</b> de <b>{{ dadosInter.length }}</b> Total</div>
             <div class="paginacao">
               <ul class="pagination">
                 <li class="page-item prev" (click)="prevPage()" [class.disabled]="pageNumber === 1">

@@ -27,17 +27,24 @@ export class ModalRegisterComponent implements OnInit {
     userId: ''
   };
 
-  teste: string = 'teste notificação'
 
   constructor (
     private modalRegisterService: ModalRegisterService,
     private NotificationService: NotificationService,
   ) {}
 
-  confirmed: any[] = [];
+  // confirmed: any[] = [];
   employeeImage = "assets/employee.png";
 
   source: any[] = [];
+
+  // source: any[] = [
+  //   {id:1, name:"Administrador"},
+  //   {id:2, name:"Basico"},
+  //   {id:3, name:"teste"},
+  //   ];
+
+  confirmed: any[] = [ ];
 
   ngOnInit(): void {
     this.permission();
@@ -47,7 +54,7 @@ export class ModalRegisterComponent implements OnInit {
   }
 
   createUser() {
-    if (this.userData.email !== '' && this.userData.firstName !== '' && this.userData.lastName !== '' && this.confirmed.length >= 1) {
+    if (this.userData.email !== '' && this.userData.firstName !== '' && this.userData.lastName !== '' && this.confirmed.length === 1) {
       this.modalRegisterService.createUser(this.userData.email, this.userData.firstName, this.userData.lastName).subscribe({
         next:() => {
           this.setPermission();
@@ -66,10 +73,10 @@ export class ModalRegisterComponent implements OnInit {
   }
 
   setPermission() {
-    if (this.confirmed.length >= 1) {
+    if (this.confirmed.length === 1) {
 
       const email = this.userData.email;
-      const permissao = this.confirmed[0].normalizedName;
+      const permissao = this.confirmed[0].name;
 
       this.modalRegisterService.setPermission(email, permissao).subscribe({
         next: (response) => {
@@ -84,37 +91,80 @@ export class ModalRegisterComponent implements OnInit {
         }
       })
     }
+    else {
+      this.NotificationService.setNotificationMessage('Só pode ser inserido 1 permissão por usuário')
+    }
   }
 
 
   permission(): void {
     this.modalRegisterService.getPermission().subscribe({
       next: (response) => {
-        this.source = response
+        this.source = response;
+        console.log(this.source);
         if (this.isEditMode && this.userData.email) {
           this.loadUserPermissions(this.userData.email);
         }
-
-      },
-      error:  (error) => {
-        this.NotificationService.setNotificationMessage('Erro ao buscar as permissões')
-      }
-    })
-  }
-
-   loadUserPermissions(email: string): void {
-    this.modalRegisterService.loadPermission(email).subscribe({
-      next: (permissions) => {
-        this.confirmed = permissions;
       },
       error: (error) => {
-        this.NotificationService.setNotificationMessage('Erro ao buscar permissões do usuário')
+        this.NotificationService.setNotificationMessage('Erro ao buscar as permissões');
+      }
+    });
+  }
+
+  loadUserPermissions(email: string): void {
+    this.modalRegisterService.loadPermission(email).subscribe({
+      next: (permissions) => {
+        if (permissions && this.source) {
+          // Verifica se 'permissions' e 'source' estão definidos
+          permissions.forEach((userPermissionName: any) => {
+            // Itera sobre cada nome de permissão do usuário
+            const matchedPermission = this.source.find(sourcePermission => sourcePermission.name === userPermissionName);
+            // Verifica se a permissão corresponde a uma do 'source'
+            if (matchedPermission) {
+              // Se houver correspondência, adiciona à lista de confirmados com o ID correspondente
+              const userPermission = { id: matchedPermission.id, name: matchedPermission.name };
+              // Verifica se a permissão já está confirmada
+              const isPermissionConfirmed = this.confirmed.some(user => user.id === userPermission.id);
+              if (!isPermissionConfirmed) {
+                // Se não estiver, adiciona à lista de confirmados
+                this.confirmed.push(userPermission);
+              }
+            }
+          });
+        }
+      },
+      error: (error) => {
+        this.NotificationService.setNotificationMessage('Erro ao buscar permissões do usuário');
       }
     });
   }
 
   editPermission(){
-    this.setPermission();
+    console.log(this.confirmed)
+    console.log(this.confirmed.length)
+    if (this.confirmed.length === 1) {
+
+      const email = this.userData.email;
+      const permissao = this.confirmed[0].name;
+      console.log(permissao)
+
+      this.modalRegisterService.setPermission(email, permissao).subscribe({
+        next: (response) => {
+          this.isModalOpen = false
+          this.NotificationService.setNotificationMessage('Usuário atualizado com sucesso')
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 6000);
+        },
+        error: (error) => {
+          this.NotificationService.setNotificationMessage('Erro ao atualizar permissão do usuário')
+        }
+      })
+    }
+    else {
+      this.NotificationService.setNotificationMessage('Só pode ser inserido 1 permissão por usuário')
+    }
   }
 
   reenviarQrCode(email: string): void {

@@ -3,6 +3,10 @@
   justify-content: flex-end;
 }
 
+
+.form-control{
+  width: 100%;
+}
 .table-responsive {
   margin: 30px 0;
 }
@@ -217,7 +221,7 @@ table.table .avatar {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   background-color: var(--cui-body-bg);
-  --cui-bg-opacity: 1 !important;
+  --cui-bg-opacity: 0 !important;
 }
 .modal .modal-footer {
   background-color: var(--cui-body-bg);
@@ -308,21 +312,21 @@ input {
 .delet {
   border: none;
   background-color: #ff0000;
-  color: black;
+  color: white !important;
   border-radius: 5px;
   height: 35px;
 }
 
 .delet:hover {
   border: none;
-  color: black;
+  color: black !important;
   background-color: #ff0000; // Cor de fundo do botão
 }
 
 .cancel {
   border: none;
   background-color: var(--tempThemeButton);
-  color: black;
+  color: white !important;
   border-radius: 5px;
   margin-bottom: 2%;
   height: 35px;
@@ -330,6 +334,6 @@ input {
 
 .cancel:hover {
   border: none;
-  color: black;
+  color: black !important;
   background-color: var(--tempThemeButtonHover); // Cor de fundo do botão
 }

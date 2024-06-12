@@ -29,7 +29,7 @@
   height: 60%; // Garante que a div ocupe toda a altura disponível
 }
 
-.banco{
+.banco {
   border-radius: 5px;
   height: 40px;
   margin-top: 5%;
@@ -48,7 +48,7 @@ option {
   margin-top: 1%;
   margin-left: 5%;
   height: 70px;
-  border-left:  2px solid #ccc;
+  border-left: 2px solid #ccc;
 
   .btn-details {
     background-color: var(--green); // Cor de fundo do botão
@@ -65,6 +65,7 @@ option {
       width: 19px; // Largura do ícone
       height: 19px; // Altura do ícone
     }
+
     &.disabled {
       cursor: not-allowed;
       opacity: 0.5; // Exemplo de estilização para um botão desativado
@@ -76,16 +77,13 @@ option {
   }
 }
 
-#button-details {
-  .btn-details:hover {
-    background-color: var(--green-water); // Cor de fundo do botão ao passar o mouse
-  }
+#button-details .btn-details:hover {
+  background-color: var(--green-water); // Cor de fundo do botão ao passar o mouse
 }
 
 #button-details:last-child {
   border-right: none;
 }
-
 
 .date-ini,
 .date-fin {
@@ -114,8 +112,7 @@ input {
 }
 
 .check {
-  margin-top: 40px;
-  margin-bottom: 1%;
+  margin: 40px auto 1%;
   height: 40px;
   width: 6%;
   text-align: center;
@@ -139,13 +136,13 @@ input {
   margin-top: 6%;
 }
 
-.accordion{
+.accordion {
   box-shadow: 0 0 5px var(--cui-secondary-color); /* Sombra para destacar o modal do fundo */
   padding: 0px;
   border-radius: 10px;
 }
 
-.accordion-button{
+.accordion-button {
   border-radius: 10px;
 }
 
@@ -157,7 +154,6 @@ svg[name="cilMoney"] {
   margin-left: 12%;
   font-size: 20px;
   color: var(--cui-secondary-color);
-  font-size: 20px;
 }
 
 .amount {
@@ -174,22 +170,28 @@ svg[name="cilMoney"] {
   color: var(--cui-body-color);
 }
 
-.accordion-button{
+.accordion-button {
   height: 150px;
+}
+
+.table-container {
+  overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
 }
 
 table {
   border: 1px solid black;
   border-radius: 10px;
+  width: 100%; /* Garante que a tabela ocupe toda a largura do container */
+  white-space: nowrap
 }
 
 .paginacao {
   display: flex;
-  justify-content: flex-end; // Posiciona a div no canto direito
-  margin-right: 20px; // Espaço à direita, ajuste conforme necessário
+  justify-content: flex-end; /* Posiciona a div no canto direito */
+  margin-right: 20px; /* Espaço à direita, ajuste conforme necessário */
 }
 
-.page-link{
+.page-link {
   cursor: pointer;
 }
 
@@ -197,18 +199,143 @@ table {
   color: var(--tempThemeButton);
 }
 
-.pagination {
-  .page-item {
-    &.disabled {
-      pointer-events: none;
-      opacity: 0.5;
+.pagination .page-item {
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
 
-      .page-link {
-        cursor: not-allowed;
-        color: black; // Cor para o texto desabilitado
-        background-color: #f5f5f5; // Cor de fundo desabilitada
-        border-color: #ddd; // Cor da borda desabilitada
-      }
+    .page-link {
+      cursor: not-allowed;
+      color: black; /* Cor para o texto desabilitado */
+      background-color: #f5f5f5; /* Cor de fundo desabilitada */
+      border-color: #ddd; /* Cor da borda desabilitada */
     }
+  }
+}
+
+/* Media Queries para Responsividade */
+
+@media (max-width: 576px) {
+  .custom-col-4,
+  .custom-col-3 {
+    border-right: none;
+    margin-bottom: 15px;
+  }
+
+  .custom-col-3 {
+    display: none;
+  }
+
+  /* Reduzir o tamanho do texto na tabela */
+  table {
+    font-size: 12px;
+    white-space: nowrap
+  }
+
+  .table-container {
+    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
+  }
+
+  #button-details {
+    margin-left: 0;
+    border-left: none;
+  }
+
+  .check {
+    width: 80%; /* Ajusta a largura em telas pequenas */
+    margin-top: 10px;
+  }
+
+  .date-inicial,
+  .date-final {
+    margin-left: 0;
+    width: 130%;
+  }
+
+  .accordion-button {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .interbancario {
+    margin-left: 0;
+  }
+
+  .amount {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .value {
+    font-size: 30px;
+  }
+
+  .paginacao {
+    justify-content: center;
+    margin-right: 0;
+  }
+  .banco {
+    text-align: center;
+    width: 100%;
+    margin-left: 3%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  #button-details {
+    margin-left: 2%;
+  }
+
+  .check {
+    width: 60%; /* Ajusta a largura em telas médias */
+    margin-top: 20px;
+  }
+
+  .date-inicial,
+  .date-final {
+    margin-left: 5%;
+    width: 90%;
+  }
+
+  .banco {
+    text-align: center;
+    width: 100%;
+    margin-left: 3%;
+  }
+
+  .custom-col-4 {
+    display: none;
+  }
+
+  /* Reduzir ainda mais o tamanho do texto na tabela */
+  table {
+    font-size: 10px;
+    white-space: nowrap
+  }
+
+  .table-container {
+    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  #button-details {
+    margin-left: 3%;
+  }
+
+  .check {
+    width: 50%; /* Ajusta a largura em telas maiores */
+    margin-top: 20px;
+  }
+
+  .date-inicial,
+  .date-final {
+    margin-left: 8%;
+    width: 90%;
+  }
+  .banco {
+    text-align: center;
+    width: 100%;
+    margin-left: 3%;
   }
 }

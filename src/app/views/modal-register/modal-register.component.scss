@@ -51,8 +51,8 @@ input {
 
 .create {
   border: none;
-  background-color: var(--cui-tertiary-bg-dark);
-  color: black;
+  background-color: var(--tempThemeButton);
+  color: white;
   border-radius: 5px;
   height: 35px;
 }
@@ -60,13 +60,13 @@ input {
 .create:hover {
   border: none;
   color: black;
-  background-color: var(--green); // Cor de fundo do botão
+  background-color: var(--tempThemeButtonHover);// Cor de fundo do botão
 }
 
 .reenviar {
   border: none;
-  background-color: var(--cui-tertiary-bg-dark);
-  color: black;
+  background-color: var(--tempThemeButton);
+  color: white;
   border-radius: 5px;
   margin-bottom: 2%;
   height: 35px;
@@ -75,5 +75,23 @@ input {
 .reenviar:hover {
   border: none;
   color: black;
-  background-color: var(--green); // Cor de fundo do botão
+  background-color: var(--tempThemeButtonHover); // Cor de fundo do botão
+}
+
+
+/* Media Queries para ajustar o modal em telas menores */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .permission {
+    font-size: 16px;
+  }
+
+  .close {
+    font-size: 18px;
+    transform: scale(1.3);
+  }
 }
